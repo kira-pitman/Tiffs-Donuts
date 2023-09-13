@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Scroll, ScrollControls } from '@react-three/drei'
 import Interfaces from './components/Interfaces'
-import ScrollManager from './components/ScrollManager'
+
 import { useState } from 'react'
 import DonutScene from './components/DonutScene'
 
@@ -16,8 +16,6 @@ function App() {
       >
         <color attach="background" args={['#ececec']} />
         <ScrollControls pages={2} demping={0.1}>
-          {/* <ScrollManager section={section} onSectionChange={setSection} /> */}
-
           <DonutScene />
           <Scroll html>
             <Interfaces />

@@ -1,9 +1,9 @@
-import { OrbitControls } from '@react-three/drei'
+import {OrbitControls} from '@react-three/drei'
 
 import DonutModel from './DonutModel.jsx'
-import React from 'react'
-import { useRef, useState } from 'react'
-import { useFrame } from '@react-three/fiber'
+// import React from 'react'
+import {useRef} from 'react'
+import {useFrame} from '@react-three/fiber'
 
 export default function DonutScene() {
   const ref = useRef()

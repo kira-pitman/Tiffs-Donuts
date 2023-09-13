@@ -1,12 +1,10 @@
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Scroll, ScrollControls } from '@react-three/drei'
-import Interfaces from './components/Interfaces'
-
-import { useState } from 'react'
-import DonutScene from './components/DonutScene'
+import {Canvas} from '@react-three/fiber'
+import {Scroll, ScrollControls} from '@react-three/drei'
+import Interfaces from './components/Interfaces.jsx'
+import DonutScene from './components/DonutScene.jsx'
 
 function App() {
-  const [section, setSection] = useState(0)
+  // const [section, setSection] = useState(0)
 
   return (
     <>

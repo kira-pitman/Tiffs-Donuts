@@ -1,6 +1,6 @@
 import { OrbitControls } from '@react-three/drei'
 
-import DonutModel from './DonutModel'
+import DonutModel from './DonutModel.jsx'
 import React from 'react'
 import { useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'

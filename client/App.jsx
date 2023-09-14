@@ -14,10 +14,18 @@ function App() {
     materials['Material.004'].clone()
   )
 
+  const [baseColor, setBaseColor] = useState(materials['Material.003'].clone())
+
   function updateGlaze(hex) {
     const newMaterials = glazeColor.clone()
     newMaterials.color = new THREE.Color(hex)
     setGlazeColor(newMaterials)
+  }
+
+  function updateBase(hex) {
+    const newMaterials = baseColor.clone()
+    newMaterials.color = new THREE.Color(hex)
+    setBaseColor(newMaterials)
   }
 
   return (
@@ -28,9 +36,9 @@ function App() {
       >
         <color attach="background" args={['#ececec']} />
         <ScrollControls pages={2} demping={0.1}>
-          <DonutScene glazeColor={glazeColor} />
+          <DonutScene glazeColor={glazeColor} baseColor={baseColor} />
           <Scroll html>
-            <Interfaces updateGlaze={updateGlaze} />
+            <Interfaces updateGlaze={updateGlaze} updateBase={updateBase} />
           </Scroll>
         </ScrollControls>
       </Canvas>

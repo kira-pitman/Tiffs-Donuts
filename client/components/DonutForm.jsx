@@ -1,21 +1,36 @@
-import { useState } from 'react'
+import { useState, useQuery } from 'react'
 
 function DonutForm(props) {
-  const {updateGlaze} = props
+  const { updateGlaze, updateBase } = props
   const flavorArray = ['Chocolate', 'Strawberry', 'Green tea', 'Lemon']
   const baseArray = ['Original', 'Chocolate']
+  // const {
+  //   data: glazes,
+  //   isLoading,
+  //   isError,
+  // } = useQuery[('glazes', getGlazes]
+
+  // const {
+  //   data: bases,
+  //   isLoading,
+  //   isError,
+  // } = useQuery[('bases', getBases]
 
   const [base, setBase] = useState('')
   const [flavor, setFlavor] = useState('')
 
-  const handleFlavorChange = (evt) => {
+  const handleFlavorChange = async (evt) => {
     setFlavor(evt.target.value)
+    // const glazeColor = await getGlazeByName(evt.target.value)
+    // updateGlaze(glazeColor.color)
   }
- 
+
   const handleBaseChange = (evt) => {
     setBase(evt.target.value)
+    // const baseColor = await getBaseByName(evt.target.value)
+    // updateBase(baseColor.color)
   }
- 
+
   return (
     <>
       <h2>Choose a glaze and base</h2>

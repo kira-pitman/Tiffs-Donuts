@@ -6,6 +6,10 @@ import Interfaces from './components/Interfaces.jsx'
 import DonutScene from './components/DonutScene.jsx'
 import * as THREE from 'three'
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
+
 function App() {
   // const [section, setSection] = useState(0)
   const { materials } = useGLTF('./donut_cat/scene.gltf')
@@ -20,6 +24,7 @@ function App() {
     const newMaterials = glazeColor.clone()
     newMaterials.color = new THREE.Color(hex)
     setGlazeColor(newMaterials)
+    console.log('triggered')
   }
 
   function updateBase(hex) {
@@ -38,7 +43,9 @@ function App() {
         <ScrollControls pages={2} demping={0.1}>
           <DonutScene glazeColor={glazeColor} baseColor={baseColor} />
           <Scroll html>
-            <Interfaces updateGlaze={updateGlaze} updateBase={updateBase} />
+            <QueryClientProvider client={queryClient}>
+              <Interfaces updateGlaze={updateGlaze} updateBase={updateBase} />
+            </QueryClientProvider>
           </Scroll>
         </ScrollControls>
       </Canvas>

@@ -1,26 +1,14 @@
-import { Base, BaseName, FlavorName, Flavor } from "../../models/donuts";
-import db from "./connection";
+import { Base, Glaze } from '../../models/donuts'
+import db from './connection'
 
 //Get all flavours
-export function getAllFlavorNames(): Promise<FlavorName[]> {
-  const flavors = db("flavors").select("id", "name");
-  return flavors;
+export function getAllGlazes(): Promise<Glaze[]> {
+  const glazes = db('glazes').select()
+  return glazes
 }
 
 //Get all base types
-export function getAllBaseNames(): Promise<BaseName[]> {
-  const bases = db("base").select("id", "name");
-  return bases;
-}
-
-//Get flavour by name
-export function getFlavorByName(name: string): Promise<Flavor> {
-  const flavors = db("flavors").select("*").where("name", name).first();
-  return flavors;
-}
-
-//Get base by name
-export function getBaseByName(name: string): Promise<Base> {
-  const flavors = db("base").select("*").where("name", name).first();
-  return flavors;
+export function getAllBases(): Promise<Base[]> {
+  const bases = db('bases').select()
+  return bases
 }

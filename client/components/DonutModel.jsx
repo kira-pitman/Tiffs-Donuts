@@ -7,12 +7,13 @@ Source: https://sketchfab.com/3d-models/donut-cat-3800caad4695418f9f60bfca87a853
 Title: Donut Cat!
 */
 
-import { useRef } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useRef } from 'react'
+import { useGLTF } from '@react-three/drei'
 
 export default function DonutModel(props) {
-  const group = useRef();
-  const { nodes, materials } = useGLTF("/donut_cat/scene.gltf");
+  const { glazeColor, baseColor } = props
+  const group = useRef()
+  const { nodes, materials } = useGLTF('/donut_cat/scene.gltf')
   // const { actions } = useAnimations(animations, group)
   return (
     <group ref={group} {...props} dispose={null}>
@@ -33,12 +34,12 @@ export default function DonutModel(props) {
                   <mesh
                     name="Object_6"
                     geometry={nodes.Object_6.geometry}
-                    material={materials["Material.004"]}
+                    material={glazeColor}
                   />
                   <mesh
                     name="Object_7"
                     geometry={nodes.Object_7.geometry}
-                    material={materials["Material.004"]}
+                    material={glazeColor}
                   />
                 </group>
                 <group
@@ -50,18 +51,18 @@ export default function DonutModel(props) {
                   <mesh
                     name="Object_9"
                     geometry={nodes.Object_9.geometry}
-                    material={materials["Material.002"]}
+                    material={materials['Material.002']}
                   />
                   <mesh
                     name="Object_10"
                     geometry={nodes.Object_10.geometry}
-                    material={materials["Material.005"]}
+                    material={materials['Material.005']}
                   />
                 </group>
                 <mesh
                   name="Object_4"
                   geometry={nodes.Object_4.geometry}
-                  material={materials["Material.003"]}
+                  material={baseColor}
                 />
               </group>
             </group>
@@ -69,7 +70,7 @@ export default function DonutModel(props) {
         </group>
       </group>
     </group>
-  );
+  )
 }
 
-useGLTF.preload("/donut_cat/scene.gltf");
+useGLTF.preload('/donut_cat/scene.gltf')

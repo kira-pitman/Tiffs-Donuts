@@ -5,7 +5,7 @@ function DonutDetails(props) {
 
   return (
     <>
-      <h2></h2>
+      <h2>Detail Page</h2>
 
       <p>
         {base.name} base with {glaze.name} topping

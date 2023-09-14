@@ -1,4 +1,4 @@
 export async function seed(knex) {
-  await knex("flavors").del();
-  await knex("base").del();
+  await knex('glazes').del()
+  await knex('bases').del()
 }

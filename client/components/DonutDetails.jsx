@@ -1,23 +1,22 @@
-import DonutForm from './DonutForm'
+import getGlazeByName from './apiClient/'
 
-//need to display details i.e name, price? anything else?
-// all from the database
+function DonutDetails({base, glaze, glazeItem}) {
 
-function DonutDetails() {
-  const flavorArray = ['Chocolate', 'Strawberry', 'Green tea', 'Lemon']
-  const baseArray = ['Original', 'Chocolate']
-  const priceArray = ['8', '9', '7', '8']
+  //const glazeItem = await getGlazeByName(glaze) - then call and get glaze object
+  // 
 
-  //how to link to forms? import Donut Form function and use? idk
+//need price just from database?
 
   return (
     <>
-    <h2>Donut Name</h2>
+    <h2></h2>
 
-    <p>___ base with ___ topping</p>
+    <p>{base} base with {glaze} topping</p>
     
     
-    <h4>Price:</h4><p>price</p>
+    <h4>Price:</h4><p>{glazeItem.price}</p>
     </>
   )
 }
+
+export default DonutDetails

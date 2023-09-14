@@ -1,7 +1,7 @@
 import { useState, useQuery } from 'react'
 
 function DonutForm(props) {
-  const { updateGlaze, updateBase } = props
+  const { updateGlaze, updateBase, changeBase, changeGlaze } = props
   const flavorArray = ['Chocolate', 'Strawberry', 'Green tea', 'Lemon']
   const baseArray = ['Original', 'Chocolate']
   // const {
@@ -16,17 +16,14 @@ function DonutForm(props) {
   //   isError,
   // } = useQuery[('bases', getBases]
 
-  const [base, setBase] = useState('')
-  const [flavor, setFlavor] = useState('')
-
-  const handleFlavorChange = async (evt) => {
-    setFlavor(evt.target.value)
+  const handleGlazeChange = async (evt) => {
+    changeGlaze(evt.target.value)
     // const glazeColor = await getGlazeByName(evt.target.value)
     // updateGlaze(glazeColor.color)
   }
 
   const handleBaseChange = (evt) => {
-    setBase(evt.target.value)
+    changeBase(evt.target.value)
     // const baseColor = await getBaseByName(evt.target.value)
     // updateBase(baseColor.color)
   }
@@ -35,18 +32,18 @@ function DonutForm(props) {
     <>
       <h2>Choose a glaze and base</h2>
       <form>
-        <div id="flavor-select">
-          <label htmlFor="flavor">Glaze</label>
+        <div id="glaze-select">
+          <label htmlFor="glaze">Glaze</label>
           <select
-            id="flavor"
-            onChange={handleFlavorChange}
-            value={flavor}
+            id="glaze"
+            onChange={handleGlazeChange}
+            value={glaze}
             name="name"
           >
-            {flavorArray.map((flavor, index) => {
+            {flavorArray.map((glaze, index) => {
               return (
-                <option key={index} value={flavor}>
-                  {flavor}
+                <option key={index} value={glaze}>
+                  {glaze}
                 </option>
               )
             })}
@@ -70,6 +67,7 @@ function DonutForm(props) {
             })}
           </select>
         </div>
+        <button>See Donut Detail</button>
       </form>
     </>
   )

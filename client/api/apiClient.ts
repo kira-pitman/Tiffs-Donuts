@@ -5,14 +5,14 @@ const rootUrl = '/api/v1/donuts'
 // GET /api/v1/donuts/flavors
 export async function fetchFlavorNames(): Promise<FlavorName[]> {
   const dbFlavors = await request.get(`${rootUrl}/flavors`)
-  console.log(dbFlavors.body)
+
   return dbFlavors.body
 }
 
 // GET /api/v1/donuts/bases
 export async function fetchBaseNames(): Promise<BaseName[]> {
   const dbBases = await request.get(`${rootUrl}/bases`)
-  console.log(dbBases.body)
+
   return dbBases.body
 }
 // GET api/v1/donuts/flavors/:name

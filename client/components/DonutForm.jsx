@@ -1,23 +1,44 @@
-import { useState, useQuery } from 'react'
+import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { fetchFlavorNames, fetchBaseNames } from '../api/apiClient'
 
 function DonutForm(props) {
-  const { base, glaze, changeBase, changeGlaze } = props
-  const flavorArray = ['Chocolate', 'Strawberry', 'Green tea', 'Lemon']
-  const baseArray = ['Original', 'Chocolate']
-  // const {
-  //   data: glazes,
-  //   isLoading,
-  //   isError,
-  // } = useQuery[('glazes', getGlazes]
+  const { baseItem, glazeItem, changeBase, changeGlaze } = props
 
-  // const {
-  //   data: bases,
-  //   isLoading,
-  //   isError,
-  // } = useQuery[('bases', getBases]
+  const {
+    data: glazes,
+    isLoading: isLoadingA,
+    isError: isErrorA,
+  } = useQuery(['glazes'], fetchFlavorNames)
+
+  const {
+    data: bases,
+    isLoading: isLoadingB,
+    isError: isErrorB,
+  } = useQuery(['bases'], fetchBaseNames)
+
+  if (isErrorA) {
+    return <p>Something went wrong</p>
+  }
+
+  if (isErrorB) {
+    return <p>Something went wrong</p>
+  }
+
+  if (!glazes || isLoadingA) {
+    return <>loading...</>
+  }
+
+  if (!bases || isLoadingB) {
+    return <>loading...</>
+  }
 
   const handleGlazeChange = (evt) => {
-    changeGlaze(evt.target.value)
+    const choosenGlaze = glazes.filter(
+      (glaze) => glaze.id == evt.target.value
+    )[0]
+    console.log(choosenGlaze)
+    changeGlaze(choosenGlaze)
   }
 
   const handleBaseChange = (evt) => {
@@ -33,13 +54,13 @@ function DonutForm(props) {
           <select
             id="glaze"
             onChange={handleGlazeChange}
-            value={glaze}
+            defaultValue={glazeItem.id}
             name="name"
           >
-            {flavorArray.map((glaze, index) => {
+            {glazes.map((glaze, index) => {
               return (
-                <option key={index} value={glaze}>
-                  {glaze}
+                <option key={index} value={glaze.id}>
+                  {glaze.name}
                 </option>
               )
             })}
@@ -51,13 +72,13 @@ function DonutForm(props) {
           <select
             id="base"
             onChange={handleBaseChange}
-            value={base.name}
+            defaultValue={baseItem.id}
             name="name"
           >
-            {baseArray.map((base, index) => {
+            {bases.map((base, index) => {
               return (
-                <option key={index} value={base}>
-                  {base}
+                <option key={index} value={base.id}>
+                  {base.name}
                 </option>
               )
             })}

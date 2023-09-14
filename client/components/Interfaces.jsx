@@ -18,11 +18,13 @@ function Interfaces(props) {
   async function changeBase(baseName) {
     // const newBase = await getBaseByName(baseName)
     // setBaseItem(newBase)
+    // updateBase(newBase.color)
   }
 
   function changeGlaze(glazeName) {
     // const newGlaze = await getGlazeByName(baseName)
     // setGlazeItem(newBase)
+    // updateGlaze(newGlaze.color)
   }
 
   return (
@@ -30,8 +32,8 @@ function Interfaces(props) {
       <section id="hero-section">
         <h1 className="text-3xl font-bold underline">Tiff Donuts</h1>
         <DonutForm
-          updateGlaze={updateGlaze}
-          updateBase={updateBase}
+          base={baseItem}
+          glaze={glazeItem}
           changeBase={changeBase}
           changeGlaze={changeGlaze}
         />

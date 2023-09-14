@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { fetchFlavorNames, fetchBaseNames } from '../api/apiClient'
+import { fetchGlazes, fetchBases } from '../api/apiClient'
 
 function DonutForm(props) {
   const { baseItem, glazeItem, changeBase, changeGlaze } = props
@@ -9,13 +9,13 @@ function DonutForm(props) {
     data: glazes,
     isLoading: isLoadingA,
     isError: isErrorA,
-  } = useQuery(['glazes'], fetchFlavorNames)
+  } = useQuery(['glazes'], fetchGlazes)
 
   const {
     data: bases,
     isLoading: isLoadingB,
     isError: isErrorB,
-  } = useQuery(['bases'], fetchBaseNames)
+  } = useQuery(['bases'], fetchBases)
 
   if (isErrorA) {
     return <p>Something went wrong</p>

@@ -3,8 +3,8 @@ import DonutDetails from './DonutDetails'
 import { useState } from 'react'
 
 const defaultBase = {
-  id: 2,
-  name: 'Strawberry',
+  id: 1,
+  name: 'Original',
 }
 
 const defaultGlaze = {
@@ -19,12 +19,12 @@ function Interfaces(props) {
 
   async function changeBase(choosenBase) {
     setBaseItem(choosenBase)
-    updateBase(Number(choosenBase.color))
+    updateBase(choosenBase.color)
   }
 
   function changeGlaze(choosenGlaze) {
     setGlazeItem(choosenGlaze)
-    updateGlaze(Number(choosenGlaze.color))
+    updateGlaze(choosenGlaze.color)
   }
 
   return (

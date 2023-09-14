@@ -1,7 +1,7 @@
-import {Canvas} from '@react-three/fiber'
-import {Scroll, ScrollControls} from '@react-three/drei'
-import Interfaces from './components/Interfaces.jsx'
-import DonutScene from './components/DonutScene.jsx'
+import { Canvas } from "@react-three/fiber";
+import { Scroll, ScrollControls } from "@react-three/drei";
+import Interfaces from "./components/Interfaces.jsx";
+import DonutScene from "./components/DonutScene.jsx";
 
 function App() {
   // const [section, setSection] = useState(0)
@@ -12,7 +12,7 @@ function App() {
         shadows
         camera={{ fov: 3, near: 0.1, far: 1000, position: [3, 3, 5] }}
       >
-        <color attach="background" args={['#ececec']} />
+        <color attach="background" args={["#ececec"]} />
         <ScrollControls pages={2} demping={0.1}>
           <DonutScene />
           <Scroll html>
@@ -21,7 +21,7 @@ function App() {
         </ScrollControls>
       </Canvas>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

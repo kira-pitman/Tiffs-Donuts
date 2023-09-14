@@ -1,7 +1,7 @@
 import { useState, useQuery } from 'react'
 
 function DonutForm(props) {
-  const { updateGlaze, updateBase, changeBase, changeGlaze } = props
+  const { base, glaze, changeBase, changeGlaze } = props
   const flavorArray = ['Chocolate', 'Strawberry', 'Green tea', 'Lemon']
   const baseArray = ['Original', 'Chocolate']
   // const {
@@ -16,16 +16,12 @@ function DonutForm(props) {
   //   isError,
   // } = useQuery[('bases', getBases]
 
-  const handleGlazeChange = async (evt) => {
+  const handleGlazeChange = (evt) => {
     changeGlaze(evt.target.value)
-    // const glazeColor = await getGlazeByName(evt.target.value)
-    // updateGlaze(glazeColor.color)
   }
 
   const handleBaseChange = (evt) => {
     changeBase(evt.target.value)
-    // const baseColor = await getBaseByName(evt.target.value)
-    // updateBase(baseColor.color)
   }
 
   return (
@@ -37,7 +33,7 @@ function DonutForm(props) {
           <select
             id="glaze"
             onChange={handleGlazeChange}
-            value={}
+            value={glaze}
             name="name"
           >
             {flavorArray.map((glaze, index) => {
@@ -55,7 +51,7 @@ function DonutForm(props) {
           <select
             id="base"
             onChange={handleBaseChange}
-            value={}
+            value={base.name}
             name="name"
           >
             {baseArray.map((base, index) => {

@@ -2,17 +2,27 @@ import DonutForm from './DonutForm'
 import DonutDetails from './DonutDetails'
 import { useState } from 'react'
 
+const defaultBase = {
+  name: 'original',
+}
+
+const defaultGlaze = {
+  name: 'Strawberry',
+  price: 8,
+}
 function Interfaces(props) {
   const { updateGlaze, updateBase } = props
-  const [base, setBase] = useState('')
-  const [glaze, setGlaze] = useState('')
+  const [baseItem, setBaseItem] = useState(defaultBase)
+  const [glazeItem, setGlazeItem] = useState(defaultGlaze)
 
-  function changeBase(baseName) {
-    setBase(baseName)
+  async function changeBase(baseName) {
+    // const newBase = await getBaseByName(baseName)
+    // setBaseItem(newBase)
   }
 
   function changeGlaze(glazeName) {
-    setGlaze(glazeName)
+    // const newGlaze = await getGlazeByName(baseName)
+    // setGlazeItem(newBase)
   }
 
   return (
@@ -29,7 +39,7 @@ function Interfaces(props) {
 
       <section id="detail-section">
         <h1 className="text-3xl font-extrabold">Details</h1>
-        <DonutDetails base={base} glaze={glaze} />
+        <DonutDetails base={baseItem} glaze={glazeItem} />
       </section>
     </>
   )

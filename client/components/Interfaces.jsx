@@ -1,33 +1,21 @@
 import DonutForm from './DonutForm'
+import DonutDetails from './DonutDetails'
 
-const Section = (props) => {
-  const { children } = props
-  return <section className="mx-auto h-screen px-4">{children}</section>
-}
-
-function Interfaces() {
+function Interfaces(props) {
+  const { updateGlaze } = props
   return (
-    <div className="pl-100">
-      <HeroSection />
-      <DetailSection />
-    </div>
+    <>
+      <section id="hero-section">
+        <h1 className="text-3xl font-bold underline">Tiff Donuts</h1>
+        <DonutForm updateGlaze={updateGlaze} />
+      </section>
+
+      <section id="detail-section">
+        <h1 className="text-3xl font-extrabold">Detail</h1>
+        <DonutDetails />
+      </section>
+    </>
   )
 }
 
-function HeroSection() {
-  return (
-    <Section>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <DonutForm />
-    </Section>
-  )
-}
-
-function DetailSection() {
-  return (
-    <Section>
-      <h1 className="text-3xl font-extrabold">Yummy Yummy</h1>
-    </Section>
-  )
-}
 export default Interfaces

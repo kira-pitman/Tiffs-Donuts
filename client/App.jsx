@@ -1,10 +1,24 @@
-import {Canvas} from '@react-three/fiber'
-import {Scroll, ScrollControls} from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
+import { useState } from 'react'
+import { useGLTF } from '@react-three/drei'
+import { Scroll, ScrollControls } from '@react-three/drei'
 import Interfaces from './components/Interfaces.jsx'
 import DonutScene from './components/DonutScene.jsx'
+import * as THREE from 'three'
 
 function App() {
   // const [section, setSection] = useState(0)
+  const { materials } = useGLTF('./donut_cat/scene.gltf')
+
+  const [glazeColor, setGlazeColor] = useState(
+    materials['Material.004'].clone()
+  )
+
+  function updateGlaze(hex) {
+    const newMaterials = glazeColor.clone()
+    newMaterials.color = new THREE.Color(hex)
+    setGlazeColor(newMaterials)
+  }
 
   return (
     <>
@@ -14,9 +28,9 @@ function App() {
       >
         <color attach="background" args={['#ececec']} />
         <ScrollControls pages={2} demping={0.1}>
-          <DonutScene />
+          <DonutScene glazeColor={glazeColor} />
           <Scroll html>
-            <Interfaces />
+            <Interfaces updateGlaze={updateGlaze} />
           </Scroll>
         </ScrollControls>
       </Canvas>

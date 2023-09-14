@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
-function DonutForm() {
+function DonutForm(props) {
+  const {updateGlaze} = props
   const flavorArray = ['Chocolate', 'Strawberry', 'Green tea', 'Lemon']
   const baseArray = ['Original', 'Chocolate']
 
@@ -10,9 +11,11 @@ function DonutForm() {
   const handleFlavorChange = (evt) => {
     setFlavor(evt.target.value)
   }
+ 
   const handleBaseChange = (evt) => {
     setBase(evt.target.value)
   }
+ 
   return (
     <>
       <h2>Choose a glaze and base</h2>

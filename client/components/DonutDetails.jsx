@@ -1,4 +1,4 @@
-import getGlazeByName from './apiClient/'
+// import getGlazeByName from './apiClient/'
 
 function DonutDetails(props) {
   const { base, glaze } = props

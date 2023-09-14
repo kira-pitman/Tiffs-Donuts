@@ -1,3 +1,5 @@
+import DonutForm from './DonutForm'
+
 const Section = (props) => {
   const { children } = props
   return <section className="mx-auto h-screen px-4">{children}</section>
@@ -16,6 +18,7 @@ function HeroSection() {
   return (
     <Section>
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <DonutForm />
     </Section>
   )
 }

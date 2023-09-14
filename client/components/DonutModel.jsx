@@ -39,7 +39,7 @@ export default function DonutModel(props) {
                   <mesh
                     name="Object_7"
                     geometry={nodes.Object_7.geometry}
-                    material={baseColor}
+                    material={glazeColor}
                   />
                 </group>
                 <group
@@ -62,7 +62,7 @@ export default function DonutModel(props) {
                 <mesh
                   name="Object_4"
                   geometry={nodes.Object_4.geometry}
-                  material={materials['Material.003']}
+                  material={baseColor}
                 />
               </group>
             </group>

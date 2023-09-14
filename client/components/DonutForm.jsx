@@ -42,7 +42,9 @@ function DonutForm(props) {
   }
 
   const handleBaseChange = (evt) => {
-    changeBase(evt.target.value)
+    const choosenBase = bases.filter((base) => base.id == evt.target.value)[0]
+    changeBase(choosenBase)
+    console.log(choosenBase)
   }
 
   return (

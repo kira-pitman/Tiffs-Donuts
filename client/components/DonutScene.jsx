@@ -1,16 +1,16 @@
-import {OrbitControls} from '@react-three/drei'
+import { OrbitControls } from "@react-three/drei";
 
-import DonutModel from './DonutModel.jsx'
+import DonutModel from "./DonutModel.jsx";
 // import React from 'react'
-import {useRef} from 'react'
-import {useFrame} from '@react-three/fiber'
+import { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 
 export default function DonutScene() {
-  const ref = useRef()
+  const ref = useRef();
 
   useFrame((_, delta) => {
-    ref.current.rotation.y += 0.5 * delta
-  })
+    ref.current.rotation.y += 0.5 * delta;
+  });
 
   return (
     <>
@@ -21,5 +21,5 @@ export default function DonutScene() {
         <DonutModel scale={[1, 1, 1]} />
       </mesh>
     </>
-  )
+  );
 }

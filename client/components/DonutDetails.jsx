@@ -5,14 +5,12 @@ function DonutDetails(props) {
 
   return (
     <>
-      <h2>Detail Page</h2>
-
-      <p>
+      <p  className="mt-5 text-3xl">
         {base.name} base with {glaze.name} topping
       </p>
 
-      <h4>Price:</h4>
-      <p>{glaze.price}</p>
+      <h4  className="mt-3 text-3xl">Price: </h4>
+      <p  className="mt-3 text-2xl">${glaze.price}</p>
     </>
   )
 }

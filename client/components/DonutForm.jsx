@@ -48,11 +48,11 @@ function DonutForm(props) {
 
   return (
     <>
-      <h2>Choose a glaze and base</h2>
+      <h2 className='text-5xl font-extrabold underline'>Choose a glaze and base</h2>
       <form>
-        <div id="glaze-select">
-          <label htmlFor="glaze">Glaze</label>
-          <select
+        <div className='mt-5' id="glaze-select">
+          <label className="mt-3 mr-2 text-3xl" htmlFor="glaze">Glaze</label>
+          <select className="w-64 h-10 p-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
             id="glaze"
             onChange={handleGlazeChange}
             defaultValue={glazeItem.id}
@@ -68,9 +68,9 @@ function DonutForm(props) {
           </select>
         </div>
 
-        <div id="base-select">
-          <label htmlFor="base">Base</label>
-          <select
+        <div className='mt-3' id="base-select">
+          <label className="text-3xl mr-2" htmlFor="base">Base</label>
+          <select className="w-64 h-10 p-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
             id="base"
             onChange={handleBaseChange}
             defaultValue={baseItem.id}
@@ -85,7 +85,7 @@ function DonutForm(props) {
             })}
           </select>
         </div>
-        <button>See Donut Detail</button>
+        <button className="mt-3 p-3 bg-sky-300 hover:bg-sky-200 rounded-full">See Donut Detail</button>
       </form>
     </>
   )

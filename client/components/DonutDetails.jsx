@@ -11,8 +11,7 @@ function DonutDetails(props) {
         {base.name} base with {glaze.name} topping
       </p>
 
-      <h4>Price:</h4>
-      <p>{glaze.price}</p>
+      <p>Price: {glaze.price}</p>
     </>
   )
 }

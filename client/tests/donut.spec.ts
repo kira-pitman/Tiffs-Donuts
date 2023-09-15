@@ -62,7 +62,7 @@ test.describe('Donut', () => {
             {name: /green tea/i, value: '3'},
             {name: /lemon/i, value: '4'},
         ]
-        for (let opt of options) {
+        for (const opt of options) {
             const option = await glazeCombobox.getByText(opt.name)
             await expect(option).toBeEnabled()
             await expect(option).toHaveJSProperty('value', opt.value)
@@ -78,7 +78,7 @@ test.describe('Donut', () => {
             {name: /chocolate/i, value: '2'},
         ]
 
-        for (let opt of options) {
+        for (const opt of options) {
             const option = await baseCombobox.getByText(opt.name)
             await expect(option).toBeEnabled()
             await expect(option).toHaveJSProperty('value', opt.value)

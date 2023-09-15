@@ -5,6 +5,7 @@ import { Scroll, ScrollControls } from '@react-three/drei'
 import Interfaces from './components/Interfaces.jsx'
 import DonutScene from './components/DonutScene.jsx'
 import * as THREE from 'three'
+import { OrbitControls } from '@react-three/drei'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
@@ -39,6 +40,7 @@ function App() {
         shadows
         camera={{ fov: 3, near: 0.1, far: 1000, position: [3, 3, 5] }}
       >
+        <OrbitControls enableZoom={false} />
         <color attach="background" args={['#ececec']} />
         <ScrollControls pages={2} demping={0.1}>
           <DonutScene glazeColor={glazeColor} baseColor={baseColor} />

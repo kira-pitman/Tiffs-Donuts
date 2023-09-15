@@ -56,7 +56,7 @@ function DonutForm(props) {
             id="glaze"
             onChange={handleGlazeChange}
             defaultValue={glazeItem.id}
-            name="name"
+            name="glaze"
           >
             {glazes.map((glaze, index) => {
               return (
@@ -74,7 +74,7 @@ function DonutForm(props) {
             id="base"
             onChange={handleBaseChange}
             defaultValue={baseItem.id}
-            name="name"
+            name="base"
           >
             {bases.map((base, index) => {
               return (

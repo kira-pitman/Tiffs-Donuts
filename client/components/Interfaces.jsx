@@ -1,6 +1,9 @@
 import DonutForm from './DonutForm'
 import DonutDetails from './DonutDetails'
 import { useState } from 'react'
+import React, { useEffect } from 'react'
+// import { BrowserRouter } from 'react-router-dom'
+import ScrollToTop from 'react-scroll-to-top'
 
 const defaultBase = {
   id: 1,
@@ -29,20 +32,34 @@ function Interfaces(props) {
 
   return (
     <>
-      <section id="hero-section">
-        <h1 className="text-3xl font-bold underline">Tiff Donuts</h1>
+      <section id="hero" className="h-screen">
+        <h1 className="text-3xl font-bold underline ">Tiff Donuts</h1>
         <DonutForm
           baseItem={baseItem}
           glazeItem={glazeItem}
           changeBase={changeBase}
           changeGlaze={changeGlaze}
         />
+        <div>
+          <a
+            href="/"
+            onClick={(e) => {
+              let detail = document.getElementById('detail')
+              e.preventDefault()
+              detail &&
+                detail.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }}
+          >
+            See Donut Details
+          </a>
+        </div>
       </section>
 
-      <section id="detail-section">
+      <section id="detail" className="h-screen">
         <h1 className="text-3xl font-extrabold">Details</h1>
         <DonutDetails base={baseItem} glaze={glazeItem} />
       </section>
+      <ScrollToTop />
     </>
   )
 }

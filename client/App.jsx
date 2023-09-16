@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { Scroll, ScrollControls } from '@react-three/drei'
+// import { Scroll, ScrollControls } from '@react-three/drei'
 import Interfaces from './components/Interfaces.jsx'
 import DonutScene from './components/DonutScene.jsx'
 import * as THREE from 'three'
@@ -19,7 +19,31 @@ function App() {
     materials['Material.004'].clone()
   )
 
+  const [donutMarginLeft, setDonutMarginLeft] = useState('0px')
+  const donutDivWidth = 800
+
   const [baseColor, setBaseColor] = useState(materials['Material.003'].clone())
+
+  useEffect(() => {
+    const scrollHandler = () => {
+      requestAnimationFrame(() => {
+        const pageHeight =
+          document.height !== undefined
+            ? document.height
+            : document.body.offsetHeight
+        const pageWidth =
+          document.width !== undefined
+            ? document.width
+            : document.body.offsetWidth
+        const yOffset = window.scrollY
+        const presentage = yOffset / pageHeight
+        const maxMargin = pageWidth - donutDivWidth
+        setDonutMarginLeft(`${maxMargin * presentage}px`)
+      })
+    }
+    window.addEventListener('scroll', scrollHandler)
+    return () => window.removeEventListener('scroll', scrollHandler)
+  }, [donutMarginLeft])
 
   function updateGlaze(hex) {
     const newMaterials = glazeColor.clone()
@@ -35,23 +59,38 @@ function App() {
   }
 
   return (
-    <>
+    <div style={{ position: 'relative' }}>
       <Canvas
         shadows
         camera={{ fov: 3, near: 0.1, far: 1000, position: [3, 3, 5] }}
+       
+
+        style={{
+          position: 'fixed',
+          height: '100vh',
+          width: `${donutDivWidth}px`,
+          marginLeft: donutMarginLeft,
+          background: 'white',
+        }}
       >
         <OrbitControls enableZoom={false} />
-        <color attach="background" args={['#ececec']} />
-        <ScrollControls pages={2} demping={0.1}>
-          <DonutScene glazeColor={glazeColor} baseColor={baseColor} />
-          <Scroll html>
+        <color attach="background" args={['#ffffff']} />
+        {/* <ScrollControls pages={2} demping={0.1}> */}
+        <DonutScene glazeColor={glazeColor} baseColor={baseColor} />
+        {/* <Scroll html>
             <QueryClientProvider client={queryClient}>
               <Interfaces updateGlaze={updateGlaze} updateBase={updateBase} />
             </QueryClientProvider>
-          </Scroll>
-        </ScrollControls>
+          </Scroll> */}
+        {/* </ScrollControls> */}
       </Canvas>
-    </>
+
+      <div style={{ position: 'absolute', top: 0, left: 0 }}>
+        <QueryClientProvider client={queryClient}>
+          <Interfaces updateGlaze={updateGlaze} updateBase={updateBase} />
+        </QueryClientProvider>
+      </div>
+    </div>
   )
 }
 

@@ -85,7 +85,6 @@ function DonutForm(props) {
             })}
           </select>
         </div>
-        <button>See Donut Detail</button>
       </form>
     </>
   )

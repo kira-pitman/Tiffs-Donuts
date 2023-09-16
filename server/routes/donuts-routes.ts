@@ -25,4 +25,24 @@ router.get('/bases', async (req, res) => {
   }
 })
 
+router.get('/bases/:id', async (req, res) => {
+  try {
+    const base = await db.getBase(req.params.id)
+    res.json(base)
+  } catch (error) {
+    res.sendStatus(500)
+    console.error(error)
+  }
+})
+
+router.get('/glazes/:id', async (req, res) => {
+  try {
+    const glaze = await db.getGlaze(req.params.id)
+    res.json(glaze)
+  } catch (error) {
+    res.sendStatus(500)
+    console.error(error)
+  }
+})
+
 export default router

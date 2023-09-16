@@ -59,7 +59,7 @@ function Interfaces(props) {
         <h1 className="text-3xl font-extrabold">Details</h1>
         <DonutDetails base={baseItem} glaze={glazeItem} />
       </section>
-      <ScrollToTop />
+      <ScrollToTop smooth />
     </>
   )
 }

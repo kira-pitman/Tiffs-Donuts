@@ -20,6 +20,9 @@ function App() {
   )
 
   const [donutMarginLeft, setDonutMarginLeft] = useState('0px')
+  const [donutMarginTop, setDonutMarginTop] = useState('0px')
+  const [donutScale, setDonutScale] = useState(1)
+  const [donutAngle, setDonutAngle] = useState(3)
   const donutDivWidth = 800
 
   const [baseColor, setBaseColor] = useState(materials['Material.003'].clone())
@@ -39,17 +42,20 @@ function App() {
         const presentage = yOffset / pageHeight
         const maxMargin = pageWidth - donutDivWidth
         setDonutMarginLeft(`${maxMargin * presentage}px`)
+        setDonutMarginTop(`${150 * presentage}px`)
+        setDonutScale(1 + presentage * 0.08)
+        setDonutAngle(10)
+        console.log(`donutAngle:${donutScale}`)
       })
     }
     window.addEventListener('scroll', scrollHandler)
     return () => window.removeEventListener('scroll', scrollHandler)
-  }, [donutMarginLeft])
+  }, [donutMarginLeft, donutMarginTop, donutScale, donutAngle])
 
   function updateGlaze(hex) {
     const newMaterials = glazeColor.clone()
     newMaterials.color = new THREE.Color(hex)
     setGlazeColor(newMaterials)
-    console.log('triggered')
   }
 
   function updateBase(hex) {
@@ -59,18 +65,23 @@ function App() {
   }
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative', scrollBehavior: 'smooth' }}>
       <Canvas
         shadows
-        camera={{ fov: 3, near: 0.1, far: 1000, position: [3, 3, 5] }}
-       
-
+        camera={{
+          fov: 3.5,
+          near: 0.1,
+          far: 1000,
+          position: [3, donutAngle, 5],
+        }}
         style={{
           position: 'fixed',
           height: '100vh',
           width: `${donutDivWidth}px`,
           marginLeft: donutMarginLeft,
+          marginTop: donutMarginTop,
           background: 'white',
+          transform: `scale(${donutScale})`,
         }}
       >
         <OrbitControls enableZoom={false} />

@@ -62,7 +62,7 @@ function DonutForm(props) {
           <select
             id="glaze"
             onChange={handleGlazeChange}
-            value={props.glazeItem.id}
+            value={glazeItem.id}
             name="glaze"
           >
             {glazes.map((glaze, index) => {
@@ -80,7 +80,7 @@ function DonutForm(props) {
           <select
             id="base"
             onChange={handleBaseChange}
-            value={props.baseItem.id}
+            value={baseItem.id}
             name="base"
           >
             {bases.map((base, index) => {

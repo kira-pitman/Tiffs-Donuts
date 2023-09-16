@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchGlazes, fetchBases } from '../api/apiClient'
+import {setURLParams} from "../lib/utils.ts";
 
 function DonutForm(props) {
   const { baseItem, glazeItem, changeBase, changeGlaze } = props
@@ -37,11 +38,13 @@ function DonutForm(props) {
       (glaze) => glaze.id == evt.target.value
     )[0]
     console.log(choosenGlaze)
+    setURLParams('glaze', String(choosenGlaze.id))
     changeGlaze(choosenGlaze)
   }
 
   const handleBaseChange = (evt) => {
     const choosenBase = bases.filter((base) => base.id == evt.target.value)[0]
+    setURLParams('base', String(choosenBase.id))
     changeBase(choosenBase)
     console.log(choosenBase)
   }
@@ -55,7 +58,7 @@ function DonutForm(props) {
           <select
             id="glaze"
             onChange={handleGlazeChange}
-            defaultValue={glazeItem.id}
+            value={props.glazeItem.id}
             name="glaze"
           >
             {glazes.map((glaze, index) => {
@@ -73,7 +76,7 @@ function DonutForm(props) {
           <select
             id="base"
             onChange={handleBaseChange}
-            defaultValue={baseItem.id}
+            value={props.baseItem.id}
             name="base"
           >
             {bases.map((base, index) => {

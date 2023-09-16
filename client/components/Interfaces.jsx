@@ -20,6 +20,8 @@ function Interfaces(props) {
   const [glazeItem, setGlazeItem] = useState(defaultGlaze)
 
   useEffect(() => {
+
+    // This can be set to use the provided hook by RR if we implement it
     const setDefaults = async () => {
       const params = new URLSearchParams(window.location.search)
       const searchGlaze = params.get('glaze')

@@ -36,9 +36,8 @@ function Interfaces(props) {
   return (
    
     <div className={'flex flex-col items-center w-screen'}>
-    <h1 className="text-8xl font-bold underline">Tiff Donuts</h1>
+    <h1 className="text-8xl leading-snug font-yummy">Tiff Donuts</h1>
       <Section id="hero-section" className={'items-end'}>
-        
         <DonutForm
           baseItem={baseItem}
           glazeItem={glazeItem}
@@ -48,7 +47,6 @@ function Interfaces(props) {
       </Section>
 
       <Section id="detail-section" className={'items-start'}>
-        <h2 className="text-5xl underline">Details</h2>
         <DonutDetails base={baseItem} glaze={glazeItem} />
       </Section>
     </div>

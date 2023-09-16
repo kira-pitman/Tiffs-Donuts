@@ -48,44 +48,50 @@ function DonutForm(props) {
 
   return (
     <>
-      <h2 className='text-5xl font-extrabold underline'>Choose a glaze and base</h2>
       <form>
-        <div className='mt-5' id="glaze-select">
-          <label className="mt-3 mr-2 text-3xl" htmlFor="glaze">Glaze</label>
-          <select className="w-64 h-10 p-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
-            id="glaze"
-            onChange={handleGlazeChange}
-            defaultValue={glazeItem.id}
-            name="name"
-          >
-            {glazes.map((glaze, index) => {
-              return (
-                <option key={index} value={glaze.id}>
-                  {glaze.name}
-                </option>
-              )
-            })}
-          </select>
-        </div>
+        <div className='grid grid-cols-2 gap-3 mt-5 place-items-center'>
+          <div className='col-start-1 col-end-7'>
+            <h2 className='text-5xl font-extrabold leading-snug'>Choose a flavor</h2>
+          </div>
+          <div className='col-start-1 col-end-3' id="glaze-select">
+            <label className="mt-3 mr-2 text-3xl" htmlFor="glaze">Glaze</label>
+            <select className="w-64 h-10 p-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
+              id="glaze"
+              onChange={handleGlazeChange}
+              defaultValue={glazeItem.id}
+              name="name"
+            >
+              {glazes.map((glaze, index) => {
+                return (
+                  <option key={index} value={glaze.id}>
+                    {glaze.name}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
 
-        <div className='mt-3' id="base-select">
-          <label className="text-3xl mr-2" htmlFor="base">Base</label>
-          <select className="w-64 h-10 p-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
-            id="base"
-            onChange={handleBaseChange}
-            defaultValue={baseItem.id}
-            name="name"
-          >
-            {bases.map((base, index) => {
-              return (
-                <option key={index} value={base.id}>
-                  {base.name}
-                </option>
-              )
-            })}
-          </select>
+          <div className='col-end-7 col-span-2' id="base-select">
+            <label className="text-3xl mr-2" htmlFor="base">Base</label>
+            <select className="w-64 h-10 p-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
+              id="base"
+              onChange={handleBaseChange}
+              defaultValue={baseItem.id}
+              name="name"
+            >
+              {bases.map((base, index) => {
+                return (
+                  <option key={index} value={base.id}>
+                    {base.name}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
+          <div className='col-start-1 col-end-7'>
+            <button className="mt-3 p-3 bg-sky-300 hover:bg-sky-200 rounded-full">See Donut Detail</button>
+          </div>
         </div>
-        <button className="mt-3 p-3 bg-sky-300 hover:bg-sky-200 rounded-full">See Donut Detail</button>
       </form>
     </>
   )

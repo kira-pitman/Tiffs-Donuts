@@ -11,7 +11,7 @@ import { gsap } from 'gsap'
 // export const NB_FLOORS = 2
 
 export default function DonutScene(props) {
-  const { glazeColor, baseColor } = props
+  const { glazeColor, baseColor, texture } = props
 
   const ref = useRef()
 
@@ -50,6 +50,7 @@ export default function DonutScene(props) {
           scale={[scale, scale, scale]}
           glazeColor={glazeColor}
           baseColor={baseColor}
+          texture={texture}
         />
       </motion.mesh>
     </>

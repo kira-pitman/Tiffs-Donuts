@@ -4,6 +4,8 @@ import { useRef, useState } from 'react'
 import React, { useEffect } from 'react'
 // import { BrowserRouter } from 'react-router-dom'
 import ScrollToTop from 'react-scroll-to-top'
+import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { useLoader } from '@react-three/fiber'
 
 const defaultBase = {
   id: 1,
@@ -17,9 +19,11 @@ const defaultGlaze = {
 }
 function Interfaces(props) {
   const heroRef = useRef(null)
-  const { updateGlaze, updateBase } = props
+  const { updateGlaze, updateBase, updateTexture } = props
   const [baseItem, setBaseItem] = useState(defaultBase)
   const [glazeItem, setGlazeItem] = useState(defaultGlaze)
+
+  const newTexture = useLoader(TextureLoader, 'gold.jpg')
 
   async function changeBase(choosenBase) {
     setBaseItem(choosenBase)
@@ -31,6 +35,17 @@ function Interfaces(props) {
     updateGlaze(choosenGlaze.color)
   }
 
+  function addGold() {
+    updateGlaze('#FFFFFF')
+    updateBase('#FFFFFF')
+    updateTexture(newTexture)
+  }
+
+  function cancelGold() {
+    updateTexture('')
+  }
+  console.log(glazeItem)
+
   return (
     <>
       <section id="hero" className="h-screen" ref={heroRef}>
@@ -41,6 +56,8 @@ function Interfaces(props) {
           changeBase={changeBase}
           changeGlaze={changeGlaze}
         />
+        <button onClick={addGold}>add golden coat</button>
+        <button onClick={cancelGold}>Remove gold</button>
         <div>
           <a
             href="/"

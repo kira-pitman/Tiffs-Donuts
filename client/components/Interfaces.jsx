@@ -1,6 +1,6 @@
 import DonutForm from './DonutForm'
 import DonutDetails from './DonutDetails'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import React, { useEffect } from 'react'
 // import { BrowserRouter } from 'react-router-dom'
 import ScrollToTop from 'react-scroll-to-top'
@@ -16,6 +16,7 @@ const defaultGlaze = {
   price: 8,
 }
 function Interfaces(props) {
+  const heroRef = useRef(null)
   const { updateGlaze, updateBase } = props
   const [baseItem, setBaseItem] = useState(defaultBase)
   const [glazeItem, setGlazeItem] = useState(defaultGlaze)
@@ -32,7 +33,7 @@ function Interfaces(props) {
 
   return (
     <>
-      <section id="hero" className="h-screen">
+      <section id="hero" className="h-screen" ref={heroRef}>
         <h1 className="text-3xl font-bold underline ">Tiff Donuts</h1>
         <DonutForm
           baseItem={baseItem}
@@ -58,7 +59,22 @@ function Interfaces(props) {
       <section id="detail" className="h-screen">
         <h1 className="text-3xl font-extrabold">Details</h1>
         <DonutDetails base={baseItem} glaze={glazeItem} />
+        {/* Option for scrolling on button click with useRef */}
+        {/* <div>
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              heroRef.current?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+              })
+            }}
+          >
+            Back to donut
+          </button>
+        </div> */}
       </section>
+
       <ScrollToTop smooth />
     </>
   )

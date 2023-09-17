@@ -1,9 +1,9 @@
 import DonutForm from './DonutForm'
 import DonutDetails from './DonutDetails'
 import { useRef, useState } from 'react'
-import React, { useEffect } from 'react'
+import Footer from './Footer'
+//import React, { useEffect } from 'react'
 // import { BrowserRouter } from 'react-router-dom'
-import ScrollToTop from 'react-scroll-to-top'
 
 const defaultBase = {
   id: 1,
@@ -17,18 +17,27 @@ const defaultGlaze = {
 }
 function Interfaces(props) {
   const heroRef = useRef(null)
+  const detailRef = useRef(null)
   const { updateGlaze, updateBase } = props
-  const [baseItem, setBaseItem] = useState(defaultBase)
-  const [glazeItem, setGlazeItem] = useState(defaultGlaze)
+  const [selectedBase, setSelectedBase] = useState(defaultBase)
+  const [selectedGlaze, setSelectedGlaze] = useState(defaultGlaze)
 
-  async function changeBase(choosenBase) {
-    setBaseItem(choosenBase)
+  function changeBase(choosenBase) {
+    setSelectedBase(choosenBase)
     updateBase(choosenBase.color)
   }
 
   function changeGlaze(choosenGlaze) {
-    setGlazeItem(choosenGlaze)
+    setSelectedGlaze(choosenGlaze)
     updateGlaze(choosenGlaze.color)
+  }
+
+  function handleScroll(e, ref) {
+    e.preventDefault()
+    ref.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
   }
 
   return (
@@ -36,46 +45,33 @@ function Interfaces(props) {
       <section id="hero" className="h-screen" ref={heroRef}>
         <h1 className="text-3xl font-bold underline ">Tiff Donuts</h1>
         <DonutForm
-          baseItem={baseItem}
-          glazeItem={glazeItem}
+          selectedBase={selectedBase}
+          selectedGlaze={selectedGlaze}
           changeBase={changeBase}
           changeGlaze={changeGlaze}
         />
         <div>
-          <a
-            href="/"
-            onClick={(e) => {
-              let detail = document.getElementById('detail')
-              e.preventDefault()
-              detail &&
-                detail.scrollIntoView({ behavior: 'smooth', block: 'start' })
-            }}
-          >
+          <button onClick={(e) => handleScroll(e, detailRef)}>
             See Donut Details
-          </a>
+          </button>
         </div>
       </section>
 
-      <section id="detail" className="h-screen">
+      <section id="detail" className="h-screen" ref={detailRef}>
         <h1 className="text-3xl font-extrabold">Details</h1>
-        <DonutDetails base={baseItem} glaze={glazeItem} />
-        {/* Option for scrolling on button click with useRef */}
-        {/* <div>
-          <button
-            onClick={(e) => {
-              e.preventDefault()
-              heroRef.current?.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-              })
-            }}
-          >
+        <DonutDetails
+          selectedBase={selectedBase}
+          selectedGlaze={selectedGlaze}
+        />
+        <div>
+          <button onClick={(e) => handleScroll(e, heroRef)}>
             Back to donut
           </button>
-        </div> */}
+        </div>
+        
       </section>
-
-      <ScrollToTop smooth />
+      
+      <Footer />
     </>
   )
 }

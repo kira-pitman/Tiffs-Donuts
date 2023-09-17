@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchGlazes, fetchBases } from '../api/apiClient'
+import {setURLParams} from "../lib/utils.ts";
 
 function DonutForm(props) {
   const { baseItem, glazeItem, changeBase, changeGlaze } = props
@@ -37,11 +38,17 @@ function DonutForm(props) {
       (glaze) => glaze.id == evt.target.value
     )[0]
     console.log(choosenGlaze)
+
+    // This can be set to use the provided hook by RR if we implement it
+    setURLParams('glaze', String(choosenGlaze.id))
     changeGlaze(choosenGlaze)
   }
 
   const handleBaseChange = (evt) => {
     const choosenBase = bases.filter((base) => base.id == evt.target.value)[0]
+
+    // This can be set to use the provided hook by RR if we implement it
+    setURLParams('base', String(choosenBase.id))
     changeBase(choosenBase)
     console.log(choosenBase)
   }
@@ -59,7 +66,7 @@ function DonutForm(props) {
               id="glaze"
               className="w-64 h-10 p-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
               onChange={handleGlazeChange}
-              defaultValue={glazeItem.id}
+              value={glazeItem.id}
               name="glaze"
             >
               {glazes.map((glaze, index) => {
@@ -78,7 +85,7 @@ function DonutForm(props) {
               id="base"
               className="w-64 h-10 p-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
               onChange={handleBaseChange}
-              defaultValue={baseItem.id}
+              value={baseItem.id}
               name="base"
             >
               {bases.map((base, index) => {

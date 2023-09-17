@@ -55,44 +55,49 @@ function DonutForm(props) {
 
   return (
     <>
-      <h2>Choose a glaze and base</h2>
       <form>
-        <div id="glaze-select">
-          <label htmlFor="glaze">Glaze</label>
-          <select
-            id="glaze"
-            onChange={handleGlazeChange}
-            value={glazeItem.id}
-            name="glaze"
-          >
-            {glazes.map((glaze, index) => {
-              return (
-                <option key={index} value={glaze.id}>
-                  {glaze.name}
-                </option>
-              )
-            })}
-          </select>
-        </div>
+        <div className="grid grid-cols-2 gap-3 mt-5 place-items-center">
+          <div className="col-start-1 col-end-7">
+            <h2 className="text-5xl font-extrabold leading-snug">Choose a flavor</h2>
+          </div>
+          <div id="glaze-select" className="col-start-1 col-end-3">
+            <label className="mt-3 mr-2 text-3xl" htmlFor="glaze">Glaze</label>
+            <select
+              id="glaze"
+              className="w-64 h-10 p-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
+              onChange={handleGlazeChange}
+              value={glazeItem.id}
+              name="glaze"
+            >
+              {glazes.map((glaze, index) => {
+                return (
+                  <option key={index} value={glaze.id}>
+                    {glaze.name}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
 
-        <div id="base-select">
-          <label htmlFor="base">Base</label>
-          <select
-            id="base"
-            onChange={handleBaseChange}
-            value={baseItem.id}
-            name="base"
-          >
-            {bases.map((base, index) => {
-              return (
-                <option key={index} value={base.id}>
-                  {base.name}
-                </option>
-              )
-            })}
-          </select>
+          <div id="base-select" className="col-end-7 col-span-2">
+            <label htmlFor="base" className="text-3xl mr-2">Base</label>
+            <select
+              id="base"
+              className="w-64 h-10 p-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
+              onChange={handleBaseChange}
+              value={baseItem.id}
+              name="base"
+            >
+              {bases.map((base, index) => {
+                return (
+                  <option key={index} value={base.id}>
+                    {base.name}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
         </div>
-        <button>See Donut Detail</button>
       </form>
     </>
   )

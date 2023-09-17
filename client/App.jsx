@@ -22,7 +22,7 @@ function App() {
   const [donutMarginLeft, setDonutMarginLeft] = useState('0px')
   const [donutMarginTop, setDonutMarginTop] = useState('0px')
   const [donutScale, setDonutScale] = useState(1)
-  const [donutAngle, setDonutAngle] = useState(3)
+  // const [donutAngle, setDonutAngle] = useState(3)
   const donutDivWidth = 800
 
   const [baseColor, setBaseColor] = useState(materials['Material.003'].clone())
@@ -44,13 +44,13 @@ function App() {
         setDonutMarginLeft(`${maxMargin * presentage}px`)
         setDonutMarginTop(`${150 * presentage}px`)
         setDonutScale(1 + presentage * 0.08)
-        setDonutAngle(10)
+        // setDonutAngle(10)
         console.log(`donutAngle:${donutScale}`)
       })
     }
     window.addEventListener('scroll', scrollHandler)
     return () => window.removeEventListener('scroll', scrollHandler)
-  }, [donutMarginLeft, donutMarginTop, donutScale, donutAngle])
+  }, [donutMarginLeft, donutMarginTop, donutScale])
 
   function updateGlaze(hex) {
     const newMaterials = glazeColor.clone()
@@ -72,7 +72,7 @@ function App() {
           fov: 3.5,
           near: 0.1,
           far: 1000,
-          position: [3, donutAngle, 5],
+          position: [3, 3, 5],
         }}
         style={{
           position: 'fixed',

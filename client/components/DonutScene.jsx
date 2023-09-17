@@ -1,4 +1,5 @@
-import { useScroll } from '@react-three/drei'
+import { useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion-3d'
 
 import DonutModel from './DonutModel.jsx'
 // import React from 'react'
@@ -6,8 +7,9 @@ import { useRef, useLayoutEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { gsap } from 'gsap'
 
-export const FLOOR_HEIGHT = 0.2
-export const NB_FLOORS = 2
+// export const FLOOR_HEIGHT = 0.2
+// export const NB_FLOORS = 2
+
 export default function DonutScene(props) {
   const { glazeColor, baseColor } = props
 
@@ -40,7 +42,7 @@ export default function DonutScene(props) {
   return (
     <>
       {/* <mesh ref={ref} position={[-0.2, -0.05, 0]}> */}
-      <mesh ref={ref}>
+      <motion.mesh ref={ref} whileHover={{ scale: 1.2 }}>
         <ambientLight />
         <spotLight intensity={0.5} />
 
@@ -49,7 +51,7 @@ export default function DonutScene(props) {
           glazeColor={glazeColor}
           baseColor={baseColor}
         />
-      </mesh>
+      </motion.mesh>
     </>
   )
 }

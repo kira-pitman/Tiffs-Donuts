@@ -1,18 +1,16 @@
-// import getGlazeByName from './apiClient/'
-
 function DonutDetails(props) {
-  const { base, glaze } = props
+  const { selectedBase, selectedGlaze } = props
 
   return (
     <>
       <h2>Detail Page</h2>
 
       <p>
-        {base.name} base with {glaze.name} topping
+        {selectedBase.name} base with {selectedGlaze.name} topping
       </p>
 
       <h4>Price:</h4>
-      <p>{glaze.price}</p>
+      <p>{selectedGlaze.price}</p>
     </>
   )
 }

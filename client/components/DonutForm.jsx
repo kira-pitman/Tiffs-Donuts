@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { fetchGlazes, fetchBases } from '../api/apiClient'
 
 function DonutForm(props) {
-  const { baseItem, glazeItem, changeBase, changeGlaze } = props
+  const { selectedBase, selectedGlaze, changeBase, changeGlaze } = props
 
   const {
     data: glazes,
@@ -55,7 +55,7 @@ function DonutForm(props) {
           <select
             id="glaze"
             onChange={handleGlazeChange}
-            defaultValue={glazeItem.id}
+            defaultValue={selectedGlaze.id}
             name="name"
           >
             {glazes.map((glaze, index) => {
@@ -73,7 +73,7 @@ function DonutForm(props) {
           <select
             id="base"
             onChange={handleBaseChange}
-            defaultValue={baseItem.id}
+            defaultValue={selectedBase.id}
             name="name"
           >
             {bases.map((base, index) => {

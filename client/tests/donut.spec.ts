@@ -105,6 +105,7 @@ test.describe('Details', () => {
         await page.getByRole('combobox', {name: /glaze/i}).selectOption('Green Tea')
         await page.getByRole('combobox', {name: /base/i}).selectOption('Chocolate')
 
+        await expect(page).toHaveURL('/?glaze=3&base=2')
         await expect(page.getByText(/chocolate base with green tea topping/i)).toBeVisible()
         await expect(page.getByText(/price: 7/i)).toBeVisible()
     })

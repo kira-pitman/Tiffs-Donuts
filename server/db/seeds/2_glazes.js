@@ -2,7 +2,7 @@ export async function seed(knex) {
   return await knex('glazes').insert([
     {
       id: 1,
-      color: '#7a431e',
+      color: '#7a4e3c',
       name: 'Chocolate',
       price: 8,
     },
@@ -62,7 +62,7 @@ export async function seed(knex) {
     },
     {
       id: 11,
-      color: '#e7a97d',
+      color: '#c08a6a',
       name: 'Chai',
       price: 11.5,
     },
@@ -74,21 +74,39 @@ export async function seed(knex) {
     },
     {
       id: 13,
-      color: '#ffcf4c',
-      name: 'Honey',
-      price: 6,
+      color: '#fad388',
+      name: 'Buttermilk',
+      price: 8,
     },
     {
-      id: 12,
-      color: '#ffcf4c',
-      name: 'Honey',
-      price: 6,
+      id: 14,
+      color: '#c875cb',
+      name: 'Ube',
+      price: 8,
     },
     {
-      id: 12,
-      color: '#ffcf4c',
-      name: 'Honey',
-      price: 6,
+      id: 15,
+      color: '#e7a440',
+      name: 'Mango',
+      price: 13,
+    },
+    {
+      id: 16,
+      color: '#6b3775',
+      name: 'Blackcurrant',
+      price: 3
+    },
+    {
+      id: 17,
+      color: '#ccf98a',
+      name: 'Key Lime',
+      price: 7
+    },
+    {
+      id: 18,
+      color: '#482a22',
+      name: 'Double Choc',
+      price: 4.5
     }
   ])
 }

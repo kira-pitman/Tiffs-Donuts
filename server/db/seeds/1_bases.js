@@ -17,7 +17,7 @@ export async function seed(knex) {
     },
     {
       id: 4,
-      color: '#eec9a0',
+      color: '#deb382',
       name: 'Cinnamon'
     },
     {
@@ -32,7 +32,7 @@ export async function seed(knex) {
     },
     {
       id: 7,
-      color: '#c93d2a',
+      color: '#d77950',
       name: 'Maple',
     },
     {
@@ -42,7 +42,7 @@ export async function seed(knex) {
     },
     {
       id: 9,
-      color: '#89d396',
+      color: '#6eb484',
       name: 'Matcha',
     },
     {
@@ -64,6 +64,21 @@ export async function seed(knex) {
       id: 13,
       color: '#a2583d',
       name: 'Pretzel'
+    },
+    {
+      id: 14,
+      color: '#b275b1',
+      name: 'Ube'
+    },
+    {
+      id: 15,
+      color: '#f58743',
+      name: 'Carrot'
+    },
+    {
+      id: 16,
+      color: '#251b18',
+      name: 'Brownie'
     }
   ])
 }

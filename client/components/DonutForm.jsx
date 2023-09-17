@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchGlazes, fetchBases } from '../api/apiClient'
-import {setURLParams} from "../lib/utils.ts";
+import { setURLParams } from '../lib/utils.ts'
 
 function DonutForm(props) {
-  const { baseItem, glazeItem, changeBase, changeGlaze } = props
+  const { selectedBase, selectedGlaze, changeBase, changeGlaze } = props
 
   const {
     data: glazes,
@@ -58,15 +58,19 @@ function DonutForm(props) {
       <form>
         <div className="grid grid-cols-2 gap-3 mt-5 place-items-center">
           <div className="col-start-1 col-end-7">
-            <h2 className="text-5xl font-extrabold leading-snug">Choose a flavor</h2>
+            <h2 className="text-5xl font-extrabold leading-snug">
+              Choose a flavor
+            </h2>
           </div>
           <div id="glaze-select" className="col-start-1 col-end-3">
-            <label className="mt-3 mr-2 text-3xl" htmlFor="glaze">Glaze</label>
+            <label className="mt-3 mr-2 text-3xl" htmlFor="glaze">
+              Glaze
+            </label>
             <select
               id="glaze"
               className="w-64 h-10 p-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
               onChange={handleGlazeChange}
-              value={glazeItem.id}
+              value={selectedGlaze.id}
               name="glaze"
             >
               {glazes.map((glaze, index) => {
@@ -80,12 +84,14 @@ function DonutForm(props) {
           </div>
 
           <div id="base-select" className="col-end-7 col-span-2">
-            <label htmlFor="base" className="text-3xl mr-2">Base</label>
+            <label htmlFor="base" className="text-3xl mr-2">
+              Base
+            </label>
             <select
               id="base"
               className="w-64 h-10 p-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
               onChange={handleBaseChange}
-              value={baseItem.id}
+              value={selectedBase.id}
               name="base"
             >
               {bases.map((base, index) => {

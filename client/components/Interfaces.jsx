@@ -1,7 +1,8 @@
 import DonutForm from './DonutForm'
 import DonutDetails from './DonutDetails'
-import {useEffect, useState} from 'react'
-import {fetchBase, fetchGlaze} from "../api/apiClient.ts";
+import { useRef, useState, useEffect } from 'react'
+import Footer from './Footer'
+import { fetchBase, fetchGlaze } from '../api/apiClient.ts'
 
 const defaultBase = {
   id: 1,
@@ -14,19 +15,36 @@ const defaultGlaze = {
   price: 8,
 }
 
-function Section(props) {
-  const { children , className } = props
-  return <section className={`h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center ${className}`}>{children}</section>
-}
+// function Section(props) {
+//   const { children, className } = props
+//   return (
+//     <section
+//       className={`h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center ${className}`}
+//     >
+//       {children}
+//     </section>
+//   )
+// }
 
 function Interfaces(props) {
+  const heroRef = useRef(null)
+  const detailRef = useRef(null)
   const { updateGlaze, updateBase } = props
 
-  const [baseItem, setBaseItem] = useState(defaultBase)
-  const [glazeItem, setGlazeItem] = useState(defaultGlaze)
+  const [selectedBase, setSelectedBase] = useState(defaultBase)
+  const [selectedGlaze, setSelectedGlaze] = useState(defaultGlaze)
+
+  function changeBase(choosenBase) {
+    setSelectedBase(choosenBase)
+    updateBase(choosenBase.color)
+  }
+
+  function changeGlaze(choosenGlaze) {
+    setSelectedGlaze(choosenGlaze)
+    updateGlaze(choosenGlaze.color)
+  }
 
   useEffect(() => {
-
     // This can be set to use the provided hook by RR if we implement it
     const setDefaults = async () => {
       const params = new URLSearchParams(window.location.search)
@@ -53,36 +71,56 @@ function Interfaces(props) {
     }
   }, [])
 
-
-
-  function changeBase(choosenBase) {
-    setBaseItem(choosenBase)
-    updateBase(choosenBase.color)
-  }
-
-  function changeGlaze(choosenGlaze) {
-    setGlazeItem(choosenGlaze)
-    updateGlaze(choosenGlaze.color)
+  function handleScroll(e, ref) {
+    e.preventDefault()
+    ref.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
   }
 
   return (
-   
-    <div className={'flex flex-col items-center w-screen'}>
-    <h1 className="text-8xl leading-snug font-yummy">Tiff Donuts</h1>
-      <Section id="hero-section" className={'items-end'}>
-        <DonutForm
-          baseItem={baseItem}
-          glazeItem={glazeItem}
-          changeBase={changeBase}
-          changeGlaze={changeGlaze}
-        />
-      </Section>
+    <>
+      <div className={'flex flex-col items-center w-screen'}>
+        <h1 className="text-8xl leading-snug font-yummy">Tiff Donuts</h1>
+        <section
+          id="hero"
+          className="h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center items-end"
+          ref={heroRef}
+        >
+          <DonutForm
+            selectedBase={selectedBase}
+            selectedGlaze={selectedGlaze}
+            changeBase={changeBase}
+            changeGlaze={changeGlaze}
+          />
 
-      <Section id="detail-section" className={'items-start'}>
-        <DonutDetails base={baseItem} glaze={glazeItem} />
-      </Section>
-    </div>
-   
+          <div>
+            <button onClick={(e) => handleScroll(e, detailRef)}>
+              See Donut Details
+            </button>
+          </div>
+        </section>
+
+        <section
+          id="detail"
+          className="h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center"
+          ref={detailRef}
+        >
+          <DonutDetails
+            selectedBase={selectedBase}
+            selectedGlaze={selectedGlaze}
+          />
+          <div>
+            <button onClick={(e) => handleScroll(e, heroRef)}>
+              Back to donut
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <Footer />
+    </>
   )
 }
 

@@ -15,7 +15,7 @@
     "format": "prettier -w '**/*.{js,jsx,ts,tsx}'",
     "knex": "knex --knexfile server/db/knexfile.js",
     "test": "vitest server",
-    "playwright": "npx playwright test"
+    "playwright": "npx playwright test",
   },
   "eslintConfig": {
     "extends": "@devacademy/eslint-config/react",

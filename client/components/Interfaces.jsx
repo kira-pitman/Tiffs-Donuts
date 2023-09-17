@@ -10,12 +10,14 @@ import { useLoader } from '@react-three/fiber'
 const defaultBase = {
   id: 1,
   name: 'Original',
+  color: '#e5e0cb',
 }
 
 const defaultGlaze = {
   id: 2,
   name: 'Strawberry',
-  price: 8,
+  color: '#f57f8e',
+  price: 9,
 }
 function Interfaces(props) {
   const heroRef = useRef(null)
@@ -42,9 +44,10 @@ function Interfaces(props) {
   }
 
   function cancelGold() {
+    updateBase(baseItem.color)
+    updateGlaze(glazeItem.color)
     updateTexture('')
   }
-  console.log(glazeItem)
 
   return (
     <>

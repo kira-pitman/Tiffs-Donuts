@@ -36,14 +36,13 @@ function DonutForm(props) {
     const choosenGlaze = glazes.filter(
       (glaze) => glaze.id == evt.target.value
     )[0]
-    console.log(choosenGlaze)
+
     changeGlaze(choosenGlaze)
   }
 
   const handleBaseChange = (evt) => {
     const choosenBase = bases.filter((base) => base.id == evt.target.value)[0]
     changeBase(choosenBase)
-    console.log(choosenBase)
   }
 
   return (

@@ -86,19 +86,21 @@ test.describe('Donut', () => {
     })
 
     test('Displays a button to see details', async ({page}) => {
-        await expect(page.getByRole('button', {name: /see donut detail/i})).toBeVisible()
+        const btn = await page.getByRole('button', {name: /see donut detail/i})
+        await expect(btn).toBeVisible()
+        await btn.click()
+        await expect(page.getByRole('heading', {level: 2, name: /detail page/i})).toBeInViewport()
     })
 })
 
 test.describe('Details', () => {
     test('Renders a details section', async ({page}) => {
-        await expect(page.getByRole('heading', {level: 1, name: /details/i})).toBeVisible()
         await expect(page.getByRole('heading', {level: 2, name: /detail page/i})).toBeVisible()
     })
 
     test('Displays the correct base and glaze', async ({page}) => {
         await expect(page.getByText(/original base with strawberry topping/i)).toBeVisible()
-        await expect(page.getByText(/price: 8/i)).toBeVisible()
+        await expect(page.getByText(/price: \$8/i)).toBeVisible()
     })
 
     test('Displays the correct base and glaze information based on input', async ({page}) => {
@@ -107,6 +109,20 @@ test.describe('Details', () => {
 
         await expect(page).toHaveURL('/?glaze=3&base=2')
         await expect(page.getByText(/chocolate base with green tea topping/i)).toBeVisible()
-        await expect(page.getByText(/price: 7/i)).toBeVisible()
+        await expect(page.getByText(/price: \$7/i)).toBeVisible()
+    })
+
+    test('Prepopulates the correct information based on params', async ({page}) => {
+        await page.goto('/?glaze=1&base=1')
+        await expect(page.getByRole('combobox', {name: /glaze/i})).toHaveValue('1')
+        await expect(page.getByRole('combobox', {name: /base/i})).toHaveValue('1')
+        await expect(page.getByText(/original base with chocolate topping/i)).toBeVisible()
+    })
+
+    test('Ignores incorrect values in params', async ({page}) => {
+        await page.goto('/?glaze=50&base=99')
+        await expect(page.getByRole('combobox', {name: /glaze/i})).toHaveValue('2')
+        await expect(page.getByRole('combobox', {name: /base/i})).toHaveValue('1')
+        await expect(page.getByText(/original base with strawberry topping/i)).toBeVisible()
     })
 })

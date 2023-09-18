@@ -28,6 +28,7 @@ function Interfaces(props) {
 
   const [selectedBase, setSelectedBase] = useState(defaultBase)
   const [selectedGlaze, setSelectedGlaze] = useState(defaultGlaze)
+  const [withGold, setWithGold] = useState(false)
 
   const newTexture = useLoader(TextureLoader, 'gold.jpg')
 
@@ -45,12 +46,14 @@ function Interfaces(props) {
     updateGlaze('#FFFFFF')
     updateBase('#FFFFFF')
     updateTexture(newTexture)
+    setWithGold(true)
   }
 
   function cancelGold() {
     updateBase(selectedBase.color)
     updateGlaze(selectedGlaze.color)
     updateTexture('')
+    setWithGold(false)
   }
 
   useEffect(() => {
@@ -140,6 +143,7 @@ function Interfaces(props) {
           <DonutDetails
             selectedBase={selectedBase}
             selectedGlaze={selectedGlaze}
+            withGold={withGold}
           />
           <div>
             <button

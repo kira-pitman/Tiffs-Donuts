@@ -18,6 +18,11 @@ export interface Donut {
   auth0_id: string
 }
 
+export interface SavedDonut {
+  base: number
+  glaze: number
+}
+
 export interface DonutDetails {
   id: number
   auth0_id: string

@@ -1,5 +1,6 @@
 import request from 'superagent'
-import { Base, Glaze } from '../../models/donuts'
+import { Base, Glaze, SavedDonut } from '../../models/donuts'
+
 const rootUrl = '/api/v1/donuts'
 
 // GET /api/v1/donuts/flavors
@@ -29,6 +30,13 @@ export async function fetchGlaze(id: number): Promise<Glaze> {
 }
 
 //Auth0
+export async function saveDonut(token: string, donut: SavedDonut) {
+  const savedDonut = await request
+    .post(rootUrl)
+    .set('Authorization', `Bearer ${token}`)
+    .send(donut)
+  return savedDonut.body
+}
 
 // export async function fetchDonutsByToken(token: string) {
 //   const userDonuts = await request

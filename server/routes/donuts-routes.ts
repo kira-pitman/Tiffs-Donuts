@@ -1,5 +1,6 @@
 import express from 'express'
 import * as db from '../db/donuts-db'
+import checkJwt from "../auth0";
 
 const router = express.Router()
 
@@ -45,6 +46,20 @@ router.get('/glazes/:id', async (req, res) => {
     }
 })
 
+router.get('/me', async (req, res) => {
+    try {
+        // const userId = req.auth?.sub
+        const userId = 'fakeAuth'
+        if (!userId) return res.status(401).json({message: 'Unauthorized'})
+        const donuts = await db.getDonuts(userId)
+
+        res.json(donuts)
+    } catch (error) {
+        res.sendStatus(500)
+        console.error(error)
+    }
+})
+
 router.get('/:id', async (req, res) => {
     try {
         const donutId = Number(req.params.id)
@@ -61,7 +76,7 @@ router.get('/:id', async (req, res) => {
 })
 
 //todo implement real middleware for auth
-router.post('/', async (req, res) => {
+router.post('/', checkJwt, async (req, res) => {
     try {
         // const userId = req.auth?.sub
         const userId = 'fakeAuth'
@@ -99,18 +114,5 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-router.get('/me', async (req, res) => {
-    try {
-        // const userId = req.auth?.sub
-        const userId = 'fakeAuth'
-        if (!userId) return res.status(401).json({message: 'Unauthorized'})
-        const donuts = await db.getDonuts(userId)
-
-        res.json(donuts)
-    } catch (error) {
-        res.sendStatus(500)
-        console.error(error)
-    }
-})
 
 export default router

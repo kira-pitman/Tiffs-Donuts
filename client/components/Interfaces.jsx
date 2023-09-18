@@ -1,40 +1,35 @@
 import DonutForm from './DonutForm'
 import DonutDetails from './DonutDetails'
+import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { useLoader } from '@react-three/fiber'
 import { useRef, useState, useEffect } from 'react'
 import Footer from './Footer'
 import { fetchBase, fetchGlaze } from '../api/apiClient.ts'
-import {useSearchParams} from "react-router-dom";
+import { useSearchParams } from 'react-router-dom'
 
 const defaultBase = {
   id: 1,
   name: 'Original',
+  color: '#e5e0cb',
 }
 
 const defaultGlaze = {
   id: 2,
   name: 'Strawberry',
-  price: 8,
+  color: '#f57f8e',
+  price: 9,
 }
-
-// function Section(props) {
-//   const { children, className } = props
-//   return (
-//     <section
-//       className={`h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center ${className}`}
-//     >
-//       {children}
-//     </section>
-//   )
-// }
 
 function Interfaces(props) {
   const heroRef = useRef(null)
   const detailRef = useRef(null)
+  const { updateGlaze, updateBase, updateTexture } = props
   const [searchParams, setSearchParams] = useSearchParams()
-  const { updateGlaze, updateBase } = props
 
   const [selectedBase, setSelectedBase] = useState(defaultBase)
   const [selectedGlaze, setSelectedGlaze] = useState(defaultGlaze)
+
+  const newTexture = useLoader(TextureLoader, 'gold.jpg')
 
   function changeBase(choosenBase) {
     setSelectedBase(choosenBase)
@@ -44,6 +39,18 @@ function Interfaces(props) {
   function changeGlaze(choosenGlaze) {
     setSelectedGlaze(choosenGlaze)
     updateGlaze(choosenGlaze.color)
+  }
+
+  function addGold() {
+    updateGlaze('#FFFFFF')
+    updateBase('#FFFFFF')
+    updateTexture(newTexture)
+  }
+
+  function cancelGold() {
+    updateBase(selectedBase.color)
+    updateGlaze(selectedGlaze.color)
+    updateTexture('')
   }
 
   useEffect(() => {
@@ -83,7 +90,12 @@ function Interfaces(props) {
   return (
     <>
       <div className={'flex flex-col items-center w-screen'}>
-        <h1 className="text-8xl leading-snug font-yummy">Tiff Donuts</h1>
+        <div className="flex items-center">
+          <h1 className="text-8xl leading-snug font-yummy py-5">
+            Tiff&apos;s Donuts
+          </h1>
+          <img src="/images/donut4.png" alt="cat-donut" />
+        </div>
         <section
           id="hero"
           className="h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center items-end"
@@ -97,7 +109,10 @@ function Interfaces(props) {
           />
 
           <div>
-            <button onClick={(e) => handleScroll(e, detailRef)}>
+            <button
+              className="mt-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full"
+              onClick={(e) => handleScroll(e, detailRef)}
+            >
               See Donut Details
             </button>
           </div>
@@ -113,7 +128,10 @@ function Interfaces(props) {
             selectedGlaze={selectedGlaze}
           />
           <div>
-            <button onClick={(e) => handleScroll(e, heroRef)}>
+            <button
+              className="mt-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full"
+              onClick={(e) => handleScroll(e, heroRef)}
+            >
               Back to donut
             </button>
           </div>

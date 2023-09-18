@@ -54,7 +54,6 @@ function DonutForm(props) {
     searchParams.set('base', String(choosenBase.id))
     setSearchParams(searchParams)
     changeBase(choosenBase)
-    console.log(choosenBase)
   }
 
   return (
@@ -62,9 +61,12 @@ function DonutForm(props) {
       <form>
         <div className="grid grid-cols-2 gap-3 mt-5 place-items-center">
           <div className="col-start-1 col-end-7">
+          <div className="flex items-center">
             <h2 className="text-5xl font-extrabold leading-snug">
-              Choose a flavor
+              Choose a flavor 
             </h2>
+            <img src="/images/donut2.png" alt="sloth-donut" />
+            </div>
           </div>
           <div id="glaze-select" className="col-start-1 col-end-3">
             <label className="mt-3 mr-2 text-3xl" htmlFor="glaze">

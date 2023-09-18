@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 
 export default function DonutScene(props) {
-  const { glazeColor, baseColor } = props
+  const { glazeColor, baseColor, texture } = props
 
   const ref = useRef()
 
@@ -24,6 +24,7 @@ export default function DonutScene(props) {
           scale={[scale, scale, scale]}
           glazeColor={glazeColor}
           baseColor={baseColor}
+          texture={texture}
         />
       </motion.mesh>
     </>

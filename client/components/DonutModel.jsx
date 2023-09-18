@@ -11,10 +11,13 @@ import { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export default function DonutModel(props) {
-  const { glazeColor, baseColor } = props
+  const { glazeColor, baseColor, texture } = props
   const group = useRef()
   const { nodes, materials } = useGLTF('/donut_cat/scene.gltf')
-  // const { actions } = useAnimations(animations, group)
+  console.log(texture)
+
+  // const texture = useTexture(url)
+
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
@@ -35,11 +38,13 @@ export default function DonutModel(props) {
                     name="Object_6"
                     geometry={nodes.Object_6.geometry}
                     material={glazeColor}
+                    material-map={texture}
                   />
                   <mesh
                     name="Object_7"
                     geometry={nodes.Object_7.geometry}
                     material={glazeColor}
+                    material-map={texture}
                   />
                 </group>
                 <group
@@ -63,6 +68,7 @@ export default function DonutModel(props) {
                   name="Object_4"
                   geometry={nodes.Object_4.geometry}
                   material={baseColor}
+                  material-map={texture}
                 />
               </group>
             </group>

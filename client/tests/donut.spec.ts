@@ -89,18 +89,18 @@ test.describe('Donut', () => {
         const btn = await page.getByRole('button', {name: /see donut detail/i})
         await expect(btn).toBeVisible()
         await btn.click()
-        await expect(page.getByRole('heading', {level: 2, name: /detail page/i})).toBeInViewport()
+        await expect(page.getByRole('heading', {level: 2, name: /detail/i})).toBeInViewport()
     })
 })
 
 test.describe('Details', () => {
     test('Renders a details section', async ({page}) => {
-        await expect(page.getByRole('heading', {level: 2, name: /detail page/i})).toBeVisible()
+        await expect(page.getByRole('heading', {level: 2, name: /detail/i})).toBeVisible()
     })
 
     test('Displays the correct base and glaze', async ({page}) => {
         await expect(page.getByText(/original base with strawberry topping/i)).toBeVisible()
-        await expect(page.getByText(/price: \$8/i)).toBeVisible()
+        await expect(page.getByText(/price: \$9/i)).toBeVisible()
     })
 
     test('Displays the correct base and glaze information based on input', async ({page}) => {

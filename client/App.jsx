@@ -4,6 +4,7 @@ import {Outlet} from "react-router-dom";
 const queryClient = new QueryClient()
 
 function App() {
+
     return (
         <main>
             <QueryClientProvider client={queryClient}>
@@ -11,6 +12,7 @@ function App() {
             </QueryClientProvider>
         </main>
     )
+
 }
 
 export default App

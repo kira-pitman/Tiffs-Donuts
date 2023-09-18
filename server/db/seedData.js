@@ -191,3 +191,36 @@ export const bases = [
         name: 'Brownie'
     }
 ]
+
+export const donuts = [
+    {
+        id: 1,
+        base: 3,
+        glaze: 1,
+        auth0_id: 'hello123'
+    },
+    {
+        id: 2,
+        base: 1,
+        glaze: 1,
+        auth0_id: 'hello123'
+    },
+    {
+        id: 3,
+        base: 2,
+        glaze: 2,
+        auth0_id: 'world156'
+    },
+    {
+        id: 4,
+        base: 1,
+        glaze: 2,
+        auth0_id: 'world156'
+    },
+    {
+        id: 5,
+        base: 1,
+        glaze: 3,
+        auth0_id: 'hello123'
+    }
+]

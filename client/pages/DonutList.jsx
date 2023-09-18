@@ -13,7 +13,7 @@ export default function DonutList() {
     isError,
   } = useQuery(['donutList'], async () => {
     const token = await getAccessTokenSilently()
-    return fetchDonuts(token)
+    return fetchDonuts({token})
   })
 
   if (isError) {
@@ -24,9 +24,6 @@ export default function DonutList() {
     return <p>Loading...</p>
   }
 
-  console.log(data, 'data')
-
-  /*
   const donutsFakeList = [
     {
         id: 1,
@@ -56,14 +53,12 @@ export default function DonutList() {
         auth0_id: 'world156',
       }
   ]
-  */
-
  
   return (
     <>
       <div className="flex flex-col items-center justify-center">
         <h2 className="text-5xl font-extrabold leading-snug mb-10">List of donuts</h2>
-        {donutsFakeList.map(donut => <DonutCard key={donut.id} donut={donut}></DonutCard>)}
+        {donutsFakeList.length === 0 ? <h3 className="mb-2 text-2xl tracking-tight text-gray-900">List is empty</h3> : donutsFakeList.map(donut => <DonutCard key={donut.id} donut={donut}></DonutCard>)}
       </div>
     </>
   )

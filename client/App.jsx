@@ -1,33 +1,26 @@
 import { Canvas } from '@react-three/fiber'
 import { useEffect, useState } from 'react'
 import { useGLTF } from '@react-three/drei'
-// import { Scroll, ScrollControls } from '@react-three/drei'
 import Interfaces from './components/Interfaces.jsx'
 import DonutScene from './components/DonutScene.jsx'
 import * as THREE from 'three'
 import { OrbitControls } from '@react-three/drei'
-import { useLoader } from '@react-three/fiber'
-import { TextureLoader } from 'three/src/loaders/TextureLoader'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const queryClient = new QueryClient()
 
 function App() {
-  // const [section, setSection] = useState(0)
   const { materials } = useGLTF('./donut_cat/scene.gltf')
 
   const [glazeColor, setGlazeColor] = useState(
     materials['Material.004'].clone()
   )
-  const [baseColor, setBaseColor] = useState(materials['Material.003'].clone())
 
   const [donutMarginLeft, setDonutMarginLeft] = useState('0px')
   const [donutMarginTop, setDonutMarginTop] = useState('0px')
-  const [donutScale, setDonutScale] = useState(1)
-  // const [donutAngle, setDonutAngle] = useState(3)
+  const [baseColor, setBaseColor] = useState(materials['Material.003'].clone())
   const donutDivWidth = 800
-
   const [texture, setTexture] = useState('')
 
   useEffect(() => {
@@ -46,14 +39,11 @@ function App() {
         const maxMargin = pageWidth - donutDivWidth
         setDonutMarginLeft(`${maxMargin * presentage}px`)
         setDonutMarginTop(`${150 * presentage}px`)
-        setDonutScale(1 + presentage * 0.08)
-        // setDonutAngle(10)
-        console.log(`donutAngle:${donutScale}`)
       })
     }
     window.addEventListener('scroll', scrollHandler)
     return () => window.removeEventListener('scroll', scrollHandler)
-  }, [donutMarginLeft, donutMarginTop, donutScale])
+  }, [donutMarginLeft, donutMarginTop])
 
   function updateGlaze(hex) {
     const newMaterials = glazeColor.clone()
@@ -89,23 +79,17 @@ function App() {
           marginLeft: donutMarginLeft,
           marginTop: donutMarginTop,
           background: 'white',
-          transform: `scale(${donutScale})`,
         }}
       >
         <OrbitControls enableZoom={false} />
         <color attach="background" args={['#ffffff']} />
-        {/* <ScrollControls pages={2} demping={0.1}> */}
         <DonutScene
           glazeColor={glazeColor}
           baseColor={baseColor}
           texture={texture}
         />
-        {/* <Scroll html>
-            <QueryClientProvider client={queryClient}>
-              <Interfaces updateGlaze={updateGlaze} updateBase={updateBase} />
-            </QueryClientProvider>
-          </Scroll> */}
-        {/* </ScrollControls> */}
+
+        <DonutScene glazeColor={glazeColor} baseColor={baseColor} />
       </Canvas>
 
       <div style={{ position: 'absolute', top: 0, left: 0 }}>

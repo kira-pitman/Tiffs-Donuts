@@ -1,11 +1,12 @@
 import DonutForm from './DonutForm'
 import DonutDetails from './DonutDetails'
-import { useRef, useState } from 'react'
-import React, { useEffect } from 'react'
+
 // import { BrowserRouter } from 'react-router-dom'
-import ScrollToTop from 'react-scroll-to-top'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { useLoader } from '@react-three/fiber'
+import { useRef, useState, useEffect } from 'react'
+import Footer from './Footer'
+import { fetchBase, fetchGlaze } from '../api/apiClient.ts'
 
 const defaultBase = {
   id: 1,
@@ -19,21 +20,24 @@ const defaultGlaze = {
   color: '#f57f8e',
   price: 9,
 }
+
 function Interfaces(props) {
   const heroRef = useRef(null)
+  const detailRef = useRef(null)
   const { updateGlaze, updateBase, updateTexture } = props
-  const [baseItem, setBaseItem] = useState(defaultBase)
-  const [glazeItem, setGlazeItem] = useState(defaultGlaze)
+
+  const [selectedBase, setSelectedBase] = useState(defaultBase)
+  const [selectedGlaze, setSelectedGlaze] = useState(defaultGlaze)
 
   const newTexture = useLoader(TextureLoader, 'gold.jpg')
 
-  async function changeBase(choosenBase) {
-    setBaseItem(choosenBase)
+  function changeBase(choosenBase) {
+    setSelectedBase(choosenBase)
     updateBase(choosenBase.color)
   }
 
   function changeGlaze(choosenGlaze) {
-    setGlazeItem(choosenGlaze)
+    setSelectedGlaze(choosenGlaze)
     updateGlaze(choosenGlaze.color)
   }
 
@@ -44,58 +48,87 @@ function Interfaces(props) {
   }
 
   function cancelGold() {
-    updateBase(baseItem.color)
-    updateGlaze(glazeItem.color)
+    updateBase(selectedBase.color)
+    updateGlaze(selectedGlaze.color)
     updateTexture('')
+  }
+
+  useEffect(() => {
+    // This can be set to use the provided hook by RR if we implement it
+    const setDefaults = async () => {
+      const params = new URLSearchParams(window.location.search)
+      const searchGlaze = params.get('glaze')
+      const searchBase = params.get('base')
+      if (searchGlaze) {
+        const glaze = await fetchGlaze(Number(searchGlaze))
+        if (glaze) {
+          changeGlaze(glaze)
+        }
+      }
+      if (searchBase) {
+        const base = await fetchBase(Number(searchBase))
+        if (base) {
+          changeBase(base)
+        }
+      }
+    }
+
+    try {
+      void setDefaults()
+    } catch (e) {
+      alert('Could not set donut values')
+    }
+  }, [])
+
+  function handleScroll(e, ref) {
+    e.preventDefault()
+    ref.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
   }
 
   return (
     <>
-      <section id="hero" className="h-screen" ref={heroRef}>
-        <h1 className="text-3xl font-bold underline ">Tiff Donuts</h1>
-        <DonutForm
-          baseItem={baseItem}
-          glazeItem={glazeItem}
-          changeBase={changeBase}
-          changeGlaze={changeGlaze}
-        />
-        <button onClick={addGold}>add golden coat</button>
-        <button onClick={cancelGold}>Remove gold</button>
-        <div>
-          <a
-            href="/"
-            onClick={(e) => {
-              let detail = document.getElementById('detail')
-              e.preventDefault()
-              detail &&
-                detail.scrollIntoView({ behavior: 'smooth', block: 'start' })
-            }}
-          >
-            See Donut Details
-          </a>
-        </div>
-      </section>
+      <div className={'flex flex-col items-center w-screen'}>
+        <h1 className="text-8xl leading-snug font-yummy">Tiff Donuts</h1>
+        <section
+          id="hero"
+          className="h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center items-end"
+          ref={heroRef}
+        >
+          <DonutForm
+            selectedBase={selectedBase}
+            selectedGlaze={selectedGlaze}
+            changeBase={changeBase}
+            changeGlaze={changeGlaze}
+          />
 
-      <section id="detail" className="h-screen">
-        <h1 className="text-3xl font-extrabold">Details</h1>
-        <DonutDetails base={baseItem} glaze={glazeItem} />
-        {/* Option for scrolling on button click with useRef */}
-        {/* <div>
-          <button
-            onClick={(e) => {
-              e.preventDefault()
-              heroRef.current?.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-              })
-            }}
-          >
-            Back to donut
-          </button>
-        </div> */}
-      </section>
+          <div>
+            <button onClick={(e) => handleScroll(e, detailRef)}>
+              See Donut Details
+            </button>
+          </div>
+        </section>
 
-      <ScrollToTop smooth />
+        <section
+          id="detail"
+          className="h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center"
+          ref={detailRef}
+        >
+          <DonutDetails
+            selectedBase={selectedBase}
+            selectedGlaze={selectedGlaze}
+          />
+          <div>
+            <button onClick={(e) => handleScroll(e, heroRef)}>
+              Back to donut
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <Footer />
     </>
   )
 }

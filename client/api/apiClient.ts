@@ -15,3 +15,15 @@ export async function fetchBases(): Promise<Base[]> {
 
   return dbBases.body
 }
+
+export async function fetchBase(id: number): Promise<Base> {
+  const dbBases = await request.get(`${rootUrl}/bases/${id}`)
+
+  return dbBases.body
+}
+
+export async function fetchGlaze(id: number): Promise<Glaze> {
+    const dbBases = await request.get(`${rootUrl}/glazes/${id}`)
+
+    return dbBases.body
+}

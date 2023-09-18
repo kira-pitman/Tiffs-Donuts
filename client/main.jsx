@@ -8,6 +8,7 @@ import Donut from "./pages/Donut.jsx";
 export const routes = createRoutesFromElements(
     <Route path={'/'} element={<App/>}>
         <Route index element={<Donut/>}/>
+        <Route path={'/me'} element={<h1>Nothing here yet!</h1>}/>
     </Route>
 )
 

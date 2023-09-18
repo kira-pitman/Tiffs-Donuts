@@ -18,7 +18,11 @@ export interface Donut {
   auth0_id: string
 }
 
-export interface DonutDetails extends Donut {
+export interface DonutDetails {
+  id: number
+  auth0_od: string
+  glazeId: number
+  baseId: number
   glazeName: string
   baseName: string
   price: number

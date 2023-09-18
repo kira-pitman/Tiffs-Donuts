@@ -23,7 +23,8 @@ export const getGlaze = (id): Promise<Glaze> => {
 
 export const getDonut = (id): Promise<DonutDetails> => {
   return db('donuts').select().where({ 'donuts.id': id })
-      .select('donuts.*',
+      .select('donuts.id AS id', 'donuts.auth0_id',
+          'donuts.glaze AS glazeId', 'donuts.base AS baseId',
           'glazes.name AS glazeName', 'glazes.price', 'glazes.color AS glazeColor',
           'bases.name AS baseName', 'bases.color AS baseColor')
       .join('glazes', 'donuts.glaze', 'glazes.id')
@@ -32,7 +33,8 @@ export const getDonut = (id): Promise<DonutDetails> => {
 }
 
 export const getDonuts = (auth0Id): Promise<DonutDetails[]> => {
-  return db('donuts').select('donuts.*',
+  return db('donuts').select('donuts.id AS id', 'donuts.auth0_id',
+      'donuts.glaze AS glazeId', 'donuts.base AS baseId',
       'glazes.name AS glazeName', 'glazes.price', 'glazes.color AS glazeColor',
       'bases.name AS baseName', 'bases.color AS baseColor')
       .where({ auth0_id: auth0Id })

@@ -28,10 +28,7 @@ function Interfaces(props) {
 
   const [selectedBase, setSelectedBase] = useState(defaultBase)
   const [selectedGlaze, setSelectedGlaze] = useState(defaultGlaze)
-<<<<<<< HEAD
-=======
   const [withGold, setWithGold] = useState(false)
->>>>>>> main
 
   const newTexture = useLoader(TextureLoader, 'gold.jpg')
 
@@ -49,20 +46,14 @@ function Interfaces(props) {
     updateGlaze('#FFFFFF')
     updateBase('#FFFFFF')
     updateTexture(newTexture)
-<<<<<<< HEAD
-=======
     setWithGold(true)
->>>>>>> main
   }
 
   function cancelGold() {
     updateBase(selectedBase.color)
     updateGlaze(selectedGlaze.color)
     updateTexture('')
-<<<<<<< HEAD
-=======
     setWithGold(false)
->>>>>>> main
   }
 
   useEffect(() => {

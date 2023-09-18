@@ -30,15 +30,9 @@ export async function fetchGlaze(id: number): Promise<Glaze> {
 
 //Auth0
 
-export async function fetchDonutsByToken(token: string) {
-  console.log('api')
-  // return request
-  //   .get(`${rootUrl}/me`)
-  //   .set('Authorization', `Bearer ${token}`)
-  //   .then((res) => (res.body.user ? res.body.user : null))
-  //   .catch((error) => console.log(error))
-  const userDonuts = await request
-    .get('/api/v1/donuts/me')
-    .set('Authorization', `Bearer ${token}`)
-  return userDonuts.body
-}
+// export async function fetchDonutsByToken(token: string) {
+//   const userDonuts = await request
+//     .get('/api/v1/donuts/me')
+//     .set('Authorization', `Bearer ${token}`)
+//   return userDonuts.body
+// }

@@ -10,7 +10,6 @@ import {
 } from 'react-router-dom'
 import Donut from './pages/Donut.jsx'
 import { Auth0Provider } from '@auth0/auth0-react'
-import SavedDonuts from './components/SavedDonuts.jsx'
 
 export const routes = createRoutesFromElements(
   <Route path={'/'} element={<App />}>

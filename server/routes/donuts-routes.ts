@@ -1,6 +1,6 @@
 import express from 'express'
 import * as db from '../db/donuts-db'
-import checkJwt from "../auth0";
+import checkJwt, {JwtRequest} from "../auth0";
 
 const router = express.Router()
 
@@ -46,10 +46,9 @@ router.get('/glazes/:id', async (req, res) => {
     }
 })
 
-router.get('/me', async (req, res) => {
+router.get('/me', checkJwt, async (req: JwtRequest, res) => {
     try {
-        // const userId = req.auth?.sub
-        const userId = 'fakeAuth'
+        const userId = req.auth?.sub
         if (!userId) return res.status(401).json({message: 'Unauthorized'})
         const donuts = await db.getDonuts(userId)
 
@@ -76,10 +75,9 @@ router.get('/:id', async (req, res) => {
 })
 
 //todo implement real middleware for auth
-router.post('/', checkJwt, async (req, res) => {
+router.post('/', checkJwt, async (req: JwtRequest, res) => {
     try {
-        // const userId = req.auth?.sub
-        const userId = 'fakeAuth'
+        const userId = req.auth?.sub
         const {base, glaze} = req.body
 
         if (!userId) return res.status(401).json({message: 'Unauthorized'})
@@ -94,10 +92,9 @@ router.post('/', checkJwt, async (req, res) => {
     }
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', checkJwt, async (req: JwtRequest, res) => {
     try {
-        // const userId = req.auth?.sub
-        const userId = 'fakeAuth'
+        const userId = req.auth?.sub
 
         const donutId = Number(req.params.id)
         if (isNaN(donutId)) return res.status(400).json({message: 'Invalid Donut ID'})

@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchGlazes, fetchBases } from '../api/apiClient'
 import { setURLParams } from '../lib/utils.ts'
+import {useSearchParams} from "react-router-dom";
 
 function DonutForm(props) {
   const { selectedBase, selectedGlaze, changeBase, changeGlaze } = props
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const {
     data: glazes,
@@ -40,7 +42,8 @@ function DonutForm(props) {
     console.log(choosenGlaze)
 
     // This can be set to use the provided hook by RR if we implement it
-    setURLParams('glaze', String(choosenGlaze.id))
+    searchParams.set('glaze', String(choosenGlaze.id))
+    setSearchParams(searchParams)
     changeGlaze(choosenGlaze)
   }
 
@@ -48,7 +51,8 @@ function DonutForm(props) {
     const choosenBase = bases.filter((base) => base.id == evt.target.value)[0]
 
     // This can be set to use the provided hook by RR if we implement it
-    setURLParams('base', String(choosenBase.id))
+    searchParams.set('base', String(choosenBase.id))
+    setSearchParams(searchParams)
     changeBase(choosenBase)
     console.log(choosenBase)
   }

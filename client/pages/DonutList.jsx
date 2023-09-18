@@ -4,6 +4,7 @@ import DonutCard from '../components/DonutCard'
 import { fetchDonuts } from '../api/apiClient'
 
 export default function DonutList() {
+
   const { getAccessTokenSilently } = useAuth0()
 
   const {
@@ -12,7 +13,6 @@ export default function DonutList() {
     isError,
   } = useQuery(['donutList'], async () => {
     const token = await getAccessTokenSilently()
-    console.log(token, 'token')
     return fetchDonuts(token)
   })
 
@@ -26,6 +26,7 @@ export default function DonutList() {
 
   console.log(data, 'data')
 
+  /*
   const donutsFakeList = [
     {
         id: 1,
@@ -55,6 +56,7 @@ export default function DonutList() {
         auth0_id: 'world156',
       }
   ]
+  */
 
  
   return (

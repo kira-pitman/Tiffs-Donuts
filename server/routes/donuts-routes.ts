@@ -31,7 +31,7 @@ router.get('/bases', async (req, res) => {
 router.get('/bases/:id', async (req, res) => {
   try {
     const baseId = Number(req.params.id)
-    if (isNaN(baseId)) return errors.clientError(res, 'Invalid Base ID')
+    if (isNaN(baseId)) return errors.clientError(req, res, 'Invalid Base ID')
 
     const base = await db.getBase(req.params.id)
     res.json(base)
@@ -44,7 +44,7 @@ router.get('/bases/:id', async (req, res) => {
 router.get('/glazes/:id', async (req, res) => {
   try {
     const glazeId = Number(req.params.id)
-    if (isNaN(glazeId)) return errors.clientError(res, 'Invalid Glaze ID')
+    if (isNaN(glazeId)) return errors.clientError(req, res, 'Invalid Glaze ID')
 
     const glaze = await db.getGlaze(glazeId)
     res.json(glaze)
@@ -57,7 +57,7 @@ router.get('/glazes/:id', async (req, res) => {
 router.get('/me', checkJwt, async (req: JwtRequest, res) => {
   try {
     const userId = req.auth?.sub
-    if (!userId) return errors.unauthorizedError(res, 'Unauthorized')
+    if (!userId) return errors.unauthorizedError(req, res, 'Unauthorized')
 
     const donuts = await db.getDonuts(userId)
     res.json(donuts)
@@ -70,7 +70,7 @@ router.get('/me', checkJwt, async (req: JwtRequest, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const donutId = Number(req.params.id)
-    if (isNaN(donutId)) return errors.clientError(res, 'Invalid Donut ID')
+    if (isNaN(donutId)) return errors.clientError(req, res, 'Invalid Donut ID')
 
     const donut = await db.getDonut(donutId)
     if (!donut)
@@ -94,7 +94,7 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
 
     if (!userId) return errors.unauthorizedError(req, res, 'Unauthorized')
     if (!base || !glaze)
-      return errors.clientError(res, 'Missing donut properties')
+      return errors.clientError(req, res, 'Missing donut properties')
 
     const donut = await db.insertDonut({ auth0_id: userId, base, glaze })
 
@@ -110,12 +110,12 @@ router.delete('/:id', checkJwt, async (req: JwtRequest, res) => {
     const userId = req.auth?.sub
 
     const donutId = Number(req.params.id)
-    if (isNaN(donutId)) return errors.clientError(res, 'Invalid Donut ID')
+    if (isNaN(donutId)) return errors.clientError(req, res, 'Invalid Donut ID')
 
     const donut = await db.getDonut(donutId)
 
     if (!userId || donut.auth0_id !== userId)
-      return errors.unauthorizedError(res, 'Unauthorized')
+      return errors.unauthorizedError(req, res, 'Unauthorized')
     else await db.deleteDonut(donutId)
 
     res.status(200).end()

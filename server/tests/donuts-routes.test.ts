@@ -36,3 +36,11 @@ describe("GET /bases", () => {
     await request(app).get("/api/v1/donuts/bases").expect(500);
   });
 });
+
+describe('GET /me', () => {
+  it('Should return a 401 if no token is present', async () => {
+    await request(app).get('/api/v1/donuts/me').expect(401)
+  })
+
+  it('Should return user values if token is present')
+})

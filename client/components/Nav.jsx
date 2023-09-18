@@ -7,8 +7,7 @@ export default function Nav() {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
   const { getAccessTokenSilently } = useAuth0()
 
-  const params = useSearchParams()[0]
-  const donut = { glaze: params.get('glaze'), base: params.get('base') }
+  const [searchParams, setSearchParams] = useSearchParams()
 
   function handleLogin() {
     loginWithRedirect({ redirectUri: `${window.location.origin}` })
@@ -19,6 +18,10 @@ export default function Nav() {
   }
 
   async function handleSave() {
+    const donut = {
+      glaze: searchParams.get('glaze'),
+      base: searchParams.get('base'),
+    }
     const token = await getAccessTokenSilently()
     saveDonut(token, donut)
   }
@@ -29,12 +32,14 @@ export default function Nav() {
         {!isAuthenticated ? (
           <button onClick={handleLogin}>Login</button>
         ) : (
-          <button onClick={handleLogout}>Logout</button>
+          <>
+            <button onClick={handleLogout}>Logout</button>
+            <button onClick={handleSave}>Save your donut</button>
+            <Link to="/me">
+              <button>View your donuts</button>
+            </Link>
+          </>
         )}
-        <button onClick={handleSave}>Save your donut</button>
-        <Link to="/me">
-          <button>View your donuts</button>
-        </Link>
       </nav>
     </>
   )

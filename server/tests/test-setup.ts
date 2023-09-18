@@ -1,15 +1,15 @@
-import {afterAll, beforeAll, beforeEach} from "vitest";
-import db from '../db/connection'
+import { afterAll, beforeAll, beforeEach } from "vitest";
+import db from "../db/connection";
 
 beforeAll(() => {
-    return db.migrate.latest()
-})
+  return db.migrate.latest();
+});
 
 // reseeds before each
 beforeEach(() => {
-    return db.seed.run()
-})
+  return db.seed.run();
+});
 
 afterAll(() => {
-    db.destroy()
-})
+  db.destroy();
+});

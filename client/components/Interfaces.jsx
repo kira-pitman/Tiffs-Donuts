@@ -7,6 +7,7 @@ import { useLoader } from '@react-three/fiber'
 import { useRef, useState, useEffect } from 'react'
 import Footer from './Footer'
 import { fetchBase, fetchGlaze } from '../api/apiClient.ts'
+import {useSearchParams} from "react-router-dom";
 
 const defaultBase = {
   id: 1,
@@ -25,6 +26,7 @@ function Interfaces(props) {
   const heroRef = useRef(null)
   const detailRef = useRef(null)
   const { updateGlaze, updateBase, updateTexture } = props
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const [selectedBase, setSelectedBase] = useState(defaultBase)
   const [selectedGlaze, setSelectedGlaze] = useState(defaultGlaze)
@@ -56,9 +58,8 @@ function Interfaces(props) {
   useEffect(() => {
     // This can be set to use the provided hook by RR if we implement it
     const setDefaults = async () => {
-      const params = new URLSearchParams(window.location.search)
-      const searchGlaze = params.get('glaze')
-      const searchBase = params.get('base')
+      const searchGlaze = searchParams.get('glaze')
+      const searchBase = searchParams.get('base')
       if (searchGlaze) {
         const glaze = await fetchGlaze(Number(searchGlaze))
         if (glaze) {
@@ -91,12 +92,16 @@ function Interfaces(props) {
   return (
     <>
       <div className={'flex flex-col items-center w-screen'}>
-        <h1 className="text-8xl leading-snug font-yummy">Tiff Donuts</h1>
+      <div className="flex items-center">
+        <h1 className="text-8xl leading-snug font-yummy py-5">Tiff&apos;s Donuts</h1>
+        <img src="/images/donut4.png" alt="cat-donut" />
+      </div>
         <section
           id="hero"
           className="h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center items-end"
           ref={heroRef}
         >
+          
           <DonutForm
             selectedBase={selectedBase}
             selectedGlaze={selectedGlaze}
@@ -105,7 +110,7 @@ function Interfaces(props) {
           />
 
           <div>
-            <button onClick={(e) => handleScroll(e, detailRef)}>
+            <button className='mt-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full' onClick={(e) => handleScroll(e, detailRef)}>
               See Donut Details
             </button>
           </div>
@@ -121,7 +126,7 @@ function Interfaces(props) {
             selectedGlaze={selectedGlaze}
           />
           <div>
-            <button onClick={(e) => handleScroll(e, heroRef)}>
+            <button className='mt-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full' onClick={(e) => handleScroll(e, heroRef)}>
               Back to donut
             </button>
           </div>

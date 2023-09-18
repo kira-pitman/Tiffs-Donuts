@@ -4,7 +4,10 @@ function DonutDetails(props) {
   return (
     <div className="grid grid-flow-row-dense grid-cols-1 gap-3">
       <div className="col-span-1">
-        <h2 className="text-5xl font-extrabold leading-snug">Detail Page</h2>
+      <div className="flex items-center">
+        <h2 className="text-5xl font-extrabold leading-snug">Detail</h2>
+        <img src="/images/donut3.png" alt="white-cat-donut" />
+        </div>
       </div>
       <div className="col-span-1">
         <p className="mt-5 text-3xl">

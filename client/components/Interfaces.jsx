@@ -82,14 +82,16 @@ function Interfaces(props) {
   return (
     <>
       <div className={'flex flex-col items-center w-screen'}>
-        <h1 className="text-8xl leading-snug font-yummy py-5">Tiff's Donuts </h1>
-        
+      <div className="flex items-center">
+        <h1 className="text-8xl leading-snug font-yummy py-5">Tiff's Donuts</h1>
+        <img src="/images/donut4.png" alt="cat-donut" />
+      </div>
         <section
           id="hero"
           className="h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center items-end"
           ref={heroRef}
         >
-          <img src="/images/donut4.png" alt="" />
+          
           <DonutForm
             selectedBase={selectedBase}
             selectedGlaze={selectedGlaze}

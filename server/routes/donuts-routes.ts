@@ -100,7 +100,17 @@ router.delete('/:id', async (req, res) => {
 })
 
 router.get('/me', async (req, res) => {
+    try {
+        // const userId = req.auth?.sub
+        const userId = 'fakeAuth'
+        if (!userId) return res.status(401).json({message: 'Unauthorized'})
+        const donuts = await db.getDonuts(userId)
 
+        res.json(donuts)
+    } catch (error) {
+        res.sendStatus(500)
+        console.error(error)
+    }
 })
 
 export default router

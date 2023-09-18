@@ -75,6 +75,7 @@ router.get('/:id', async (req, res) => {
     const donut = await db.getDonut(donutId)
     if (!donut)
       return errors.notFoundError(
+          req,
         res,
         `Donut with id ${donutId} does not exist`
       )
@@ -91,7 +92,7 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
     const userId = req.auth?.sub
     const { base, glaze } = req.body
 
-    if (!userId) return errors.unauthorizedError(res, 'Unauthorized')
+    if (!userId) return errors.unauthorizedError(req, res, 'Unauthorized')
     if (!base || !glaze)
       return errors.clientError(res, 'Missing donut properties')
 

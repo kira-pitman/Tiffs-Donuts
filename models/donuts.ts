@@ -17,3 +17,15 @@ export interface Donut {
   glaze: number
   auth0_id: string
 }
+
+export interface DonutDetails {
+  id: number
+  auth0_od: string
+  glazeId: number
+  baseId: number
+  glazeName: string
+  baseName: string
+  price: number
+  glazeColor: string
+  baseColor: string
+}

@@ -3,8 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import Interfaces from '../components/Interfaces'
 import DonutScene from '../components/DonutScene'
-import DonutModel from '../components/DonutModel'
-// import DonutList from '../components/DonutList'
+
 import * as THREE from 'three'
 import { OrbitControls } from '@react-three/drei'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -19,7 +18,9 @@ function App() {
   )
 
   const [donutMarginLeft, setDonutMarginLeft] = useState('0px')
-  const [donutMarginTop, setDonutMarginTop] = useState('0px')
+
+  const [donutMarginTop, setDonutMarginTop] = useState('100px')
+
   const [baseColor, setBaseColor] = useState(materials['Material.003'].clone())
   const donutDivWidth = 800
   const [texture, setTexture] = useState('')
@@ -40,8 +41,9 @@ function App() {
         const yOffset = window.scrollY
         const presentage = yOffset / pageHeight
         const maxMargin = pageWidth - donutDivWidth
-        setDonutMarginLeft(`${maxMargin * presentage}px`)
-        setDonutMarginTop(`${150 * presentage}px`)
+
+        setDonutMarginLeft(`${maxMargin * presentage * 0.7}px`)
+        setDonutMarginTop(`${50 * (1 + presentage)}px`)
       })
     }
     window.addEventListener('scroll', scrollHandler)
@@ -88,7 +90,7 @@ function App() {
         ref={canvasRef}
         shadows
         camera={{
-          fov: 3.5,
+          fov: 3.2,
           near: 0.1,
           far: 1000,
           position: [3, 3, 5],
@@ -109,7 +111,6 @@ function App() {
           baseColor={baseColor}
           texture={texture}
         />
-
       </Canvas>
 
       <div

@@ -1,6 +1,7 @@
 import express from 'express'
 import * as db from '../db/donuts-db'
 import checkJwt, {JwtRequest} from "../auth0";
+import errors from '../lib/errors'
 
 const router = express.Router()
 
@@ -28,6 +29,9 @@ router.get('/bases', async (req, res) => {
 
 router.get('/bases/:id', async (req, res) => {
     try {
+        const baseId = Number(req.params.id)
+        if (isNaN(baseId)) return errors.clientError(req, res, 'Invalid Base ID')
+
         const base = await db.getBase(req.params.id)
         res.json(base)
     } catch (error) {
@@ -38,7 +42,10 @@ router.get('/bases/:id', async (req, res) => {
 
 router.get('/glazes/:id', async (req, res) => {
     try {
-        const glaze = await db.getGlaze(req.params.id)
+        const glazeId = Number(req.params.id)
+        if (isNaN(glazeId)) return errors.clientError(req, res, 'Invalid Glaze ID')
+
+        const glaze = await db.getGlaze(glazeId)
         res.json(glaze)
     } catch (error) {
         res.sendStatus(500)
@@ -49,9 +56,9 @@ router.get('/glazes/:id', async (req, res) => {
 router.get('/me', checkJwt, async (req: JwtRequest, res) => {
     try {
         const userId = req.auth?.sub
-        if (!userId) return res.status(401).json({message: 'Unauthorized'})
-        const donuts = await db.getDonuts(userId)
+        if (!userId) return errors.unauthorizedError(req, res, 'Unauthorized')
 
+        const donuts = await db.getDonuts(userId)
         res.json(donuts)
     } catch (error) {
         res.sendStatus(500)
@@ -62,10 +69,10 @@ router.get('/me', checkJwt, async (req: JwtRequest, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const donutId = Number(req.params.id)
-        if (isNaN(donutId)) return res.status(400).json({message: 'Invalid Donut ID'})
+        if (isNaN(donutId)) return errors.clientError(req, res, 'Invalid Donut ID')
 
         const donut = await db.getDonut(donutId)
-        if (!donut) return res.status(404).json({message: `Donut with id ${donutId} does not exist`})
+        if (!donut) return errors.notFoundError(req, res, `Donut with id ${donutId} does not exist`)
 
         else res.json(donut)
     } catch (error) {
@@ -80,8 +87,8 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
         const userId = req.auth?.sub
         const {base, glaze} = req.body
 
-        if (!userId) return res.status(401).json({message: 'Unauthorized'})
-        if (!base || !glaze) return res.status(400).json({message: 'Missing donut properties'})
+        if (!userId) return errors.unauthorizedError(req, res, 'Unauthorized')
+        if (!base || !glaze) return errors.clientError(req, res, 'Missing donut properties')
 
         const donut = await db.insertDonut({auth0_id: userId, base, glaze})
 
@@ -97,11 +104,11 @@ router.delete('/:id', checkJwt, async (req: JwtRequest, res) => {
         const userId = req.auth?.sub
 
         const donutId = Number(req.params.id)
-        if (isNaN(donutId)) return res.status(400).json({message: 'Invalid Donut ID'})
+        if (isNaN(donutId)) return errors.clientError(req, res, 'Invalid Donut ID')
 
         const donut = await db.getDonut(donutId)
 
-        if (!userId || donut.auth0_id !== userId) return res.status(401).json({message: 'Unauthorized'})
+        if (!userId || donut.auth0_id !== userId) return errors.unauthorizedError(req, res, 'Unauthorized')
         else await db.deleteDonut(donutId)
 
         res.status(200).end()

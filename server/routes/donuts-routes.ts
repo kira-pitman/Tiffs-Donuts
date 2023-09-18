@@ -70,9 +70,9 @@ router.post('/', async (req, res) => {
         if (!userId) return res.status(401).json({message: 'Unauthorized'})
         if (!base || !glaze) return res.status(400).json({message: 'Missing donut properties'})
 
-        const donut = db.insertDonut({auth0_id: userId, base, glaze})
+        const donut = await db.insertDonut({auth0_id: userId, base, glaze})
 
-        res.json(donut)
+        res.json(donut[0])
     } catch (error) {
         res.sendStatus(500)
         console.error(error)

@@ -22,4 +22,6 @@ export interface DonutDetails extends Donut {
   glazeName: string
   baseName: string
   price: number
+  glazeColor: string
+  baseColor: string
 }

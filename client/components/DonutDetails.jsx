@@ -1,12 +1,12 @@
 function DonutDetails(props) {
-  const { selectedBase, selectedGlaze } = props
+  const { selectedBase, selectedGlaze } = props;
 
   return (
     <div className="grid grid-flow-row-dense grid-cols-1 gap-3">
       <div className="col-span-1">
-      <div className="flex items-center">
-        <h2 className="text-5xl font-extrabold leading-snug">Detail</h2>
-        <img src="/images/donut3.png" alt="white-cat-donut" />
+        <div className="flex items-center">
+          <h2 className="text-5xl font-extrabold leading-snug">Detail</h2>
+          <img src="/images/donut3.png" alt="white-cat-donut" />
         </div>
       </div>
       <div className="col-span-1">
@@ -18,7 +18,7 @@ function DonutDetails(props) {
         <p className="mt-3 text-2xl">Price: ${selectedGlaze.price}</p>
       </div>
     </div>
-  )
+  );
 }
 
-export default DonutDetails
+export default DonutDetails;

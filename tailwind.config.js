@@ -5,7 +5,7 @@ export default {
     extend: {
       fontFamily: {
         yummy: ["yummy"],
-      }
+      },
     },
   },
   plugins: [],

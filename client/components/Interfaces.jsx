@@ -6,6 +6,7 @@ import { useRef, useState, useEffect } from 'react'
 import Footer from './Footer'
 import { fetchBase, fetchGlaze } from '../api/apiClient.ts'
 import { useSearchParams } from 'react-router-dom'
+import * as THREE from 'three'
 
 const defaultBase = {
   id: 1,
@@ -101,7 +102,7 @@ function Interfaces(props) {
         </div>
         <section
           id="hero"
-          className="h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center items-end"
+          className="h-screen w-screen -mt-10 mr-9 p-8 max-w-screen-2xl mx-auto flex flex-col justify-center items-end"
         >
           <DonutForm
             selectedBase={selectedBase}

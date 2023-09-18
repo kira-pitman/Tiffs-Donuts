@@ -80,7 +80,23 @@ router.post('/', async (req, res) => {
 })
 
 router.delete('/:id', async (req, res) => {
+    try {
+        // const userId = req.auth?.sub
+        const userId = 'fakeAuth'
 
+        const donutId = Number(req.params.id)
+        if (isNaN(donutId)) return res.status(400).json({message: 'Invalid Donut ID'})
+
+        const donut = await db.getDonut(donutId)
+
+        if (!userId || donut.auth0_id !== userId) return res.status(401).json({message: 'Unauthorized'})
+        else await db.deleteDonut(donutId)
+
+        res.status(200).end()
+    } catch (error) {
+        res.sendStatus(500)
+        console.error(error)
+    }
 })
 
 router.get('/me', async (req, res) => {

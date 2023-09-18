@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import Interfaces from '../components/Interfaces'
 import DonutScene from '../components/DonutScene'
@@ -21,6 +21,8 @@ function App() {
   const [baseColor, setBaseColor] = useState(materials['Material.003'].clone())
   const donutDivWidth = 800
   const [texture, setTexture] = useState('')
+
+  const canvasRef = useRef()
 
   useEffect(() => {
     const scrollHandler = () => {
@@ -61,9 +63,27 @@ function App() {
     setTexture(newTexture)
   }
 
+  // Forward pointer events from the overlay to the canvas
+  const onPointerMove = (e) => {
+    canvasRef.current.dispatchEvent(
+      new MouseEvent('pointermove', e.nativeEvent)
+    )
+  }
+
+  const onPointerDown = (e) => {
+    canvasRef.current.dispatchEvent(
+      new MouseEvent('pointerdown', e.nativeEvent)
+    )
+  }
+
+  const onPointerUp = (e) => {
+    canvasRef.current.dispatchEvent(new MouseEvent('pointerup', e.nativeEvent))
+  }
+
   return (
     <div style={{ position: 'relative', scrollBehavior: 'smooth' }}>
       <Canvas
+        ref={canvasRef}
         shadows
         camera={{
           fov: 3.5,
@@ -80,7 +100,7 @@ function App() {
           background: 'rgba(0, 0, 200, 0)',
         }}
       >
-        <OrbitControls enableZoom={false} />
+        <OrbitControls enableZoom={false} enablePan={false} />
 
         <DonutScene
           glazeColor={glazeColor}
@@ -89,7 +109,12 @@ function App() {
         />
       </Canvas>
 
-      <div style={{ position: 'absolute', top: 0, left: 0 }}>
+      <div
+        style={{ position: 'absolute', top: 0, left: 0 }}
+        onPointerMove={onPointerMove}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+      >
         <QueryClientProvider client={queryClient}>
           <Interfaces
             updateGlaze={updateGlaze}

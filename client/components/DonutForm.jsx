@@ -59,7 +59,7 @@ function DonutForm(props) {
         <div className="grid grid-cols-2 gap-3 mt-5 place-items-center">
           <div className="col-start-1 col-end-7">
             <h2 className="text-5xl font-extrabold leading-snug">
-              Choose a flavor
+              Choose a flavor 
             </h2>
           </div>
           <div id="glaze-select" className="col-start-1 col-end-3">

@@ -22,7 +22,7 @@ function DonutDetails(props) {
       </div>
       <div className="col-span-1">
         <p className="mt-3 text-2xl">
-          Price: ${selectedGlaze.price} + ${withGold ? goldCoat.price : ''}
+          Price: ${selectedGlaze.price} {withGold ? `+ $${goldCoat.price}` : ''}
         </p>
       </div>
     </div>

@@ -94,7 +94,7 @@ function Interfaces(props) {
     <>
       <div className={'flex flex-col items-center w-screen'}>
         <div className="flex items-center">
-          <h1 className="text-8xl leading-snug font-yummy py-5">
+          <h1 ref={heroRef} className="text-8xl leading-snug font-yummy py-5">
             Tiff&apos;s Donuts
           </h1>
           <img src="/images/donut4.png" alt="cat-donut" />
@@ -102,7 +102,6 @@ function Interfaces(props) {
         <section
           id="hero"
           className="h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col justify-center items-end"
-          ref={heroRef}
         >
           <DonutForm
             selectedBase={selectedBase}
@@ -113,15 +112,7 @@ function Interfaces(props) {
 
           <div>
             <button
-              className="mt-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full"
-              onClick={(e) => handleScroll(e, detailRef)}
-            >
-              See Donut Details
-            </button>
-          </div>
-          <div>
-            <button
-              className="mt-3 p-3 px-5 bg-[#d7d41e] hover:bg-[#8f8d16] rounded-full"
+              className="mt-5 p-3 px-5 bg-[#d7d41e] hover:bg-[#8f8d16] rounded-full"
               onClick={addGold}
             >
               Coat with gold
@@ -131,6 +122,14 @@ function Interfaces(props) {
               onClick={cancelGold}
             >
               Remove gold
+            </button>
+          </div>
+          <div>
+            <button
+              className="mt-5 p-3 bg-sky-400 hover:bg-sky-300 rounded-full"
+              onClick={(e) => handleScroll(e, detailRef)}
+            >
+              See Donut Details
             </button>
           </div>
         </section>

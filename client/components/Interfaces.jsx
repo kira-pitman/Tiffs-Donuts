@@ -3,6 +3,7 @@ import DonutDetails from './DonutDetails'
 import { useRef, useState, useEffect } from 'react'
 import Footer from './Footer'
 import { fetchBase, fetchGlaze } from '../api/apiClient.ts'
+import {useSearchParams} from "react-router-dom";
 
 const defaultBase = {
   id: 1,
@@ -29,6 +30,7 @@ const defaultGlaze = {
 function Interfaces(props) {
   const heroRef = useRef(null)
   const detailRef = useRef(null)
+  const [searchParams, setSearchParams] = useSearchParams()
   const { updateGlaze, updateBase } = props
 
   const [selectedBase, setSelectedBase] = useState(defaultBase)
@@ -47,9 +49,8 @@ function Interfaces(props) {
   useEffect(() => {
     // This can be set to use the provided hook by RR if we implement it
     const setDefaults = async () => {
-      const params = new URLSearchParams(window.location.search)
-      const searchGlaze = params.get('glaze')
-      const searchBase = params.get('base')
+      const searchGlaze = searchParams.get('glaze')
+      const searchBase = searchParams.get('base')
       if (searchGlaze) {
         const glaze = await fetchGlaze(Number(searchGlaze))
         if (glaze) {

@@ -116,6 +116,20 @@ function Interfaces(props) {
               See Donut Details
             </button>
           </div>
+          <div>
+            <button
+              className="mt-3 p-3 px-5 bg-[#d7d41e] hover:bg-[#8f8d16] rounded-full"
+              onClick={addGold}
+            >
+              Coat with gold
+            </button>
+            <button
+              className="mt-3 p-3 ml-3 px-7 bg-[#d7d41e77] hover:bg-[#8f8d1633] rounded-full"
+              onClick={cancelGold}
+            >
+              Remove gold
+            </button>
+          </div>
         </section>
 
         <section

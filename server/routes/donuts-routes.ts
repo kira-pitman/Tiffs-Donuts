@@ -60,7 +60,23 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+//todo implement real middleware for auth
 router.post('/', async (req, res) => {
+    try {
+        // const userId = req.auth?.sub
+        const userId = 'fakeAuth'
+        const {base, glaze} = req.body
+
+        if (!userId) return res.status(401).json({message: 'Unauthorized'})
+        if (!base || !glaze) return res.status(400).json({message: 'Missing donut properties'})
+
+        const donut = db.insertDonut({auth0_id: userId, base, glaze})
+
+        res.json(donut)
+    } catch (error) {
+        res.sendStatus(500)
+        console.error(error)
+    }
 })
 
 router.delete('/:id', async (req, res) => {

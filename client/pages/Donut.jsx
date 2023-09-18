@@ -66,11 +66,11 @@ function Donut() {
                     width: `${donutDivWidth}px`,
                     marginLeft: donutMarginLeft,
                     marginTop: donutMarginTop,
-                    background: 'white',
+                    background: 'rgba(0, 0, 200, 0)',
                 }}
             >
                 <OrbitControls enableZoom={false}/>
-                <color attach="background" args={['#ffffff']}/>
+                {/* <color attach="background" args={['#ffffff']}/> */}
                 <DonutScene glazeColor={glazeColor} baseColor={baseColor}/>
             </Canvas>
 

@@ -4,6 +4,7 @@ function DonutDetails(props) {
     name: 'coated with gold',
     price: 1000,
   }
+
   return (
     <div className="grid grid-flow-row-dense grid-cols-1 gap-3">
       <div className="col-span-1">

@@ -1,12 +1,19 @@
 export interface Glaze {
-  id: number
-  name: string
-  color: string
-  price: number
+  id: number;
+  name: string;
+  color: string;
+  price: number;
 }
 
 export interface Base {
+  id: number;
+  name: string;
+  color: string;
+}
+
+export interface Donut {
   id: number
-  name: string
-  color: string
+  base: number
+  glaze: number
+  auth0_id: string
 }

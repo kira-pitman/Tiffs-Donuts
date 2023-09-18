@@ -1,5 +1,5 @@
-import {bases} from "../seedData.js";
+import { bases } from "../seedData.js";
 
 export async function seed(knex) {
-  return await knex('bases').insert(bases)
+  return await knex("bases").insert(bases);
 }

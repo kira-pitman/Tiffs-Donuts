@@ -6,7 +6,6 @@ import { useRef, useState, useEffect } from 'react'
 import Footer from './Footer'
 import { fetchBase, fetchGlaze } from '../api/apiClient.ts'
 import { useSearchParams } from 'react-router-dom'
-import * as THREE from 'three'
 
 const defaultBase = {
   id: 1,

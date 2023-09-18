@@ -17,3 +17,9 @@ export interface Donut {
   glaze: number
   auth0_id: string
 }
+
+export interface DonutDetails extends Donut {
+  glazeName: string
+  baseName: string
+  price: number
+}

@@ -57,6 +57,7 @@ router.get('/glazes/:id', async (req, res) => {
 router.get('/me', checkJwt, async (req: JwtRequest, res) => {
   try {
     const userId = req.auth?.sub
+    // const userId = 'hello123'
     if (!userId) return errors.unauthorizedError(req, res, 'Unauthorized')
 
     const donuts = await db.getDonuts(userId)

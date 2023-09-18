@@ -5,24 +5,24 @@ import { JwtPayload } from 'jsonwebtoken'
 import jwks from 'jwks-rsa'
 
 // TODO: set the domain and audience (API Identifier)
-const domain = "mako-tiffsdonuts.au.auth0.com"
-const audience = "https://tiffsdonuts/api"
+const domain = 'https://mako-tiffsdonuts.au.auth0.com'
+const audience = 'https://tiffsdonuts/api'
 
 const checkJwt = jwt({
-    secret: jwks.expressJwtSecret({
-        cache: true,
-        rateLimit: true,
-        jwksRequestsPerMinute: 5,
-        jwksUri: `${domain}/.well-known/jwks.json`,
-    }) as GetVerificationKey,
-    audience: audience,
-    issuer: `${domain}/`,
-    algorithms: ['RS256'],
+  secret: jwks.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `${domain}/.well-known/jwks.json`,
+  }) as GetVerificationKey,
+  audience: audience,
+  issuer: `${domain}/`,
+  algorithms: ['RS256'],
 })
 
 export default checkJwt
 
 export interface JwtRequest<TReq = any, TRes = any>
-    extends Request<ParamsDictionary, TRes, TReq> {
-    auth?: JwtPayload
+  extends Request<ParamsDictionary, TRes, TReq> {
+  auth?: JwtPayload
 }

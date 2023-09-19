@@ -28,7 +28,9 @@ export default function DonutList() {
     <>
       <div className="flex flex-col items-center justify-center">
         <h2 className="text-5xl font-extrabold leading-snug mb-10">List of donuts</h2>
-        {data.length === 0 ? <h3 className="mb-2 text-2xl tracking-tight text-gray-900">Nothing here yet!</h3> : data.map(donut => <DonutCard key={donut.id} donut={donut}></DonutCard>)}
+        <div className="max-h-650 overflow-y-auto custom-scrollbar">
+          {data.length === 0 ? <h3 className="mb-2 text-2xl tracking-tight text-gray-900">Nothing here yet!</h3> : data.map(donut => <DonutCard key={donut.id} donut={donut}></DonutCard>)}
+        </div>
       </div>
     </>
   )

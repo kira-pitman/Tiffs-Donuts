@@ -10,7 +10,7 @@ server.use("/api/v1/donuts", donutRouter);
 
 server.use((err, req, res, next) => {
   if (!err) return;
-  console.log(`An error has occured. ${req.path}: ${err}`);
+  console.log(`An error has occurred. ${req.path}: ${err}`);
 
   if (String(err).match(/unauthorized/gi))
     return errors.unauthorizedError(req, res, "Unauthorized");

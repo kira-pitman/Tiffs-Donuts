@@ -21,7 +21,10 @@ body {
   background-attachment: fixed;
   z-index: 1;
 }
-
+.nav {
+  
+  font-family: 'Itim', cursive;
+}
 img {
   width: 200px;
 }

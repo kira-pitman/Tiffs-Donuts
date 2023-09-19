@@ -2,7 +2,6 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useQuery } from '@tanstack/react-query'
 import DonutCard from '../components/DonutCard'
 import { fetchDonuts } from '../api/apiClient'
-
 import { Player } from '@lottiefiles/react-lottie-player'
 
 export default function DonutList() {
@@ -52,14 +51,6 @@ export default function DonutList() {
             )}
           </div>
         </div>
-
-        {/* <div id="donuts-canvas" className="absolute left-0 top-12">
-          {donuts.map((donut) => {
-            return (
-              
-            )
-          })}
-        </div> */}
       </div>
     </>
   )

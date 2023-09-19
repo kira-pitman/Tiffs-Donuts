@@ -33,7 +33,7 @@ function DonutCard({ donut }) {
             <button onClick={(event) => handleDelete(event, donut.id)} className="mt-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full">Delete Donut</button>
         </div>
     </div>
-    )
-  }
-  
-  export default DonutCard
+  );
+}
+
+export default DonutCard;

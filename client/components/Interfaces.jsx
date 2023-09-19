@@ -6,6 +6,8 @@ import { useRef, useState, useEffect } from "react";
 import Footer from "./Footer";
 import { fetchBase, fetchGlaze } from "../api/apiClient.ts";
 import { useSearchParams } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import SaveButton from "./SaveButton";
 
 const defaultBase = {
   id: 1,
@@ -21,6 +23,7 @@ const defaultGlaze = {
 };
 
 function Interfaces(props) {
+  const { isAuthenticated } = useAuth0();
   const heroRef = useRef(null);
   const detailRef = useRef(null);
   const { updateGlaze, updateBase, updateTexture } = props;
@@ -151,6 +154,12 @@ function Interfaces(props) {
             >
               Back to donut
             </button>
+            {isAuthenticated && (
+              <SaveButton
+                selectedBase={selectedBase}
+                selectedGlaze={selectedGlaze}
+              />
+            )}
           </div>
         </section>
       </div>
@@ -160,4 +169,14 @@ function Interfaces(props) {
   );
 }
 
+//{!isAuthenticated ? (
+// <button onClick={handleLogin}>Login</button>
+// ) : (
+//   <>
+//     <button onClick={handleLogout}>Logout</button>
+//     <Link to="/me">
+//       <button>View your donuts</button>
+//     </Link>
+//   </>
+// )}
 export default Interfaces;

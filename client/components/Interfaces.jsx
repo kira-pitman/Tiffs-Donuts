@@ -8,6 +8,7 @@ import { fetchBase, fetchGlaze } from "../api/apiClient.ts";
 import { useSearchParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import SaveButton from "./SaveButton";
+import Nav from "./Nav";
 
 const defaultBase = {
   id: 1,
@@ -95,9 +96,12 @@ function Interfaces(props) {
 
   return (
     <>
+      <div ref={heroRef} >
+      <Nav />
+      </div>
       <div className={"flex flex-col items-center w-screen"}>
         <div className="flex items-center">
-          <h1 ref={heroRef} className="text-8xl leading-snug font-yummy py-5">
+          <h1 className="text-8xl leading-snug font-yummy py-5">
             Tiff&apos;s Donuts
           </h1>
           <img src="/images/donut4.png" alt="cat-donut" />
@@ -149,7 +153,7 @@ function Interfaces(props) {
           />
           <div>
             <button
-              className="mt-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full"
+              className="mt-3 mr-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full"
               onClick={(e) => handleScroll(e, heroRef)}
             >
               Back to donut

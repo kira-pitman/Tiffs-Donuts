@@ -8,7 +8,6 @@ function App() {
   return (
     <main>
       <QueryClientProvider client={queryClient}>
-        <Nav />
         <Outlet />
       </QueryClientProvider>
     </main>

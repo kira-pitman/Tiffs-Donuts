@@ -171,6 +171,7 @@ function Interfaces(props) {
               <SaveButton
                 selectedBase={selectedBase}
                 selectedGlaze={selectedGlaze}
+                withGold={withGold}
               />
             )}
           </div>

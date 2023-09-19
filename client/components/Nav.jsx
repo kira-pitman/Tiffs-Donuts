@@ -1,29 +1,15 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { useSearchParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { saveDonut } from "../api/apiClient";
+import { useAuth0 } from '@auth0/auth0-react'
+import { Link } from 'react-router-dom'
 
 export default function Nav() {
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
-  const { getAccessTokenSilently } = useAuth0();
-
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
 
   function handleLogin() {
-    loginWithRedirect({ redirectUri: `${window.location.origin}` });
+    loginWithRedirect({ redirectUri: `${window.location.origin}` })
   }
 
   function handleLogout() {
-    logout({ returnTo: `${window.location.origin}` });
-  }
-
-  async function handleSave() {
-    const donut = {
-      glaze: searchParams.get("glaze"),
-      base: searchParams.get("base"),
-    };
-    const token = await getAccessTokenSilently();
-    saveDonut(token, donut);
+    logout({ returnTo: `${window.location.origin}` })
   }
 
   return (
@@ -34,7 +20,6 @@ export default function Nav() {
         ) : (
           <>
             <button onClick={handleLogout}>Logout</button>
-            <button onClick={handleSave}>Save your donut</button>
             <Link to="/me">
               <button>View your donuts</button>
             </Link>
@@ -42,5 +27,5 @@ export default function Nav() {
         )}
       </nav>
     </>
-  );
+  )
 }

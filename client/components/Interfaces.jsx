@@ -1,101 +1,101 @@
-import DonutForm from "./DonutForm";
-import DonutDetails from "./DonutDetails";
-import { TextureLoader } from "three/src/loaders/TextureLoader";
-import { useLoader } from "@react-three/fiber";
-import { useRef, useState, useEffect } from "react";
-import Footer from "./Footer";
-import { fetchBase, fetchGlaze } from "../api/apiClient.ts";
-import { useSearchParams } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import SaveButton from "./SaveButton";
+import DonutForm from './DonutForm'
+import DonutDetails from './DonutDetails'
+import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { useLoader } from '@react-three/fiber'
+import { useRef, useState, useEffect } from 'react'
+import Footer from './Footer'
+import { fetchBase, fetchGlaze } from '../api/apiClient.ts'
+import { useSearchParams } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
+import SaveButton from './SaveButton'
 
 const defaultBase = {
   id: 1,
-  name: "Original",
-  color: "#e5e0cb",
-};
+  name: 'Original',
+  color: '#e5e0cb',
+}
 
 const defaultGlaze = {
   id: 2,
-  name: "Strawberry",
-  color: "#f57f8e",
+  name: 'Strawberry',
+  color: '#f57f8e',
   price: 9,
-};
+}
 
 function Interfaces(props) {
-  const { isAuthenticated } = useAuth0();
-  const heroRef = useRef(null);
-  const detailRef = useRef(null);
-  const { updateGlaze, updateBase, updateTexture } = props;
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { isAuthenticated } = useAuth0()
+  const heroRef = useRef(null)
+  const detailRef = useRef(null)
+  const { updateGlaze, updateBase, updateTexture } = props
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const [selectedBase, setSelectedBase] = useState(defaultBase);
-  const [selectedGlaze, setSelectedGlaze] = useState(defaultGlaze);
-  const [withGold, setWithGold] = useState(false);
+  const [selectedBase, setSelectedBase] = useState(defaultBase)
+  const [selectedGlaze, setSelectedGlaze] = useState(defaultGlaze)
+  const [withGold, setWithGold] = useState(false)
 
-  const newTexture = useLoader(TextureLoader, "gold.jpg");
+  const newTexture = useLoader(TextureLoader, 'gold.jpg')
 
   function changeBase(choosenBase) {
-    setSelectedBase(choosenBase);
-    updateBase(choosenBase.color);
+    setSelectedBase(choosenBase)
+    updateBase(choosenBase.color)
   }
 
   function changeGlaze(choosenGlaze) {
-    setSelectedGlaze(choosenGlaze);
-    updateGlaze(choosenGlaze.color);
+    setSelectedGlaze(choosenGlaze)
+    updateGlaze(choosenGlaze.color)
   }
 
   function addGold() {
-    updateGlaze("#FFFFFF");
-    updateBase("#FFFFFF");
-    updateTexture(newTexture);
-    setWithGold(true);
+    updateGlaze('#FFFFFF')
+    updateBase('#FFFFFF')
+    updateTexture(newTexture)
+    setWithGold(true)
   }
 
   function cancelGold() {
-    updateBase(selectedBase.color);
-    updateGlaze(selectedGlaze.color);
-    updateTexture("");
-    setWithGold(false);
+    updateBase(selectedBase.color)
+    updateGlaze(selectedGlaze.color)
+    updateTexture('')
+    setWithGold(false)
   }
 
   useEffect(() => {
     // This can be set to use the provided hook by RR if we implement it
     const setDefaults = async () => {
-      const searchGlaze = searchParams.get("glaze");
-      const searchBase = searchParams.get("base");
+      const searchGlaze = searchParams.get('glaze')
+      const searchBase = searchParams.get('base')
       if (searchGlaze) {
-        const glaze = await fetchGlaze(Number(searchGlaze));
+        const glaze = await fetchGlaze(Number(searchGlaze))
         if (glaze) {
-          changeGlaze(glaze);
+          changeGlaze(glaze)
         }
       }
       if (searchBase) {
-        const base = await fetchBase(Number(searchBase));
+        const base = await fetchBase(Number(searchBase))
         if (base) {
-          changeBase(base);
+          changeBase(base)
         }
       }
-    };
+    }
 
     try {
-      void setDefaults();
+      void setDefaults()
     } catch (e) {
-      alert("Could not set donut values");
+      alert('Could not set donut values')
     }
-  }, []);
+  }, [])
 
   function handleScroll(e, ref) {
-    e.preventDefault();
+    e.preventDefault()
     ref.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+      behavior: 'smooth',
+      block: 'start',
+    })
   }
 
   return (
     <>
-      <div className={"flex flex-col items-center w-screen"}>
+      <div className={'flex flex-col items-center w-screen'}>
         <div className="flex items-center">
           <h1 ref={heroRef} className="text-8xl leading-snug font-yummy py-5">
             Tiff&apos;s Donuts
@@ -166,17 +166,7 @@ function Interfaces(props) {
 
       <Footer />
     </>
-  );
+  )
 }
 
-//{!isAuthenticated ? (
-// <button onClick={handleLogin}>Login</button>
-// ) : (
-//   <>
-//     <button onClick={handleLogout}>Logout</button>
-//     <Link to="/me">
-//       <button>View your donuts</button>
-//     </Link>
-//   </>
-// )}
-export default Interfaces;
+export default Interfaces

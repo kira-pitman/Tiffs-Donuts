@@ -16,11 +16,13 @@ export interface Donut {
   base: number;
   glaze: number;
   auth0_id: string;
+  gold: boolean;
 }
 
 export interface SavedDonut {
   base: number;
   glaze: number;
+  gold: boolean;
 }
 
 export interface DonutDetails {
@@ -33,4 +35,5 @@ export interface DonutDetails {
   price: number;
   glazeColor: string;
   baseColor: string;
+  gold: boolean;
 }

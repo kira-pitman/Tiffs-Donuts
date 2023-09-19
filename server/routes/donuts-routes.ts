@@ -101,7 +101,8 @@ router.post("/", checkJwt, async (req: JwtRequest, res) => {
     res.json(donut[0]);
   } catch (error) {
     // handles sqlite constraint err
-    if (error.errno === 19) return errors.clientError(req, res, 'Invalid request')
+    if (error.errno === 19)
+      return errors.clientError(req, res, "Invalid request");
     res.sendStatus(500);
     console.error(error);
   }
@@ -115,7 +116,12 @@ router.delete("/:id", checkJwt, async (req: JwtRequest, res) => {
     if (isNaN(donutId)) return errors.clientError(req, res, "Invalid Donut ID");
 
     const donut = await db.getDonut(donutId);
-    if (!donut) return errors.notFoundError(req, res, `Donut with id ${donutId} does not exist`)
+    if (!donut)
+      return errors.notFoundError(
+        req,
+        res,
+        `Donut with id ${donutId} does not exist`,
+      );
 
     if (!userId || donut.auth0_id !== userId)
       return errors.unauthorizedError(req, res, "Unauthorized");

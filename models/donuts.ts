@@ -21,6 +21,7 @@ export interface Donut {
 export interface SavedDonut {
   base: number;
   glaze: number;
+  token: string;
 }
 
 export interface DonutDetails {

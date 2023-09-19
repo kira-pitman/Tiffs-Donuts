@@ -1,6 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { useQuery } from '@tanstack/react-query'
 import DonutCard from '../components/DonutCard'
+import Nav from '../components/Nav'
 import { fetchDonuts } from '../api/apiClient'
 import { Player } from '@lottiefiles/react-lottie-player'
 
@@ -34,10 +35,11 @@ export default function DonutList() {
 
   return (
     <>
-      <div className="relative">
+      <Nav />
+      <div className="relative mt-48">
         <div className="flex flex-col items-center justify-center">
           <h2 className="text-5xl font-extrabold leading-snug mb-10">
-            List of donuts
+            Your donuts
           </h2>
           <div className="max-h-650 overflow-y-auto custom-scrollbar">
             {donuts.length === 0 ? (

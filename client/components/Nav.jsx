@@ -1,20 +1,20 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
+import { useAuth0 } from '@auth0/auth0-react'
+import { Link } from 'react-router-dom'
 
 export default function Nav() {
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
 
   function handleLogin() {
-    loginWithRedirect({ redirectUri: `${window.location.origin}` });
+    loginWithRedirect({ redirectUri: `${window.location.origin}` })
   }
 
   function handleLogout() {
-    logout({ returnTo: `${window.location.origin}` });
+    logout({ returnTo: `${window.location.origin}` })
   }
 
   return (
     <>
-      <nav className="mx-auto w-full flex justify-between items-center">
+      <nav className="fixed top-0 mx-auto w-full flex justify-between items-center bg-white z-10">
         <div className="flex items-center">
           <Link to="/">
             <img
@@ -30,7 +30,7 @@ export default function Nav() {
 
         {!isAuthenticated ? (
           <button
-            className="mt-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full text-white mr-8 text-2xl nav"
+            className="mt-3 p-3 bg-red-500  hover:bg-red-400 rounded-full text-white mr-8 text-2xl nav"
             onClick={handleLogin}
           >
             Login
@@ -43,7 +43,7 @@ export default function Nav() {
               </button>
             </Link>
             <button
-              className=" p-3 bg-red-500 hover:bg-red-400 rounded-full text-white mr-8 text-2xl nav"
+              className=" p-3  bg-sky-400  hover:bg-sky-300 rounded-full text-white mr-8 text-2xl nav"
               onClick={handleLogout}
             >
               Logout
@@ -52,5 +52,5 @@ export default function Nav() {
         )}
       </nav>
     </>
-  );
+  )
 }

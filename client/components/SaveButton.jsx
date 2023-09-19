@@ -15,5 +15,12 @@ export default function SaveButton(props) {
     const token = await getAccessTokenSilently()
     saveDonut(token, donut)
   }
-  return <button onClick={handleSave}>Save your donut</button>
+  return (
+    <button
+      className="mt-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full"
+      onClick={handleSave}
+    >
+      Save your donut
+    </button>
+  )
 }

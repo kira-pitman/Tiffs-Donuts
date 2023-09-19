@@ -154,10 +154,12 @@ function Interfaces(props) {
             >
               Back to donut
             </button>
-            <SaveButton
-              selectedBase={selectedBase}
-              selectedGlaze={selectedGlaze}
-            />
+            {isAuthenticated && (
+              <SaveButton
+                selectedBase={selectedBase}
+                selectedGlaze={selectedGlaze}
+              />
+            )}
           </div>
         </section>
       </div>
@@ -167,4 +169,14 @@ function Interfaces(props) {
   )
 }
 
+//{!isAuthenticated ? (
+// <button onClick={handleLogin}>Login</button>
+// ) : (
+//   <>
+//     <button onClick={handleLogout}>Logout</button>
+//     <Link to="/me">
+//       <button>View your donuts</button>
+//     </Link>
+//   </>
+// )}
 export default Interfaces

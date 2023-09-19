@@ -1,29 +1,29 @@
-import { useAuth0 } from '@auth0/auth0-react'
-import { useParams, useSearchParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import { saveDonut } from '../api/apiClient'
+import { useAuth0 } from "@auth0/auth0-react";
+import { useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { saveDonut } from "../api/apiClient";
 
 export default function Nav() {
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
-  const { getAccessTokenSilently } = useAuth0()
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams();
 
   function handleLogin() {
-    loginWithRedirect({ redirectUri: `${window.location.origin}` })
+    loginWithRedirect({ redirectUri: `${window.location.origin}` });
   }
 
   function handleLogout() {
-    logout({ returnTo: `${window.location.origin}` })
+    logout({ returnTo: `${window.location.origin}` });
   }
 
   async function handleSave() {
     const donut = {
-      glaze: searchParams.get('glaze'),
-      base: searchParams.get('base'),
-    }
-    const token = await getAccessTokenSilently()
-    saveDonut(token, donut)
+      glaze: searchParams.get("glaze"),
+      base: searchParams.get("base"),
+    };
+    const token = await getAccessTokenSilently();
+    saveDonut(token, donut);
   }
 
   return (
@@ -42,5 +42,5 @@ export default function Nav() {
         )}
       </nav>
     </>
-  )
+  );
 }

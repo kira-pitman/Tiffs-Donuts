@@ -29,15 +29,22 @@ function Interfaces(props) {
   const [selectedBase, setSelectedBase] = useState(defaultBase)
   const [selectedGlaze, setSelectedGlaze] = useState(defaultGlaze)
   const [withGold, setWithGold] = useState(false)
+  const [coatMessage, setCoatMessage] = useState(false)
 
   const newTexture = useLoader(TextureLoader, 'gold.jpg')
 
   function changeBase(choosenBase) {
+    if (withGold) {
+      return setCoatMessage(true)
+    }
     setSelectedBase(choosenBase)
     updateBase(choosenBase.color)
   }
 
   function changeGlaze(choosenGlaze) {
+    if (withGold) {
+      return setCoatMessage(true)
+    }
     setSelectedGlaze(choosenGlaze)
     updateGlaze(choosenGlaze.color)
   }
@@ -54,6 +61,7 @@ function Interfaces(props) {
     updateGlaze(selectedGlaze.color)
     updateTexture('')
     setWithGold(false)
+    setCoatMessage(false)
   }
 
   useEffect(() => {
@@ -109,6 +117,12 @@ function Interfaces(props) {
             changeBase={changeBase}
             changeGlaze={changeGlaze}
           />
+
+          <div className="block mt-4 ">
+            {coatMessage ? (
+              <p>Please remove gold coat first to change glaze and base</p>
+            ) : null}
+          </div>
 
           <div>
             <button

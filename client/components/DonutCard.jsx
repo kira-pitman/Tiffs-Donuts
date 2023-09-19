@@ -57,6 +57,11 @@ function DonutCard({ donut }) {
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
           {donut.baseName} base with {donut.glazeName} topping
         </h5>
+        {donut.gold == 1 ? (
+          <h4 className="mb-2 text-2xl font-bold tracking-tight text-[#a8a83f]">
+            coated with gold
+          </h4>
+        ) : null}
         <p className="mb-3 font-normal text-gray-700">Price: ${donut.price}</p>
         <button
           onClick={(event) => handleDelete(event, donut.id)}

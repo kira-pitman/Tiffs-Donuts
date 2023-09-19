@@ -113,6 +113,7 @@ router.delete("/:id", checkJwt, async (req: JwtRequest, res) => {
     if (isNaN(donutId)) return errors.clientError(req, res, "Invalid Donut ID");
 
     const donut = await db.getDonut(donutId);
+    if (!donut) return errors.notFoundError(req, res, `Donut with id ${donutId} does not exist`)
 
     if (!userId || donut.auth0_id !== userId)
       return errors.unauthorizedError(req, res, "Unauthorized");

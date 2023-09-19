@@ -49,6 +49,6 @@ export async function fetchDonuts({
 }
 
 export async function delDonut (id: number, token:string) {
-await request.delete(`${rootUrl}/${id}`).set('Authorization', `Bearer ${token}`)
-
+  console.log( token)
+  await request.delete(`${rootUrl}/${id}`).set('Authorization', `Bearer ${token}`)
 }

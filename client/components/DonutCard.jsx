@@ -6,7 +6,9 @@ function DonutCard({ donut }) {
 
   const {getAccessTokenSilently} = useAuth0()
   const queryClient = useQueryClient()
-  const delMutation = useMutation(delDonut, {
+
+  const delMutation = useMutation( {
+    mutationFn : async ({id, token} ) => delDonut(id, token),
     onSuccess: () => {
       queryClient.invalidateQueries(['donutList'])   
     },
@@ -16,7 +18,9 @@ function DonutCard({ donut }) {
   async function handleDelete(event, id) {
     const token = await getAccessTokenSilently()
     event.preventDefault()
-    delMutation.mutate(id, token)
+    console.log(donut.id)
+    console.log(token)
+    delMutation.mutate({id, token})
   }
 
   return (

@@ -100,6 +100,8 @@ router.post("/", checkJwt, async (req: JwtRequest, res) => {
 
     res.json(donut[0]);
   } catch (error) {
+    // handles sqlite constraint err
+    if (error.errno === 19) return errors.clientError(req, res, 'Invalid request')
     res.sendStatus(500);
     console.error(error);
   }

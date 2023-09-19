@@ -223,6 +223,14 @@ describe("POST /", () => {
     expect(res.body.message).toMatch(/missing/i);
   });
 
+    it("Should return a 400 if glaze/base values are invalid", async () => {
+        const res = await request(app)
+            .post("/api/v1/donuts/")
+            .set("Authorization", `Bearer 123`)
+            .send({ glaze: 20, base: 42 })
+            .expect(400);
+    });
+
   it("Should return a 500 if an error occurs", async () => {
     vi.spyOn(db, "insertDonut").mockRejectedValueOnce("NO BAKING ALLOWED");
     await request(app)

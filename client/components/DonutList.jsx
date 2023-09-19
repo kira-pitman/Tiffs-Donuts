@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber'
-import Donuts from '../components/Donuts'
+import SavedDonuts from './SavedDonuts'
 import { OrbitControls } from '@react-three/drei'
 
 function DonutList() {
@@ -42,7 +42,7 @@ function DonutList() {
               }}
             >
               <OrbitControls enableZoom={false} />
-              <Donuts
+              <SavedDonuts
                 glazeColorId={donut.glazeColorId}
                 baseColorId={donut.baseColorId}
               />

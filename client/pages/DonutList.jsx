@@ -26,7 +26,7 @@ export default function DonutList() {
   if (isLoading) {
     return (
       <Player
-        src="/public/lotti/chocolate-donuts.json"
+        src="/lotti/chocolate-donuts.json"
         className="player"
         loop
         autoplay
@@ -71,8 +71,8 @@ export default function DonutList() {
                     background: 'rgba(0, 0, 200, 0)',
                     width: '400px',
                     marginLeft: donut.id % 2 == 0 ? '40px' : '200px',
-                    marginTop: '-30px',
-                    height: '220px',
+                    marginBottom: '-30px',
+                    height: '230px',
                   }}
                 >
                   <OrbitControls enableZoom={false} />

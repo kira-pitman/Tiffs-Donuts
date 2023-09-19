@@ -1,5 +1,5 @@
 import request from "superagent";
-import { Base, Glaze } from "../../models/donuts";
+import { Base, DonutDetails, Glaze } from "../../models/donuts";
 const rootUrl = "/api/v1/donuts";
 
 // GET /api/v1/donuts/flavors
@@ -26,4 +26,10 @@ export async function fetchGlaze(id: number): Promise<Glaze> {
   const dbBases = await request.get(`${rootUrl}/glazes/${id}`);
 
   return dbBases.body;
+}
+
+export async function fetchDonuts({ token }: { token: string }): Promise<DonutDetails[]> {
+  const dbDonuts = await request.get(`${rootUrl}/me`).set('Authorization', `Bearer ${token}`)
+
+  return dbDonuts.body
 }

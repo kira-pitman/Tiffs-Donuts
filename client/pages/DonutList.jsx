@@ -2,9 +2,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useQuery } from "@tanstack/react-query";
 import DonutCard from "../components/DonutCard";
 import { fetchDonuts } from "../api/apiClient";
+import {Navigate} from "react-router-dom";
 
 export default function DonutList() {
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, isAuthenticated, isLoading: isLoadingAuth } = useAuth0();
+
+  if (!isAuthenticated && !isLoadingAuth) return <Navigate to={'/'}/>
 
   const { data, isLoading, isError } = useQuery(["donutList"], async () => {
     const token = await getAccessTokenSilently();

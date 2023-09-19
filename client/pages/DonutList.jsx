@@ -5,6 +5,7 @@ import { fetchDonuts } from '../api/apiClient'
 import { Canvas } from '@react-three/fiber'
 import SavedDonuts from '../components/SavedDonuts'
 import { OrbitControls } from '@react-three/drei'
+import { Player } from '@lottiefiles/react-lottie-player'
 
 export default function DonutList() {
   const { getAccessTokenSilently } = useAuth0()
@@ -23,7 +24,15 @@ export default function DonutList() {
   }
 
   if (isLoading) {
-    return <p>Loading...</p>
+    return (
+      <Player
+        src="/public/lotti/chocolate-donuts.json"
+        className="player"
+        loop
+        autoplay
+        style={{ height: '500px', width: '500px' }}
+      />
+    )
   }
 
   return (

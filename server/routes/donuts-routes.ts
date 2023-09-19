@@ -59,7 +59,8 @@ router.get("/me", checkJwt, async (req: JwtRequest, res) => {
     const userId = req.auth?.sub;
     if (!userId) return errors.unauthorizedError(req, res, "Unauthorized");
 
-    const donuts = await db.getDonuts(userId);
+    const donuts = (await db.getDonuts(userId))?.map(
+        donut => ({...donut, price: donut.gold ? Number(donut.price) + 1000 : donut.price}));
     res.json(donuts);
   } catch (error) {
     res.sendStatus(500);
@@ -79,26 +80,26 @@ router.get("/:id", async (req, res) => {
         res,
         `Donut with id ${donutId} does not exist`,
       );
-    else res.json(donut);
+    else res.json({...donut, price: donut.gold ? Number(donut.price) + 1000 : donut.price});
   } catch (error) {
     res.sendStatus(500);
     console.error(error);
   }
 });
 
-//todo implement real middleware for auth
 router.post("/", checkJwt, async (req: JwtRequest, res) => {
   try {
     const userId = req.auth?.sub;
-    const { base, glaze } = req.body;
+    const { base, glaze, gold } = req.body;
 
     if (!userId) return errors.unauthorizedError(req, res, "Unauthorized");
-    if (!base || !glaze)
+    // double equal to also check for null
+    if (!base || !glaze || gold == undefined)
       return errors.clientError(req, res, "Missing donut properties");
 
-    const donut = await db.insertDonut({ auth0_id: userId, base, glaze });
+    const donut = (await db.insertDonut({ auth0_id: userId, base, glaze, gold }))[0];
 
-    res.json(donut[0]);
+    res.json(donut);
   } catch (error) {
     // handles sqlite constraint err
     if (error.errno === 19) return errors.clientError(req, res, 'Invalid request')

@@ -9,12 +9,13 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Donut from "./pages/Donut.jsx";
+import DonutList from "./pages/DonutList.jsx";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 export const routes = createRoutesFromElements(
   <Route path={"/"} element={<App />}>
     <Route index element={<Donut />} />
-    <Route path={"/me"} element={<h1>Nothing here yet!</h1>} />
+    <Route path={"/me"} element={<DonutList />} />
   </Route>,
 );
 

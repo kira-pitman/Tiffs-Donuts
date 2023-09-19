@@ -4,6 +4,7 @@ import app from "../server";
 import * as db from "../db/donuts-db";
 import "./test-setup";
 import { bases, glazes } from "../db/seedData.js";
+import {Params} from "express-unless";
 
 vi.mock("express-jwt", () => ({
   expressjwt: (_options: Params) => (req, res, next) => {
@@ -72,6 +73,7 @@ describe("GET /me", () => {
         baseId: 3,
         glazeName: "Chocolate",
         price: 8,
+        gold: 0,
         glazeColor: "#7a4e3c",
         baseName: "Milky",
         baseColor: "#fffdf8",
@@ -82,7 +84,8 @@ describe("GET /me", () => {
         glazeId: 1,
         baseId: 1,
         glazeName: "Chocolate",
-        price: 8,
+        price: 1008,
+        gold: 1,
         glazeColor: "#7a4e3c",
         baseName: "Original",
         baseColor: "#e5e0cb",
@@ -94,6 +97,7 @@ describe("GET /me", () => {
         baseId: 1,
         glazeName: "Green Tea",
         price: 7,
+        gold: 0,
         glazeColor: "#74a12e",
         baseName: "Original",
         baseColor: "#e5e0cb",
@@ -115,6 +119,7 @@ describe("GET /:id", () => {
       glazeId: 2,
       baseId: 1,
       glazeName: "Strawberry",
+      gold: 0,
       price: 9,
       glazeColor: "#f57f8e",
       baseName: "Original",
@@ -190,7 +195,7 @@ describe("DELETE /:id", () => {
 });
 
 describe("POST /", () => {
-  const donut = { base: 1, glaze: 2 };
+  const donut = { base: 1, glaze: 2, gold: false };
 
   it("Should add a donut", async () => {
     const res = await request(app)
@@ -202,6 +207,7 @@ describe("POST /", () => {
       id: 6,
       base: 1,
       glaze: 2,
+      gold: 0,
       auth0_id: "hello123",
     });
   });

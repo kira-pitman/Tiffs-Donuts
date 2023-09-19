@@ -1,6 +1,5 @@
-import { afterAll, beforeAll, beforeEach, vi } from "vitest";
+import {afterAll, beforeAll, beforeEach} from "vitest";
 import db from "../db/connection";
-import {expressjwt as jwt} from "express-jwt";
 
 beforeAll(() => {
   return db.migrate.latest();
@@ -14,4 +13,3 @@ beforeEach(() => {
 afterAll(() => {
   db.destroy();
 });
-

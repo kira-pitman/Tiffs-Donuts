@@ -7,12 +7,12 @@ import {Navigate} from "react-router-dom";
 export default function DonutList() {
   const { getAccessTokenSilently, isAuthenticated, isLoading: isLoadingAuth } = useAuth0();
 
-  if (!isAuthenticated && !isLoadingAuth) return <Navigate to={'/'}/>
-
   const { data, isLoading, isError } = useQuery(["donutList"], async () => {
     const token = await getAccessTokenSilently();
     return fetchDonuts({ token });
   });
+
+  if (!isAuthenticated && !isLoadingAuth) return <Navigate to={'/'}/>
 
   if (isError) {
     return <p>Something went wrong!</p>;

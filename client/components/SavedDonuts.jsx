@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber'
-import DonutModelForList from './DonutModelForList'
+
 import DonutModel from './DonutModel'
 
 import { useRef, useState } from 'react'
@@ -9,16 +9,15 @@ import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 
 function Donuts(props) {
-  const { glazeColorId, baseColorId } = props
+  const { glazeColorCode, baseColorCode } = props
 
   const { materials } = useGLTF('./donut_cat/scene.gltf')
-  // const [baseMaterial, setBaseMaterial] = useState(materials['Material.003'].clone())
-  // const [baseMaterial, setGlazeMaterial] = useState(materials['Material.004'].clone())
+
   const baseMaterial = materials['Material.003'].clone()
-  baseMaterial.color = new THREE.Color(baseColorId)
+  baseMaterial.color = new THREE.Color(baseColorCode)
 
   const glazeMaterial = materials['Material.003'].clone()
-  glazeMaterial.color = new THREE.Color(glazeColorId)
+  glazeMaterial.color = new THREE.Color(glazeColorCode)
 
   const ref = useRef()
   useFrame((_, delta) => {
@@ -32,7 +31,7 @@ function Donuts(props) {
       <spotLight intensity={0.5} />
 
       <DonutModel
-        scale={[1.2, 1.2, 1.2]}
+        scale={[1.3, 1.3, 1.3]}
         glazeColor={glazeMaterial}
         baseColor={baseMaterial}
         texture={''}

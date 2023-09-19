@@ -7,7 +7,7 @@ export default {
         yummy: ["yummy"],
       },
       maxHeight: {
-        '650': '650px',
+        650: "650px",
       },
     },
   },

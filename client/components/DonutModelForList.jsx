@@ -7,17 +7,14 @@ Source: https://sketchfab.com/3d-models/donut-cat-3800caad4695418f9f60bfca87a853
 Title: Donut Cat!
 */
 
-import { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import React, { useRef } from 'react'
+import { useGLTF, useAnimations } from '@react-three/drei'
 
-export default function DonutModel(props) {
-  const { glazeColor, baseColor, texture } = props
+export default function Model(props) {
+  const { glazeColor } = props
   const group = useRef()
   const { nodes, materials } = useGLTF('/donut_cat/scene.gltf')
-  console.log(texture)
-
-  // const texture = useTexture(url)
-
+  // const { actions } = useAnimations(animations, group)
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
@@ -31,20 +28,18 @@ export default function DonutModel(props) {
               <group
                 name="donut_2"
                 position={[0, 0.024, 0]}
-                rotation={[0, 0, 0]}
+                rotation={[0, -1.522, 0]}
               >
                 <group name="polewka_0">
                   <mesh
                     name="Object_6"
                     geometry={nodes.Object_6.geometry}
                     material={glazeColor}
-                    material-map={texture}
                   />
                   <mesh
                     name="Object_7"
                     geometry={nodes.Object_7.geometry}
                     material={glazeColor}
-                    material-map={texture}
                   />
                 </group>
                 <group
@@ -67,8 +62,7 @@ export default function DonutModel(props) {
                 <mesh
                   name="Object_4"
                   geometry={nodes.Object_4.geometry}
-                  material={baseColor}
-                  material-map={texture}
+                  material={materials['Material.003']}
                 />
               </group>
             </group>

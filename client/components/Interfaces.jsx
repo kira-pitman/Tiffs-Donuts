@@ -28,7 +28,6 @@ function Interfaces(props) {
   const detailRef = useRef(null)
   const { updateGlaze, updateBase, updateTexture } = props
   const [searchParams, setSearchParams] = useSearchParams()
-  å
   const [selectedBase, setSelectedBase] = useState(defaultBase)
   const [selectedGlaze, setSelectedGlaze] = useState(defaultGlaze)
   const [withGold, setWithGold] = useState(false)

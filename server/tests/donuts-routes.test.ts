@@ -45,11 +45,12 @@ describe("GET /bases", () => {
   });
 });
 
-// some initial protected route tests :-) you can work off these #Nathalia
 describe("GET /me", () => {
   it("Should return a 401 if no token is present", async () => {
     await request(app).get("/api/v1/donuts/me").expect(401);
   });
+
+  it('Should return a 500 if an error occurs')
 
   it("Should return user values if token is present", async () => {
     const res = await request(app)
@@ -94,3 +95,27 @@ describe("GET /me", () => {
     ]);
   });
 });
+
+describe('GET /:id', () => {
+  it('Should return a donut')
+  it('Should return a 400 if the ID is invalid')
+  it('Should return a 404 if the donut does not exist')
+  it('Should return a 500 if an error occurs')
+})
+
+describe('DELETE /:id', () => {
+  it('Should delete a donut')
+  it('Should return a 400 if the ID is invalid')
+  it('Should return a 404 if the donut does not exist')
+  it('Should return a 401 if the user is unauthorized')
+  it('Should return a 401 if the user id does not match')
+  it('Should return a 500 if an error occurs')
+})
+
+describe('POST /', () => {
+  it('Should add a donut')
+  it('Should return a 401 if the user is unauthorized')
+  it('Should return a 400 if not all details are added')
+  it('Should return a 500 if an error occurs')
+})
+

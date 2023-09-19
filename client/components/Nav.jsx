@@ -5,6 +5,8 @@ import { saveDonut } from "../api/apiClient";
 
 export default function Nav() {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+
+
   const { getAccessTokenSilently } = useAuth0();
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,6 +24,7 @@ export default function Nav() {
       glaze: searchParams.get("glaze"),
       base: searchParams.get("base"),
     };
+    
     const token = await getAccessTokenSilently();
     saveDonut(token, donut);
   }

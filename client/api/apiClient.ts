@@ -35,6 +35,7 @@ export async function saveDonut(token: string, donut: SavedDonut) {
     .send(donut)
   return savedDonut.body
 }
+
 export async function fetchDonuts({
   token,
 }: {
@@ -45,4 +46,9 @@ export async function fetchDonuts({
     .set('Authorization', `Bearer ${token}`)
 
   return dbDonuts.body
+}
+
+export async function delDonut (id: number, token:string) {
+await request.delete(`${rootUrl}/${id}`).set('Authorization', `Bearer ${token}`)
+
 }

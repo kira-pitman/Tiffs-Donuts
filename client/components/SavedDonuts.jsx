@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber'
-
+import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import DonutModel from './DonutModel'
-
+import { useLoader } from '@react-three/fiber'
 import { useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
@@ -9,15 +9,16 @@ import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 
 function Donuts(props) {
-  const { glazeColorCode, baseColorCode } = props
+  const { glazeColorCode, baseColorCode, gold } = props
 
   const { materials } = useGLTF('./donut_cat/scene.gltf')
+  const goldCoat = useLoader(TextureLoader, 'gold.jpg')
 
   const baseMaterial = materials['Material.003'].clone()
-  baseMaterial.color = new THREE.Color(baseColorCode)
+  baseMaterial.color = new THREE.Color(gold == 0 ? baseColorCode : '#FFFFFF')
 
   const glazeMaterial = materials['Material.003'].clone()
-  glazeMaterial.color = new THREE.Color(glazeColorCode)
+  glazeMaterial.color = new THREE.Color(gold == 0 ? glazeColorCode : '#FFFFFF')
 
   const ref = useRef()
   useFrame((_, delta) => {
@@ -34,7 +35,7 @@ function Donuts(props) {
         scale={[1.5, 1.5, 1.5]}
         glazeColor={glazeMaterial}
         baseColor={baseMaterial}
-        texture={''}
+        texture={gold == 1 ? goldCoat : null}
       />
     </mesh>
   )

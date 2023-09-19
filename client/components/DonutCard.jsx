@@ -48,6 +48,7 @@ function DonutCard({ donut }) {
           <SavedDonuts
             glazeColorCode={donut.glazeColor}
             baseColorCode={donut.baseColor}
+            gold={donut.gold}
           />
         </Canvas>
       </div>

@@ -9,7 +9,7 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import Donut from './pages/Donut.jsx'
-import DonutList from './components/DonutList.jsx'
+import DonutList from './pages/DonutList.jsx'
 import { Auth0Provider } from '@auth0/auth0-react'
 
 export const routes = createRoutesFromElements(

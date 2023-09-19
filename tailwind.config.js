@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         yummy: ["yummy"],
       },
+      maxHeight: {
+        '650': '650px',
+      },
     },
   },
   plugins: [],

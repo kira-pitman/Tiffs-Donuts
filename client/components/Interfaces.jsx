@@ -1,6 +1,5 @@
 import DonutForm from './DonutForm'
 import DonutDetails from './DonutDetails'
-
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { useLoader } from '@react-three/fiber'
 import { useRef, useState, useEffect } from 'react'
@@ -29,7 +28,6 @@ function Interfaces(props) {
 
   const [selectedBase, setSelectedBase] = useState(defaultBase)
   const [selectedGlaze, setSelectedGlaze] = useState(defaultGlaze)
-
   const [withGold, setWithGold] = useState(false)
 
   const newTexture = useLoader(TextureLoader, 'gold.jpg')
@@ -55,7 +53,6 @@ function Interfaces(props) {
     updateBase(selectedBase.color)
     updateGlaze(selectedGlaze.color)
     updateTexture('')
-
     setWithGold(false)
   }
 

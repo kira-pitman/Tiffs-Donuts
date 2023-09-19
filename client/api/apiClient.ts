@@ -27,13 +27,16 @@ export async function fetchGlaze(id: number): Promise<Glaze> {
 
   return dbBases.body
 }
-
-export async function saveDonut(token: string, donut: SavedDonut) {
+// token: string, donut: SavedDonut
+export async function saveDonut(donutData: SavedDonut) {
   const savedDonut = await request
     .post(rootUrl)
-    .set('Authorization', `Bearer ${token}`)
-    .send(donut)
-  console.log(savedDonut.body)
+    .set('Authorization', `Bearer ${donutData.token}`)
+    .send({
+      base: donutData.base,
+      glaze: donutData.glaze,
+      gold: donutData.gold,
+    })
   return savedDonut.body
 }
 

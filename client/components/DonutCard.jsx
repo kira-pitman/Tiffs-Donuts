@@ -63,6 +63,7 @@ function DonutCard({ donut }) {
           </h4>
         ) : null}
         <p className="mb-3 font-normal text-gray-700">Price: ${donut.price}</p>
+
         <button
           onClick={(event) => handleDelete(event, donut.id)}
           className="mt-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full"

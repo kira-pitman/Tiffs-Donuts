@@ -1,13 +1,12 @@
-import { useAuth0 } from '@auth0/auth0-react'
-import { useQuery } from '@tanstack/react-query'
-import DonutCard from '../components/DonutCard'
-import Nav from '../components/Nav'
-import { fetchDonuts } from '../api/apiClient'
+import { useAuth0 } from "@auth0/auth0-react";
+import { useQuery } from "@tanstack/react-query";
+import DonutCard from "../components/DonutCard";
+import { fetchDonuts } from "../api/apiClient";
+import {Navigate} from "react-router-dom";
 import { Player } from '@lottiefiles/react-lottie-player'
-
+import Nav from '../components/Nav'
 export default function DonutList() {
-  const { getAccessTokenSilently } = useAuth0()
-
+  const { getAccessTokenSilently, isAuthenticated, isLoading: isLoadingAuth } = useAuth0();
   const {
     data: donuts,
     isLoading,
@@ -16,6 +15,8 @@ export default function DonutList() {
     const token = await getAccessTokenSilently()
     return fetchDonuts({ token })
   })
+
+  if (!isAuthenticated && !isLoadingAuth) return <Navigate to={'/'}/>
 
   if (isError) {
     return <p>Something went wrong!</p>

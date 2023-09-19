@@ -129,7 +129,7 @@ function Interfaces(props) {
           </div>
           <div>
             <button
-              className="mt-5 p-3 bg-sky-400 hover:bg-sky-300 rounded-full"
+              className="mt-5 p-3 bg-sky-400 hover:bg-sky-300 rounded-full "
               onClick={(e) => handleScroll(e, detailRef)}
             >
               See Donut Details

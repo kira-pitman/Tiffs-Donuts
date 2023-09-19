@@ -1,5 +1,5 @@
 import request from "superagent";
-import { Base, Glaze, SavedDonut, DonutDetails } from "../../models/donuts";
+import { Base, Glaze, DonutDetails, SavedDonut } from "../../models/donuts";
 const rootUrl = "/api/v1/donuts";
 
 // GET /api/v1/donuts/flavors
@@ -27,12 +27,12 @@ export async function fetchGlaze(id: number): Promise<Glaze> {
 
   return dbBases.body;
 }
-
-export async function saveDonut(token: string, donut: SavedDonut) {
+// token: string, donut: SavedDonut
+export async function saveDonut(donutData: SavedDonut) {
   const savedDonut = await request
     .post(rootUrl)
-    .set("Authorization", `Bearer ${token}`)
-    .send(donut);
+    .set("Authorization", `Bearer ${donutData.token}`)
+    .send({ base: donutData.base, glaze: donutData.glaze });
   return savedDonut.body;
 }
 
@@ -48,7 +48,9 @@ export async function fetchDonuts({
   return dbDonuts.body;
 }
 
-export async function delDonut (id: number, token:string) {
-  console.log( token)
-  await request.delete(`${rootUrl}/${id}`).set('Authorization', `Bearer ${token}`)
+export async function delDonut(id: number, token: string) {
+  console.log(token);
+  await request
+    .delete(`${rootUrl}/${id}`)
+    .set("Authorization", `Bearer ${token}`);
 }

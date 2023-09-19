@@ -15,25 +15,39 @@ export default function Nav() {
   return (
     <>
       <nav className="mx-auto w-full flex justify-between items-center">
-      
         <div className="flex items-center">
           <Link to="/">
-          <img className="w-16 m-4 animate-spin" src="/images/brand.png" alt="nav-brand-donut" />
+            <img
+              className="w-16 m-4 animate-spin"
+              src="/images/brand.png"
+              alt="nav-brand-donut"
+            />
           </Link>
           <Link to="/">
-          <button className="ml-1 text-2xl hover:underline nav">Home</button>
+            <button className="ml-1 text-2xl hover:underline nav">Home</button>
           </Link>
         </div>
-  
-       
+
         {!isAuthenticated ? (
-          <button className="mt-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full text-white mr-8 text-2xl nav"  onClick={handleLogin}>Login</button>
+          <button
+            className="mt-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full text-white mr-8 text-2xl nav"
+            onClick={handleLogin}
+          >
+            Login
+          </button>
         ) : (
           <div className="flex items-center">
             <Link to="/me">
-              <button className="mr-5 text-2xl hover:underline nav">View your donuts</button>
+              <button className="mr-5 text-2xl hover:underline nav">
+                View your donuts
+              </button>
             </Link>
-            <button className=" p-3 bg-red-500 hover:bg-red-400 rounded-full text-white mr-8 text-2xl nav" onClick={handleLogout}>Logout</button>
+            <button
+              className=" p-3 bg-red-500 hover:bg-red-400 rounded-full text-white mr-8 text-2xl nav"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </div>
         )}
       </nav>

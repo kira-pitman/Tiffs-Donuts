@@ -1,8 +1,7 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Outlet } from "react-router-dom";
-import Nav from "./components/Nav";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Outlet } from 'react-router-dom'
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
 function App() {
   return (
@@ -11,7 +10,7 @@ function App() {
         <Outlet />
       </QueryClientProvider>
     </main>
-  );
+  )
 }
 
-export default App;
+export default App

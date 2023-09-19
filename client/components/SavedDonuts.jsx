@@ -31,7 +31,7 @@ function Donuts(props) {
       <spotLight intensity={0.5} />
 
       <DonutModel
-        scale={[1.3, 1.3, 1.3]}
+        scale={[1.5, 1.5, 1.5]}
         glazeColor={glazeMaterial}
         baseColor={baseMaterial}
         texture={''}

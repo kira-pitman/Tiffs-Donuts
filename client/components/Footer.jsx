@@ -13,13 +13,6 @@ export default function Footer() {
           Flaticon
         </a>
       </p>
-      <p className="mx-auto w-full flex justify-center">
-        Nav icon is created by Triberion from{' '}
-        <a href="https://www.flaticon.com/free-icons/donut" title="donut icons">
-          {' '}
-          Flaticon
-        </a>
-      </p>
     </footer>
   )
 }

@@ -18,6 +18,7 @@ export default function SaveButton(props) {
     const donut = {
       glaze: props.selectedGlaze.id,
       base: props.selectedBase.id,
+      gold: props.withGold,
       token: await getAccessTokenSilently(),
     }
     saveDonutMutation.mutate(donut)

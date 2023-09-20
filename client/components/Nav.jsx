@@ -14,7 +14,7 @@ export default function Nav() {
 
   return (
     <>
-      <nav className="fixed top-0 mx-auto w-full flex justify-between items-center bg-white z-10">
+      <nav className="fixed top-0 mx-auto w-full h-15 flex justify-between items-center bg-[#f5f5f5] z-10">
         <div className="flex items-center">
           <Link to="/">
             <img

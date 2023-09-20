@@ -4,7 +4,7 @@ import app from "../server";
 import * as db from "../db/donuts-db";
 import "./test-setup";
 import { bases, glazes } from "../db/seedData.js";
-import {Params} from "express-unless";
+import { Params } from "express-unless";
 
 vi.mock("express-jwt", () => ({
   expressjwt: (_options: Params) => (req, res, next) => {

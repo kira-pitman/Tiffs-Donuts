@@ -109,7 +109,7 @@ function Interfaces(props) {
       <div ref={heroRef}>
         <Nav />
       </div>
-      <div className={'flex flex-col items-center w-screen mt-32'}>
+      <div className={"flex flex-col items-center w-screen mt-32"}>
         <div className="flex items-center">
           <h1 className="text-8xl leading-snug font-yummy py-5">
             Tiff&apos;s Donuts

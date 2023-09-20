@@ -24,8 +24,8 @@ export default function SaveButton(props) {
     saveDonutMutation.mutate(donut);
     setIsSuccessVisible(true);
     setTimeout(() => {
-      setIsSuccessVisible(false)
-    }, 2000)
+      setIsSuccessVisible(false);
+    }, 2000);
   }
 
   if (saveDonutMutation.isError) {

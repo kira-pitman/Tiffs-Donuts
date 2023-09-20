@@ -1,60 +1,59 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchGlazes, fetchBases } from "../api/apiClient";
-import { setURLParams } from "../lib/utils.ts";
-import { useSearchParams } from "react-router-dom";
+import { useQuery } from '@tanstack/react-query'
+import { fetchGlazes, fetchBases } from '../api/apiClient'
+import { useSearchParams } from 'react-router-dom'
 
 function DonutForm(props) {
-  const { selectedGlaze, selectedBase, changeBase, changeGlaze } = props;
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { selectedGlaze, selectedBase, changeBase, changeGlaze } = props
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const {
     data: glazes,
     isLoading: isLoadingA,
     isError: isErrorA,
-  } = useQuery(["glazes"], fetchGlazes);
+  } = useQuery(['glazes'], fetchGlazes)
 
   const {
     data: bases,
     isLoading: isLoadingB,
     isError: isErrorB,
-  } = useQuery(["bases"], fetchBases);
+  } = useQuery(['bases'], fetchBases)
 
   if (isErrorA) {
-    return <p>Something went wrong</p>;
+    return <p>Something went wrong</p>
   }
 
   if (isErrorB) {
-    return <p>Something went wrong</p>;
+    return <p>Something went wrong</p>
   }
 
   if (!glazes || isLoadingA) {
-    return <>loading...</>;
+    return <>loading...</>
   }
 
   if (!bases || isLoadingB) {
-    return <>loading...</>;
+    return <>loading...</>
   }
 
   const handleGlazeChange = (evt) => {
     const choosenGlaze = glazes.filter(
-      (glaze) => glaze.id == evt.target.value,
-    )[0];
-    console.log(choosenGlaze);
+      (glaze) => glaze.id == evt.target.value
+    )[0]
+    console.log(choosenGlaze)
 
     // This can be set to use the provided hook by RR if we implement it
-    searchParams.set("glaze", String(choosenGlaze.id));
-    setSearchParams(searchParams);
-    changeGlaze(choosenGlaze);
-  };
+    searchParams.set('glaze', String(choosenGlaze.id))
+    setSearchParams(searchParams)
+    changeGlaze(choosenGlaze)
+  }
 
   const handleBaseChange = (evt) => {
-    const choosenBase = bases.filter((base) => base.id == evt.target.value)[0];
+    const choosenBase = bases.filter((base) => base.id == evt.target.value)[0]
 
     // This can be set to use the provided hook by RR if we implement it
-    searchParams.set("base", String(choosenBase.id));
-    setSearchParams(searchParams);
-    changeBase(choosenBase);
-  };
+    searchParams.set('base', String(choosenBase.id))
+    setSearchParams(searchParams)
+    changeBase(choosenBase)
+  }
 
   return (
     <>
@@ -74,7 +73,7 @@ function DonutForm(props) {
             </label>
             <select
               id="glaze"
-              className="w-64 h-10 p-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
+              className="w-64 h-12 p-2 text-lg text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
               onChange={handleGlazeChange}
               value={selectedGlaze.id}
               name="glaze"
@@ -84,7 +83,7 @@ function DonutForm(props) {
                   <option key={index} value={glaze.id}>
                     {glaze.name}
                   </option>
-                );
+                )
               })}
             </select>
           </div>
@@ -95,7 +94,7 @@ function DonutForm(props) {
             </label>
             <select
               id="base"
-              className="w-64 h-10 p-2 text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
+              className="w-64 h-12 p-2 text-lg text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none appearance-none"
               onChange={handleBaseChange}
               value={selectedBase.id}
               name="base"
@@ -105,14 +104,14 @@ function DonutForm(props) {
                   <option key={index} value={base.id}>
                     {base.name}
                   </option>
-                );
+                )
               })}
             </select>
           </div>
         </div>
       </form>
     </>
-  );
+  )
 }
 
-export default DonutForm;
+export default DonutForm

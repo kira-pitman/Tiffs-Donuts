@@ -17,7 +17,7 @@ function App() {
   )
 
   const [donutMarginLeft, setDonutMarginLeft] = useState('0px')
-  const [donutMarginTop, setDonutMarginTop] = useState('200px')
+  const [donutMarginTop, setDonutMarginTop] = useState('160px')
   const [baseColor, setBaseColor] = useState(materials['Material.003'].clone())
   const donutDivWidth = 800
   const [texture, setTexture] = useState('')
@@ -40,7 +40,7 @@ function App() {
         const maxMargin = pageWidth - donutDivWidth
 
         setDonutMarginLeft(`${maxMargin * presentage * 0.7}px`)
-        setDonutMarginTop(`${80 * (1 + presentage)}px`)
+        setDonutMarginTop(`${160 + 30 * presentage}px`)
       })
     }
     window.addEventListener('scroll', scrollHandler)

@@ -36,9 +36,9 @@ export default function DonutList() {
   return (
     <>
       <Nav />
-      <div className="relative mt-48">
+      <div className="relative">
         <div className="flex flex-col items-center justify-center">
-          <h2 className="text-5xl font-extrabold leading-snug mb-10">
+          <h2 className="text-5xl font-extrabold leading-snug mt-32 mb-5">
             Your donuts
           </h2>
           <div className="max-h-650 overflow-y-auto custom-scrollbar">

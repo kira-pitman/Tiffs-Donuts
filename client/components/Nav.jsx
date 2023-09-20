@@ -30,7 +30,7 @@ export default function Nav() {
 
         {!isAuthenticated ? (
           <button
-            className="mt-3 px-3 py-2 bg-red-500  hover:bg-red-400 rounded-full text-white mr-8 text-2xl nav"
+            className="mt-3 px-3 py-2 bg-[#CC3968]  hover:bg-red-400 rounded-full text-white mr-8 text-2xl nav"
             onClick={handleLogin}
           >
             Login

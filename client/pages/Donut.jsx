@@ -16,11 +16,11 @@ function App() {
     materials["Material.004"].clone(),
   );
 
-  const [donutMarginLeft, setDonutMarginLeft] = useState('0px')
-  const [donutMarginTop, setDonutMarginTop] = useState('160px')
-  const [baseColor, setBaseColor] = useState(materials['Material.003'].clone())
-  const donutDivWidth = 800
-  const [texture, setTexture] = useState('')
+  const [donutMarginLeft, setDonutMarginLeft] = useState("0px");
+  const [donutMarginTop, setDonutMarginTop] = useState("160px");
+  const [baseColor, setBaseColor] = useState(materials["Material.003"].clone());
+  const donutDivWidth = 800;
+  const [texture, setTexture] = useState("");
 
   const canvasRef = useRef();
 
@@ -39,13 +39,13 @@ function App() {
         const presentage = yOffset / pageHeight;
         const maxMargin = pageWidth - donutDivWidth;
 
-        setDonutMarginLeft(`${maxMargin * presentage * 0.7}px`)
-        setDonutMarginTop(`${160 + 30 * presentage}px`)
-      })
-    }
-    window.addEventListener('scroll', scrollHandler)
-    return () => window.removeEventListener('scroll', scrollHandler)
-  }, [donutMarginLeft, donutMarginTop])
+        setDonutMarginLeft(`${maxMargin * presentage * 0.7}px`);
+        setDonutMarginTop(`${160 + 30 * presentage}px`);
+      });
+    };
+    window.addEventListener("scroll", scrollHandler);
+    return () => window.removeEventListener("scroll", scrollHandler);
+  }, [donutMarginLeft, donutMarginTop]);
 
   function updateGlaze(hex) {
     const newMaterials = glazeColor.clone();

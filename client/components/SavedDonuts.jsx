@@ -1,10 +1,8 @@
-import { Canvas } from "@react-three/fiber";
-import { TextureLoader } from "three/src/loaders/TextureLoader";
+import {useFrame, useLoader} from "@react-three/fiber";
+import {TextureLoader} from "three/src/loaders/TextureLoader";
 import DonutModel from "./DonutModel";
-import { useLoader } from "@react-three/fiber";
-import { useRef, useState } from "react";
-import { useFrame } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
+import {useRef} from "react";
+import {useGLTF} from "@react-three/drei";
 
 import * as THREE from "three";
 

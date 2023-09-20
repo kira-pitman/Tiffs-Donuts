@@ -1,59 +1,59 @@
-import { useQuery } from '@tanstack/react-query'
-import { fetchGlazes, fetchBases } from '../api/apiClient'
-import { useSearchParams } from 'react-router-dom'
+import { useQuery } from "@tanstack/react-query";
+import { fetchGlazes, fetchBases } from "../api/apiClient";
+import { useSearchParams } from "react-router-dom";
 
 function DonutForm(props) {
-  const { selectedGlaze, selectedBase, changeBase, changeGlaze } = props
-  const [searchParams, setSearchParams] = useSearchParams()
+  const { selectedGlaze, selectedBase, changeBase, changeGlaze } = props;
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const {
     data: glazes,
-    isLoading: isLoadingA,
-    isError: isErrorA,
-  } = useQuery(['glazes'], fetchGlazes)
+    isLoading: isLoadingGlazes,
+    isError: isErrorGlazes,
+  } = useQuery(["glazes"], fetchGlazes);
 
   const {
     data: bases,
-    isLoading: isLoadingB,
-    isError: isErrorB,
-  } = useQuery(['bases'], fetchBases)
+    isLoading: isLoadingBases,
+    isError: isErrorBases,
+  } = useQuery(["bases"], fetchBases);
 
-  if (isErrorA) {
-    return <p>Something went wrong</p>
+  if (isErrorGlazes) {
+    return <p>Something went wrong</p>;
   }
 
-  if (isErrorB) {
-    return <p>Something went wrong</p>
+  if (isErrorBases) {
+    return <p>Something went wrong</p>;
   }
 
-  if (!glazes || isLoadingA) {
-    return <>loading...</>
+  if (!glazes || isLoadingGlazes) {
+    return <>loading...</>;
   }
 
-  if (!bases || isLoadingB) {
-    return <>loading...</>
+  if (!bases || isLoadingBases) {
+    return <>loading...</>;
   }
 
   const handleGlazeChange = (evt) => {
     const choosenGlaze = glazes.filter(
-      (glaze) => glaze.id == evt.target.value
-    )[0]
-    console.log(choosenGlaze)
+      (glaze) => glaze.id == evt.target.value,
+    )[0];
+    console.log(choosenGlaze);
 
     // This can be set to use the provided hook by RR if we implement it
-    searchParams.set('glaze', String(choosenGlaze.id))
-    setSearchParams(searchParams)
-    changeGlaze(choosenGlaze)
-  }
+    searchParams.set("glaze", String(choosenGlaze.id));
+    setSearchParams(searchParams);
+    changeGlaze(choosenGlaze);
+  };
 
   const handleBaseChange = (evt) => {
-    const choosenBase = bases.filter((base) => base.id == evt.target.value)[0]
+    const choosenBase = bases.filter((base) => base.id == evt.target.value)[0];
 
     // This can be set to use the provided hook by RR if we implement it
-    searchParams.set('base', String(choosenBase.id))
-    setSearchParams(searchParams)
-    changeBase(choosenBase)
-  }
+    searchParams.set("base", String(choosenBase.id));
+    setSearchParams(searchParams);
+    changeBase(choosenBase);
+  };
 
   return (
     <>
@@ -83,7 +83,7 @@ function DonutForm(props) {
                   <option key={index} value={glaze.id}>
                     {glaze.name}
                   </option>
-                )
+                );
               })}
             </select>
           </div>
@@ -104,14 +104,14 @@ function DonutForm(props) {
                   <option key={index} value={base.id}>
                     {base.name}
                   </option>
-                )
+                );
               })}
             </select>
           </div>
         </div>
       </form>
     </>
-  )
+  );
 }
 
-export default DonutForm
+export default DonutForm;

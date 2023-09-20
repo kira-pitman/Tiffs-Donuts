@@ -230,8 +230,7 @@ describe("POST /", () => {
   });
 
   it("Should return a 400 if glaze/base values are invalid", async () => {
-    const res = await request(app)
-      .post("/api/v1/donuts/")
+    await request(app).post("/api/v1/donuts/")
       .set("Authorization", `Bearer 123`)
       .send({ glaze: 20, base: 42 })
       .expect(400);

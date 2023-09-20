@@ -14,17 +14,17 @@ function DonutDetails(props) {
         </div>
       </div>
       <div className="col-span-1">
-        <p className="mt-5 text-3xl">
+        <h3 className="mt-5 text-3xl">
           {selectedBase.name} base with {selectedGlaze.name} topping{" "}
           <span className="font-bold text-[#8f8f32]">
             {withGold ? goldCoat.name : ""}
           </span>
-        </p>
+        </h3>
       </div>
       <div className="col-span-1">
-        <p className="mt-3 text-2xl">
+        <h3 className="mt-3 text-2xl">
           Price: ${selectedGlaze.price} {withGold ? `+ $${goldCoat.price}` : ""}
-        </p>
+        </h3>
       </div>
     </div>
   );

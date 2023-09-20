@@ -28,7 +28,7 @@ function Interfaces(props) {
   const heroRef = useRef(null);
   const detailRef = useRef(null);
   const { updateGlaze, updateBase, updateTexture } = props;
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [selectedBase, setSelectedBase] = useState(defaultBase);
   const [selectedGlaze, setSelectedGlaze] = useState(defaultGlaze);
   const [withGold, setWithGold] = useState(false);
@@ -109,7 +109,7 @@ function Interfaces(props) {
       <div ref={heroRef}>
         <Nav />
       </div>
-      <div className={'flex flex-col items-center w-screen mt-32'}>
+      <div className={"flex flex-col items-center w-screen mt-32"}>
         <div className="flex items-center">
           <h1 className="text-8xl leading-snug font-yummy py-5">
             Tiff&apos;s Donuts
@@ -149,7 +149,7 @@ function Interfaces(props) {
           </div>
           <div>
             <button
-              className="mt-5 p-3 text-xl px-4 text-white bg-[#fc8484] hover:bg-sky-300 rounded-full "
+              className="mt-5 p-3 text-xl px-4 text-white bg-[#CC3968] hover:bg-sky-300 rounded-full "
               onClick={(e) => handleScroll(e, detailRef)}
             >
               See Donut Details
@@ -169,7 +169,7 @@ function Interfaces(props) {
           />
           <div className="mt-3">
             <button
-              className="mt-3 mr-3 p-3 text-xl  text-white bg-[#fc8484] hover:bg-sky-300 rounded-full"
+              className="mt-3 mr-3 p-3 text-xl  text-white bg-[#CC3968] hover:bg-sky-300 rounded-full"
               onClick={(e) => handleScroll(e, heroRef)}
             >
               Back to donut

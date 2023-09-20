@@ -8,29 +8,29 @@ function DonutForm(props) {
 
   const {
     data: glazes,
-    isLoading: isLoadingA,
-    isError: isErrorA,
+    isLoading: isLoadingGlazes,
+    isError: isErrorGlazes,
   } = useQuery(["glazes"], fetchGlazes);
 
   const {
     data: bases,
-    isLoading: isLoadingB,
-    isError: isErrorB,
+    isLoading: isLoadingBases,
+    isError: isErrorBases,
   } = useQuery(["bases"], fetchBases);
 
-  if (isErrorA) {
+  if (isErrorGlazes) {
     return <p>Something went wrong</p>;
   }
 
-  if (isErrorB) {
+  if (isErrorBases) {
     return <p>Something went wrong</p>;
   }
 
-  if (!glazes || isLoadingA) {
+  if (!glazes || isLoadingGlazes) {
     return <>loading...</>;
   }
 
-  if (!bases || isLoadingB) {
+  if (!bases || isLoadingBases) {
     return <>loading...</>;
   }
 

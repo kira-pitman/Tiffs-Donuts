@@ -24,7 +24,7 @@ const defaultGlaze = {
 }
 
 function Interfaces(props) {
-  const { isAuthenticated } = useAuth0()
+  const { isAuthenticated, loginWithRedirect } = useAuth0()
   const heroRef = useRef(null)
   const detailRef = useRef(null)
   const { updateGlaze, updateBase, updateTexture } = props
@@ -101,6 +101,10 @@ function Interfaces(props) {
     })
   }
 
+  function handleLogin() {
+    loginWithRedirect({ redirectUri: `${window.location.origin}` })
+  }
+
   return (
     <>
       <div ref={heroRef}>
@@ -171,12 +175,23 @@ function Interfaces(props) {
             >
               Back to donut
             </button>
-            {isAuthenticated && (
+            {isAuthenticated ? (
               <SaveButton
                 selectedBase={selectedBase}
                 selectedGlaze={selectedGlaze}
                 withGold={withGold}
               />
+            ) : (
+              <div className="mt-20">
+                Love your donut?{' '}
+                <button
+                  onClick={handleLogin}
+                  className="text-red-500 hover:text-red-400"
+                >
+                  login
+                </button>{' '}
+                and save it for later!
+              </div>
             )}
           </div>
         </section>

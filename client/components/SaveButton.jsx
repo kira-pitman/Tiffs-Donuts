@@ -24,8 +24,8 @@ export default function SaveButton(props) {
     saveDonutMutation.mutate(donut);
     setIsSuccessVisible(true);
     setTimeout(() => {
-      setIsSuccessVisible(false);
-    }, 3000);
+      setIsSuccessVisible(false)
+    }, 2000)
   }
 
   if (saveDonutMutation.isError) {
@@ -38,7 +38,7 @@ export default function SaveButton(props) {
 
   if (saveDonutMutation.isLoading) {
     return (
-      <button className="mt-3 ml-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full">
+      <button className="mt-3 ml-3 p-3 text-xl bg-[#eeebe1] rounded-full">
         Saving...
       </button>
     );
@@ -47,12 +47,12 @@ export default function SaveButton(props) {
   return (
     <>
       {isSuccessVisible ? (
-        <button className="mt-3 ml-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full">
+        <button className="mt-8 ml-3 p-3 text-xl bg-[#e5e0cb] hover:bg-[#eeebe1] rounded-full">
           Success!
         </button>
       ) : (
         <button
-          className="mt-3 ml-3 p-3 bg-sky-400 hover:bg-sky-300 rounded-full"
+          className="mt-8 ml-3 p-3 text-xl px-7 bg-[#e5e0cb] hover:bg-[#eeebe1] rounded-full"
           onClick={handleSave}
         >
           Save donut

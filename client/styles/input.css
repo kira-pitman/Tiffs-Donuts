@@ -9,7 +9,7 @@
 
 body {
   margin: 0;
-  font-family: 'system-ui', serif;
+  font-family: 'Itim', cursive;
   color: rgb(26, 26, 26);
   background: linear-gradient(
     106.7deg,
@@ -22,7 +22,6 @@ body {
   z-index: 1;
 }
 .nav {
-  
   font-family: 'Itim', cursive;
 }
 img {

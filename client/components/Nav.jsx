@@ -14,11 +14,11 @@ export default function Nav() {
 
   return (
     <>
-      <nav className="fixed top-0 mx-auto w-full flex justify-between items-center bg-white z-10">
+      <nav className="fixed top-0 mx-auto w-full h-13 flex justify-between items-center bg-[#f5f5f5] z-10">
         <div className="flex items-center">
           <Link to="/">
             <img
-              className="w-16 m-4 animate-spin"
+              className="w-14 m-4 animate-spin"
               src="/images/brand.png"
               alt="nav-brand-donut"
             />
@@ -30,7 +30,7 @@ export default function Nav() {
 
         {!isAuthenticated ? (
           <button
-            className="mt-3 p-3 bg-red-500  hover:bg-red-400 rounded-full text-white mr-8 text-2xl nav"
+            className="mt-3 px-3 py-2 bg-red-500  hover:bg-red-400 rounded-full text-white mr-8 text-2xl nav"
             onClick={handleLogin}
           >
             Login
@@ -43,7 +43,7 @@ export default function Nav() {
               </button>
             </Link>
             <button
-              className=" p-3  bg-sky-400  hover:bg-sky-300 rounded-full text-white mr-8 text-2xl nav"
+              className=" px-3 py-2 bg-[#b6b6b6]  hover:bg-sky-300 rounded-full text-white mr-20 text-2xl nav"
               onClick={handleLogout}
             >
               Logout

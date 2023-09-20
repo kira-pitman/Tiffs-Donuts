@@ -68,7 +68,7 @@ function DonutCard({ donut }) {
           onClick={(event) => handleDelete(event, donut.id)}
           className="mt-3 p-3 bg-[#eeebe1] hover:bg-[#e5e0cb] rounded-full"
         >
-          Delete Donut
+          Eat this Donut
         </button>
       </div>
     </div>

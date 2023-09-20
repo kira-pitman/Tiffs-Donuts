@@ -9,7 +9,7 @@ function DonutDetails(props) {
     <div className="grid grid-flow-row-dense grid-cols-1 gap-3">
       <div className="col-span-1">
         <div className="flex items-center">
-          <h2 className="text-5xl font-extrabold leading-snug">Detail</h2>
+          <h2 className="text-5xl font-extrabold leading-snug">Details</h2>
           <img src="/images/donut3.png" alt="white-cat-donut" />
         </div>
       </div>

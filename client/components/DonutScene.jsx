@@ -9,7 +9,7 @@ export default function DonutScene(props) {
   const ref = useRef();
 
   const scale = 1.1;
- 
+
   useFrame((_, delta) => {
     ref.current.rotation.y += 0.5 * delta;
   });

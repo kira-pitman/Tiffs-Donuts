@@ -59,8 +59,10 @@ router.get("/me", checkJwt, async (req: JwtRequest, res) => {
     const userId = req.auth?.sub;
     if (!userId) return errors.unauthorizedError(req, res, "Unauthorized");
 
-    const donuts = (await db.getDonuts(userId))?.map(
-        donut => ({...donut, price: donut.gold ? Number(donut.price) + 1000 : donut.price}));
+    const donuts = (await db.getDonuts(userId))?.map((donut) => ({
+      ...donut,
+      price: donut.gold ? Number(donut.price) + 1000 : donut.price,
+    }));
     res.json(donuts);
   } catch (error) {
     res.sendStatus(500);
@@ -80,7 +82,11 @@ router.get("/:id", async (req, res) => {
         res,
         `Donut with id ${donutId} does not exist`,
       );
-    else res.json({...donut, price: donut.gold ? Number(donut.price) + 1000 : donut.price});
+    else
+      res.json({
+        ...donut,
+        price: donut.gold ? Number(donut.price) + 1000 : donut.price,
+      });
   } catch (error) {
     res.sendStatus(500);
     console.error(error);
@@ -97,7 +103,9 @@ router.post("/", checkJwt, async (req: JwtRequest, res) => {
     if (!base || !glaze || gold == undefined)
       return errors.clientError(req, res, "Missing donut properties");
 
-    const donut = (await db.insertDonut({ auth0_id: userId, base, glaze, gold }))[0];
+    const donut = (
+      await db.insertDonut({ auth0_id: userId, base, glaze, gold })
+    )[0];
 
     res.json(donut);
   } catch (error) {
